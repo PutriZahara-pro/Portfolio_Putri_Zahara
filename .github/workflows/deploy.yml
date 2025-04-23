@@ -29,7 +29,7 @@ jobs:
         run: pnpm install
 
       - name: Build and Export
-        run: pnpm run build && pnpm run export
+        run: pnpm run build
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
