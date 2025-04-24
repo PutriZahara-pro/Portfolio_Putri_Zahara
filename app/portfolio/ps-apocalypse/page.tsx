@@ -1,44 +1,37 @@
-import Image from "next/image"
+"use client";
 import Link from "next/link"
 import { ArrowLeft } from "lucide-react"
+import { useState } from "react"
+import ImageLightbox from "@/components/image-lightbox"
 
-const artworks = [
-  {
-    id: 1,
-    title: "Forest Clearing",
-    description: "A hidden camp in the forest with small structures scattered throughout the clearing.",
-    image:
-      "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/key_frame_base_camp.jpg-mXXBlBNExQxCj43bmzDmz8YYC98BZw.jpeg",
-    year: "2023",
-    tools: "Digital Painting",
-  },
-  {
-    id: 2,
-    title: "Abandoned City",
-    description: "Urban landscape reclaimed by nature after the apocalypse.",
-    image: "/placeholder.svg?height=600&width=800",
-    year: "2023",
-    tools: "Digital Painting",
-  },
-  {
-    id: 3,
-    title: "Underground Shelter",
-    description: "A survivor's hideout beneath the ruins.",
-    image: "/placeholder.svg?height=600&width=800",
-    year: "2023",
-    tools: "Digital Painting",
-  },
-  {
-    id: 4,
-    title: "Wasteland",
-    description: "Barren landscape with remnants of civilization.",
-    image: "/placeholder.svg?height=600&width=800",
-    year: "2022",
-    tools: "Digital Painting",
-  },
-]
+const images = [
+  '/images/Portfolio/ps_apocalypse/1.jpg',
+  '/images/Portfolio/ps_apocalypse/2.jpg',
+  '/images/Portfolio/ps_apocalypse/3.jpg',
+  '/images/Portfolio/ps_apocalypse/4.jpg'
+].map((src, index) => ({
+  src,
+  alt: `Image ${index + 1} of P.S. Apocalypse Project`,
+  description: 'Illustration for P.S. Apocalypse project'
+}));
 
 export default function PSApocalypsePage() {
+  const [lightboxOpen, setLightboxOpen] = useState(false)
+  const [currentImageIndex, setCurrentImageIndex] = useState(0)
+  const lightboxImages = images.map(image => ({
+    src: image.src,
+    alt: image.alt
+  }))
+
+  const openLightbox = (index: number) => {
+    setCurrentImageIndex(index)
+    setLightboxOpen(true)
+  }
+
+  const closeLightbox = () => {
+    setLightboxOpen(false)
+  }
+
   return (
     <main className="pt-16 bg-zinc-900">
       {/* Project Header */}
@@ -59,7 +52,7 @@ export default function PSApocalypsePage() {
             <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-sm">
               <div>
                 <h3 className="text-zinc-400 mb-1">CLIENT</h3>
-                <p>Horizon Games</p>
+                <p>Personal Project</p>
               </div>
               <div>
                 <h3 className="text-zinc-400 mb-1">YEAR</h3>
@@ -71,7 +64,7 @@ export default function PSApocalypsePage() {
               </div>
               <div>
                 <h3 className="text-zinc-400 mb-1">DELIVERABLES</h3>
-                <p>Environment Concepts, Key Art</p>
+                <p>Environment designs</p>
               </div>
             </div>
           </div>
@@ -82,19 +75,22 @@ export default function PSApocalypsePage() {
       <section className="pb-20">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-            {artworks.map((artwork) => (
-              <div key={artwork.id} className="bg-zinc-800 rounded-lg overflow-hidden">
-                <div className="relative aspect-[4/3] overflow-hidden">
-                  <Image src={artwork.image || "/placeholder.svg"} alt={artwork.title} fill className="object-cover" />
+            {images.map((image, index) => (
+              <div key={index} className="bg-zinc-800 rounded-lg overflow-hidden shadow-lg">
+                <div
+                  className="overflow-hidden cursor-pointer"
+                  onClick={() => openLightbox(index)}
+                >
+                  <img 
+                    src={image.src} 
+                    alt={image.alt} 
+                    className="w-full object-cover" 
+                    loading={index === 0 ? "eager" : "lazy"}
+                  />
                 </div>
                 <div className="p-6">
-                  <h2 className="text-2xl font-bold mb-2">{artwork.title}</h2>
-                  <p className="text-zinc-300 mb-4">{artwork.description}</p>
-                  <div className="flex flex-wrap gap-4 text-sm text-zinc-400">
-                    <span>{artwork.year}</span>
-                    <span>•</span>
-                    <span>{artwork.tools}</span>
-                  </div>
+                  <h2 className="text-2xl font-bold mb-2">{image.alt}</h2>
+                  <p className="text-zinc-300 mb-4">{image.description}</p>
                 </div>
               </div>
             ))}
@@ -133,6 +129,12 @@ export default function PSApocalypsePage() {
           </div>
         </div>
       </section>
+      <ImageLightbox
+        images={lightboxImages}
+        initialSlide={currentImageIndex}
+        isOpen={lightboxOpen}
+        onClose={closeLightbox}
+      />
     </main>
   )
 }

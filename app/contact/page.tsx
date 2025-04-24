@@ -1,7 +1,5 @@
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Textarea } from "@/components/ui/textarea"
-import { Mail, MapPin } from "lucide-react"
+import { Phone, MapPin, Linkedin, Palette } from "lucide-react"
+import ContactForm from "@/components/contact-form"
 
 export default function ContactPage() {
   return (
@@ -9,99 +7,82 @@ export default function ContactPage() {
       {/* Contact Hero */}
       <section className="py-20">
         <div className="container mx-auto px-4">
-          <h1 className="text-4xl md:text-5xl font-bold mb-6">Contact Me</h1>
-          <p className="text-xl text-zinc-300 max-w-3xl">
-            Interested in working together? Feel free to reach out for collaborations, commissions, or just to say
-            hello.
-          </p>
+          <div className="max-w-4xl mx-auto text-center">
+            <h1 className="text-4xl md:text-5xl font-bold mb-6">Get in Touch</h1>
+            <p className="text-xl text-zinc-300">
+              Interested in working together? Feel free to reach out for collaborations, commissions, or just to say
+              hello.
+            </p>
+          </div>
         </div>
       </section>
 
       {/* Contact Form & Info */}
       <section className="pb-20">
         <div className="container mx-auto px-4">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 max-w-6xl mx-auto">
             {/* Contact Form */}
-            <div className="bg-zinc-800 p-8 rounded-lg">
-              <h2 className="text-2xl font-bold mb-6">Send a Message</h2>
-              <form className="space-y-6">
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  <div className="space-y-2">
-                    <label htmlFor="name" className="text-sm font-medium">
-                      Name
-                    </label>
-                    <Input
-                      id="name"
-                      placeholder="Your name"
-                      className="bg-zinc-700 border-zinc-600 focus:border-emerald-500"
-                    />
-                  </div>
-                  <div className="space-y-2">
-                    <label htmlFor="email" className="text-sm font-medium">
-                      Email
-                    </label>
-                    <Input
-                      id="email"
-                      type="email"
-                      placeholder="Your email"
-                      className="bg-zinc-700 border-zinc-600 focus:border-emerald-500"
-                    />
-                  </div>
-                </div>
-                <div className="space-y-2">
-                  <label htmlFor="subject" className="text-sm font-medium">
-                    Subject
-                  </label>
-                  <Input
-                    id="subject"
-                    placeholder="Subject"
-                    className="bg-zinc-700 border-zinc-600 focus:border-emerald-500"
-                  />
-                </div>
-                <div className="space-y-2">
-                  <label htmlFor="message" className="text-sm font-medium">
-                    Message
-                  </label>
-                  <Textarea
-                    id="message"
-                    placeholder="Your message"
-                    rows={6}
-                    className="bg-zinc-700 border-zinc-600 focus:border-emerald-500"
-                  />
-                </div>
-                <Button className="w-full bg-emerald-600 hover:bg-emerald-700">Send Message</Button>
-              </form>
-            </div>
+            <ContactForm lang="en" />
 
             {/* Contact Info */}
             <div className="space-y-8">
-              <div>
+              <div className="bg-gradient-to-br from-zinc-800/80 to-zinc-900/90 p-8 rounded-3xl border border-zinc-700/50 shadow-lg">
                 <h2 className="text-2xl font-bold mb-6">Contact Information</h2>
                 <p className="text-zinc-300 mb-8">
                   Feel free to reach out through any of the following channels. I'm always open to discussing new
                   projects, creative ideas, or opportunities to be part of your vision.
                 </p>
-              </div>
-
-              <div className="space-y-6">
-                <div className="flex items-start gap-4">
-                  <div className="bg-zinc-800 p-3 rounded-full">
-                    <Mail className="h-6 w-6 text-emerald-400" />
+              
+                <div className="space-y-6">
+                  <div className="flex items-center gap-4">
+                    <div className="bg-emerald-500/10 p-3 rounded-full">
+                      <MapPin className="h-6 w-6 text-emerald-400" />
+                    </div>
+                    <div>
+                      <h3 className="font-medium mb-1">Location</h3>
+                      <p className="text-zinc-300">Lyon, France</p>
+                    </div>
                   </div>
-                  <div>
-                    <h3 className="font-medium mb-1">Email</h3>
-                    <p className="text-zinc-300">putrizahara972015@gmail.com</p>
+                  
+                  <div className="flex items-center gap-4">
+                    <div className="bg-emerald-500/10 p-3 rounded-full">
+                      <Phone className="h-6 w-6 text-emerald-400" />
+                    </div>
+                    <div>
+                      <h3 className="font-medium mb-1">Phone</h3>
+                      <p className="text-zinc-300">+33 6 XX XX XX XX</p>
+                    </div>
                   </div>
                 </div>
-
-                <div className="flex items-start gap-4">
-                  <div className="bg-zinc-800 p-3 rounded-full">
-                    <MapPin className="h-6 w-6 text-emerald-400" />
-                  </div>
-                  <div>
-                    <h3 className="font-medium mb-1">Location</h3>
-                    <p className="text-zinc-300">Lyon, France</p>
-                  </div>
+              </div>
+              
+              <div className="bg-gradient-to-br from-zinc-800/80 to-zinc-900/90 p-8 rounded-3xl border border-zinc-700/50 shadow-lg">
+                <h2 className="text-2xl font-bold mb-6">Find Me Online</h2>
+                
+                <div className="grid grid-cols-2 gap-4">
+                  <a 
+                    href="https://www.linkedin.com/in/putri-zahara" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-3 bg-zinc-800/50 hover:bg-zinc-700/50 p-4 rounded-2xl transition-all"
+                  >
+                    <div className="bg-blue-500/20 p-2 rounded-full">
+                      <Linkedin className="h-5 w-5 text-blue-400" />
+                    </div>
+                    <span>LinkedIn</span>
+                  </a>
+                  
+                  <a 
+                    href="https://www.artstation.com/putrizahara972015" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-3 bg-zinc-800/50 hover:bg-zinc-700/50 p-4 rounded-2xl transition-all"
+                  >
+                    <div className="bg-indigo-500/20 p-2 rounded-full">
+                      <Palette className="h-5 w-5 text-indigo-400" />
+                    </div>
+                    <span>ArtStation</span>
+                  </a>
                 </div>
               </div>
             </div>

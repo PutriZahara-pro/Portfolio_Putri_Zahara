@@ -1,8 +1,9 @@
 /** @type {import('next').NextConfig} */
+const isGitHubAction = process.env.GITHUB_ACTIONS === 'true'
 const nextConfig = {
   output: 'export',
-  basePath: '/Portfolio_Putri_Zahara',
-  assetPrefix: '/Portfolio_Putri_Zahara/',
+  basePath: isGitHubAction ? '/Portfolio_Putri_Zahara' : '',
+  assetPrefix: isGitHubAction ? '/Portfolio_Putri_Zahara/' : '',
   trailingSlash: true,
   eslint: {
     ignoreDuringBuilds: true,

@@ -26,13 +26,16 @@ export default function AboutPage() {
                 </p>
               </div>
             </div>
-            <div className="relative h-[500px] rounded-lg overflow-hidden">
-              <Image
-                src="/images/putri-zahara-portrait.png"
-                alt="Putri Zahara portrait"
-                fill
-                className="object-contain"
-              />
+            <div className="relative flex justify-center items-center">
+              <div className="absolute inset-0 bg-gradient-to-b from-emerald-600/20 to-zinc-900/30 rounded-full blur-3xl opacity-40 transform scale-90"></div>
+              <div className="relative h-[600px] w-[500px] rounded-3xl overflow-hidden bg-zinc-800/50 backdrop-blur-sm border border-emerald-500/20 p-5 shadow-lg shadow-emerald-500/10">
+                <div className="absolute bottom-0 left-0 right-0 h-1/3 bg-gradient-to-t from-zinc-800/80 to-transparent z-10"></div>
+                <img
+                  src="/images/putri-zahara-portrait.png"
+                  alt="Putri Zahara portrait"
+                  className="object-cover h-full w-full object-top rounded-2xl"
+                />
+              </div>
             </div>
           </div>
         </div>

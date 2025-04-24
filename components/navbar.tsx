@@ -2,7 +2,8 @@
 
 import { useState } from "react"
 import Link from "next/link"
-import { Menu, X } from "lucide-react"
+import { Menu, X, GamepadIcon } from "lucide-react"
+import LanguageSwitcher from "@/components/language-switcher"
 
 const navLinks = [
   { name: "Home", href: "/" },
@@ -16,6 +17,7 @@ const navLinks = [
       { name: "Other Works", href: "/portfolio/other-works" },
     ],
   },
+  { name: "Game", href: "/game" },
   { name: "Contact", href: "/contact" },
 ]
 
@@ -41,7 +43,7 @@ export default function Navbar() {
           </Link>
 
           {/* Desktop Navigation */}
-          <nav className="hidden md:flex space-x-8">
+          <nav className="hidden md:flex space-x-8 items-center">
             {navLinks.map((link) => (
               <div key={link.name} className="relative group">
                 {link.subLinks ? (
@@ -77,12 +79,17 @@ export default function Navbar() {
                     )}
                   </>
                 ) : (
-                  <Link href={link.href} className="text-zinc-300 hover:text-white py-2">
+                  <Link
+                    href={link.href}
+                    className={`text-zinc-300 hover:text-white py-2 flex items-center ${link.name === "Game" ? "text-emerald-400 hover:text-emerald-300" : ""}`}
+                  >
+                    {link.name === "Game" && <GamepadIcon className="mr-1 h-4 w-4" />}
                     {link.name}
                   </Link>
                 )}
               </div>
             ))}
+            <LanguageSwitcher />
           </nav>
 
           {/* Mobile Menu Button */}
@@ -133,14 +140,19 @@ export default function Navbar() {
                 ) : (
                   <Link
                     href={link.href}
-                    className="block text-zinc-300 hover:text-white py-2"
+                    className={`block py-2 flex items-center ${link.name === "Game" ? "text-emerald-400 hover:text-emerald-300" : "text-zinc-300 hover:text-white"}`}
                     onClick={() => setIsOpen(false)}
                   >
+                    {link.name === "Game" && <GamepadIcon className="mr-1 h-4 w-4" />}
                     {link.name}
                   </Link>
                 )}
               </div>
             ))}
+            {/* Language Switcher */}
+            <div className="pt-2">
+              <LanguageSwitcher />
+            </div>
           </div>
         </div>
       )}
