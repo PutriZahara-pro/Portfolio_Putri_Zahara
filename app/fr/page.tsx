@@ -8,7 +8,7 @@ export default function PageFr() {
       <section className="relative h-screen flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0 z-0">
           <img
-            src="/key_frame_base_camp.jpg"
+            src="/Portfolio_Putri_Zahara/key_frame_base_camp.jpg"
             alt="Illustration conceptuelle montrant une clairière avec de petites structures"
             className="object-cover opacity-40 w-full h-full"
           />

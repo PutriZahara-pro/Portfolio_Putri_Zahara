@@ -5,10 +5,10 @@ import { useState } from "react"
 import ImageLightbox from "@/components/image-lightbox"
 
 const images = [
-  '/images/Portfolio/ps_apocalypse/1.jpg',
-  '/images/Portfolio/ps_apocalypse/2.jpg',
-  '/images/Portfolio/ps_apocalypse/3.jpg',
-  '/images/Portfolio/ps_apocalypse/4.jpg'
+  '/Portfolio_Putri_Zahara/images/Portfolio/ps_apocalypse/1.jpg',
+  '/Portfolio_Putri_Zahara/images/Portfolio/ps_apocalypse/2.jpg',
+  '/Portfolio_Putri_Zahara/images/Portfolio/ps_apocalypse/3.jpg',
+  '/Portfolio_Putri_Zahara/images/Portfolio/ps_apocalypse/4.jpg'
 ].map((src, index) => ({
   src,
   alt: `Image ${index + 1} of P.S. Apocalypse Project`,

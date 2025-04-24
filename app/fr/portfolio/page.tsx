@@ -7,14 +7,14 @@ const portfolioCategories = [
     id: "ps-apocalypse",
     title: "P.S. Apocalypse",
     description: "Illustrations de concepts d'environnement pour un monde post-apocalyptique",
-    image: "/images/Portfolio/ps_apocalypse/1.jpg",
+    image: "/Portfolio_Putri_Zahara/images/Portfolio/ps_apocalypse/1.jpg",
     count: 4,
   },
   {
     id: "ethian-redem",
     title: "The Ethians Redeemed",
     description: "Designs de personnages et environnements pour un RPG narratif dans un monde dystopique",
-    image: "/images/title/titletitre.png",
+    image: "/Portfolio_Putri_Zahara/images/title/titletitre.png",
     count: 6,
   },
   {

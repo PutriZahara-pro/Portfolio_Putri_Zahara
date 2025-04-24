@@ -5,17 +5,17 @@ import { useState } from "react"
 import ImageLightbox from "@/components/image-lightbox"
 
 const images = [
-  '/images/Portfolio/The_Ethians_Redeemed/camp_du_travail_keyframe.jpg',
-  '/images/Portfolio/The_Ethians_Redeemed/design_dome_yirie.jpg',
-  '/images/Portfolio/The_Ethians_Redeemed/design_yirie_banner.jpg',
-  '/images/Portfolio/The_Ethians_Redeemed/dug_out_house.jpg',
-  '/images/Portfolio/The_Ethians_Redeemed/gate_capital_yirie.png',
-  '/images/Portfolio/The_Ethians_Redeemed/key_frame_base_camp.jpg',
-  '/images/Portfolio/The_Ethians_Redeemed/planche_perso_dimi_new.jpg',
-  '/images/Portfolio/The_Ethians_Redeemed/planche_perso_haikal_new.jpg',
-  '/images/Portfolio/The_Ethians_Redeemed/set_design_camp_travail.jpg',
-  '/images/Portfolio/The_Ethians_Redeemed/set_design_dug_out_house.jpg',
-  '/images/Portfolio/The_Ethians_Redeemed/set_design_yirie.jpg'
+  '/Portfolio_Putri_Zahara/images/Portfolio/The_Ethians_Redeemed/camp_du_travail_keyframe.jpg',
+  '/Portfolio_Putri_Zahara/images/Portfolio/The_Ethians_Redeemed/design_dome_yirie.jpg',
+  '/Portfolio_Putri_Zahara/images/Portfolio/The_Ethians_Redeemed/design_yirie_banner.jpg',
+  '/Portfolio_Putri_Zahara/images/Portfolio/The_Ethians_Redeemed/dug_out_house.jpg',
+  '/Portfolio_Putri_Zahara/images/Portfolio/The_Ethians_Redeemed/gate_capital_yirie.png',
+  '/Portfolio_Putri_Zahara/images/Portfolio/The_Ethians_Redeemed/key_frame_base_camp.jpg',
+  '/Portfolio_Putri_Zahara/images/Portfolio/The_Ethians_Redeemed/planche_perso_dimi_new.jpg',
+  '/Portfolio_Putri_Zahara/images/Portfolio/The_Ethians_Redeemed/planche_perso_haikal_new.jpg',
+  '/Portfolio_Putri_Zahara/images/Portfolio/The_Ethians_Redeemed/set_design_camp_travail.jpg',
+  '/Portfolio_Putri_Zahara/images/Portfolio/The_Ethians_Redeemed/set_design_dug_out_house.jpg',
+  '/Portfolio_Putri_Zahara/images/Portfolio/The_Ethians_Redeemed/set_design_yirie.jpg'
 ].map((src, index) => ({
   src,
   alt: `Image ${index + 1} of The Ethians Redeemed Project`,
