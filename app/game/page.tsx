@@ -38,7 +38,7 @@ export default function GamePage() {
               {/* Banner de jeu */}
               <div className="h-40 bg-gradient-to-r from-emerald-900/80 to-zinc-900 flex items-center justify-center relative overflow-hidden">
                 <div className="absolute inset-0 opacity-20">
-                  <div className="absolute top-0 left-0 w-full h-full bg-[url('/images/title/titletitre.png')] bg-cover bg-center"></div>
+                  <div className="absolute top-0 left-0 w-full h-full bg-[url('/Portfolio_Putri_Zahara/images/title/titletitre.png')] bg-cover bg-center"></div>
                 </div>
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent opacity-80"></div>
                 <h2 className="text-3xl font-bold text-white relative z-10 text-center">The Ethians Redeemed Experience</h2>
