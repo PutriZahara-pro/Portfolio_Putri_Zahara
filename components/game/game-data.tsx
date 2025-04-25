@@ -2,10 +2,10 @@ import type { GameScene } from "@/components/game/types"
 
 // Character definitions
 export const characters = {
-  demetreus: {
-    id: "demetreus",
-    name: "Demetreus",
-    image: "/Portfolio_Putri_Zahara/images/characters/Demetreus_concept_art_new.png",
+  demetrius: {
+    id: "demetrius",
+    name: "Demetrius",
+    image: "/Portfolio_Putri_Zahara/images/characters/Demetrius_concept_art_new.png",
     stats: {
       hp: 20,
       maxHp: 20,
@@ -78,7 +78,7 @@ export const gameScenes: GameScene[] = [
     id: "intro",
     type: "dialogue",
     background: "/Portfolio_Putri_Zahara/images/title/titletitre.png",
-    text: "In a world where the Empire Yirie rules with an iron fist, you are Demetreus, a farmer whose life was shattered when imperial forces invaded your homeland.",
+    text: "In a world where the Empire Yirie rules with an iron fist, you are Demetrius, a farmer whose life was shattered when imperial forces invaded your homeland.",
     choices: [{ text: "Continue", nextScene: "intro_2" }],
   },
   {
@@ -95,7 +95,7 @@ export const gameScenes: GameScene[] = [
     type: "dialogue",
     background: "/Portfolio_Putri_Zahara/images/environement/camp_du_travail_keyframe.jpg",
     text: "Years have passed. The labor camp is brutal. Every day is filled with backbreaking work, meager rations, and the constant threat of punishment.",
-    characters: [{ ...characters.demetreus, position: "center" }],
+    characters: [{ ...characters.demetrius, position: "center" }],
     choices: [{ text: "Continue", nextScene: "labor_camp_2" }],
   },
   {
@@ -105,7 +105,7 @@ export const gameScenes: GameScene[] = [
     speaker: "Guard",
     text: "Prisoner 120! Get back to work! The commandant is inspecting today, and he doesn't tolerate slackers.",
     characters: [
-      { ...characters.demetreus, position: "left" },
+      { ...characters.demetrius, position: "left" },
       { ...characters.guard, position: "right" },
     ],
     choices: [
@@ -121,7 +121,7 @@ export const gameScenes: GameScene[] = [
     background: "/Portfolio_Putri_Zahara/images/environement/camp_du_travail_keyframe.jpg",
     text: "As you work, you notice another prisoner watching you. He has blonde hair and carries himself with unusual dignity despite his ragged appearance.",
     characters: [
-      { ...characters.demetreus, position: "left" },
+      { ...characters.demetrius, position: "left" },
       { ...characters.haikal, position: "right" },
     ],
     choices: [
@@ -136,7 +136,7 @@ export const gameScenes: GameScene[] = [
     speaker: "Mysterious Prisoner",
     text: "You're different from the others. I've been watching you. You haven't given up hope yet, have you?",
     characters: [
-      { ...characters.demetreus, position: "left" },
+      { ...characters.demetrius, position: "left" },
       { ...characters.haikal, position: "right" },
     ],
     choices: [
@@ -151,7 +151,7 @@ export const gameScenes: GameScene[] = [
     speaker: "Haikal",
     text: "My name is Haikal. Before the invasion, I was the prince of Ether. Now I'm just another prisoner, like you. But I haven't given up. I have a plan to escape.",
     characters: [
-      { ...characters.demetreus, position: "left" },
+      { ...characters.demetrius, position: "left" },
       { ...characters.haikal, position: "right" },
     ],
     choices: [
@@ -166,7 +166,7 @@ export const gameScenes: GameScene[] = [
     speaker: "Haikal",
     text: "Nothing is impossible. I've been here longer than you, studying the guards, the routines. There's a way out, but I need your help. Are you with me?",
     characters: [
-      { ...characters.demetreus, position: "left" },
+      { ...characters.demetrius, position: "left" },
       { ...characters.haikal, position: "right" },
     ],
     choices: [
@@ -181,7 +181,7 @@ export const gameScenes: GameScene[] = [
     speaker: "Haikal",
     text: "Would you rather die here, slowly, day by day? Or take a chance at freedom? At revenge for what they did to your family?",
     characters: [
-      { ...characters.demetreus, position: "left" },
+      { ...characters.demetrius, position: "left" },
       { ...characters.haikal, position: "right" },
     ],
     choices: [
@@ -198,7 +198,7 @@ export const gameScenes: GameScene[] = [
     speaker: "Haikal",
     text: "Tonight, during the shift change, there will be a brief window when the eastern gate is less guarded. We'll need to create a distraction.",
     characters: [
-      { ...characters.demetreus, position: "left" },
+      { ...characters.demetrius, position: "left" },
       { ...characters.haikal, position: "right" },
     ],
     choices: [
@@ -256,10 +256,10 @@ export const gameScenes: GameScene[] = [
     id: "guard_reason",
     type: "dialogue",
     background: "/Portfolio_Putri_Zahara/images/environement/gate_capital_yirie.png",
-    speaker: "Demetreus",
+    speaker: "Demetrius",
     text: "Please, we mean no harm. We just want our freedom. You know the conditions here aren't right.",
     characters: [
-      { ...characters.demetreus, position: "left" },
+      { ...characters.demetrius, position: "left" },
       { ...characters.guard, position: "right" },
     ],
     choices: [
@@ -298,7 +298,7 @@ export const gameScenes: GameScene[] = [
     background: "/Portfolio_Putri_Zahara/images/environement/key_frame_base_camp.jpg",
     text: "You and Haikal slip through the gate and into the darkness beyond. The taste of freedom is sweet, but you know the Empire won't let you go easily.",
     characters: [
-      { ...characters.demetreus, position: "left" },
+      { ...characters.demetrius, position: "left" },
       { ...characters.haikal, position: "right" },
     ],
     choices: [{ text: "Continue", nextScene: "forest_hideout" }],
@@ -322,7 +322,7 @@ export const gameScenes: GameScene[] = [
     speaker: "Haikal",
     text: "We need to establish a base in the forest. From there, we can start building a resistance against the Empire.",
     characters: [
-      { ...characters.demetreus, position: "left" },
+      { ...characters.demetrius, position: "left" },
       { ...characters.haikal, position: "right" },
     ],
     choices: [
@@ -336,18 +336,18 @@ export const gameScenes: GameScene[] = [
     id: "revenge_path",
     type: "dialogue",
     background: "/Portfolio_Putri_Zahara/images/environement/key_frame_base_camp.jpg",
-    speaker: "Demetreus",
+    speaker: "Demetrius",
     text: "The Empire took everything from me. I won't rest until Commandant Milo and Emperor Hades pay for what they've done.",
-    characters: [{ ...characters.demetreus, position: "center" }],
+    characters: [{ ...characters.demetrius, position: "center" }],
     choices: [{ text: "Continue", nextScene: "time_passes_revenge" }],
   },
   {
     id: "freedom_path",
     type: "dialogue",
     background: "/Portfolio_Putri_Zahara/images/environement/key_frame_base_camp.jpg",
-    speaker: "Demetreus",
+    speaker: "Demetrius",
     text: "There are thousands still suffering in those camps. We need to build a movement that can free them all.",
-    characters: [{ ...characters.demetreus, position: "center" }],
+    characters: [{ ...characters.demetrius, position: "center" }],
     choices: [{ text: "Continue", nextScene: "time_passes_freedom" }],
   },
 
@@ -410,7 +410,7 @@ export const gameScenes: GameScene[] = [
     type: "dialogue",
     background: "/Portfolio_Putri_Zahara/images/environement/key_frame_base_camp.jpg",
     text: "Commandant Milo falls before you. The man who oversaw so much suffering is finally defeated. His forces retreat in disarray.",
-    characters: [{ ...characters.demetreus, position: "center" }],
+    characters: [{ ...characters.demetrius, position: "center" }],
     choices: [
       { text: '"This is just the beginning."', nextScene: "hades_offer", stateChanges: { defeatedMilo: true } },
     ],
@@ -421,7 +421,7 @@ export const gameScenes: GameScene[] = [
     background: "/Portfolio_Putri_Zahara/images/environement/key_frame_base_camp.jpg",
     text: 'You defeat Milo but spare his life. "Tell your emperor that we want peace, but we will fight for our freedom if we must."',
     characters: [
-      { ...characters.demetreus, position: "left" },
+      { ...characters.demetrius, position: "left" },
       { ...characters.milo, position: "right" },
     ],
     choices: [{ text: "Continue", nextScene: "hades_offer", stateChanges: { defeatedMilo: true } }],
@@ -460,7 +460,7 @@ export const gameScenes: GameScene[] = [
     id: "refuse_hades",
     type: "dialogue",
     background: "/Portfolio_Putri_Zahara/images/environement/key_frame_base_camp.jpg",
-    speaker: "Demetreus",
+    speaker: "Demetrius",
     text: "Tell your emperor that freedom cannot be bought. We will continue our fight until all slaves are freed and the Empire's tyranny ends.",
     choices: [{ text: "Continue", nextScene: "vulkan_kingdom" }],
   },
@@ -473,7 +473,7 @@ export const gameScenes: GameScene[] = [
     speaker: "Haikal",
     text: "How could you? After everything we've been through, everything we've fought for... you've betrayed us all for a title?",
     characters: [
-      { ...characters.demetreus, position: "left" },
+      { ...characters.demetrius, position: "left" },
       { ...characters.haikal, position: "right" },
     ],
     choices: [
@@ -514,7 +514,7 @@ export const gameScenes: GameScene[] = [
     speaker: "Queen Ellis",
     text: "So you are the rebel leader I've heard so much about. Why should Vulkan risk war with the Empire for your cause?",
     characters: [
-      { ...characters.demetreus, position: "left" },
+      { ...characters.demetrius, position: "left" },
       { ...characters.ellis, position: "right" },
     ],
     choices: [
@@ -565,10 +565,10 @@ export const gameScenes: GameScene[] = [
     id: "hades_negotiation",
     type: "dialogue",
     background: "/Portfolio_Putri_Zahara/images/environement/key_frame_base_camp.jpg",
-    speaker: "Demetreus",
+    speaker: "Demetrius",
     text: "Emperor Hades, this conflict has caused enough suffering. There can be peace between our peoples, but only if you end the slavery and oppression.",
     characters: [
-      { ...characters.demetreus, position: "left" },
+      { ...characters.demetrius, position: "left" },
       { ...characters.hades, position: "right" },
     ],
     choices: [{ text: "Continue", nextScene: "hades_response" }],
@@ -580,7 +580,7 @@ export const gameScenes: GameScene[] = [
     speaker: "Emperor Hades",
     text: "Peace? The Empire needs resources, labor. Your idealism is admirable but naive. The strong rule, the weak serve. That is the natural order.",
     characters: [
-      { ...characters.demetreus, position: "left" },
+      { ...characters.demetrius, position: "left" },
       { ...characters.hades, position: "right" },
     ],
     choices: [
@@ -592,10 +592,10 @@ export const gameScenes: GameScene[] = [
     id: "hades_alternative",
     type: "dialogue",
     background: "/Portfolio_Putri_Zahara/images/environement/key_frame_base_camp.jpg",
-    speaker: "Demetreus",
+    speaker: "Demetrius",
     text: "The Kingdom of Vulkan has agricultural techniques that could triple your food production. An alliance would benefit both our peoples more than war ever could.",
     characters: [
-      { ...characters.demetreus, position: "left" },
+      { ...characters.demetrius, position: "left" },
       { ...characters.hades, position: "right" },
     ],
     choices: [{ text: "Continue", nextScene: "ending_diplomatic" }],

@@ -23,15 +23,14 @@ export default function CharacterSprite({ character, position }: CharacterSprite
       </div>
       
       {/* Image du personnage (buste) */}
-      <div className="relative h-96 w-72">
+      <div className="relative h-64 w-48 md:h-96 md:w-72">
         <Image 
           src={character.image || "/placeholder.svg"} 
           alt={character.name} 
           fill 
-          className="object-contain" 
+          className="object-contain scale-110 translate-y-[5%] md:scale-150" 
           style={{ 
             objectPosition: '50% 30%',
-            transform: 'scale(1.8)',
             transformOrigin: 'center 20%'
           }}
         />

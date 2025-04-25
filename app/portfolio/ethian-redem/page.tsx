@@ -112,7 +112,7 @@ export default function EthianRedemPage() {
             <div className="prose prose-invert max-w-none">
               <p>
                 The Ethians Redeemed is a narrative RPG set in a dystopian world where the Yirie Empire rules with an iron fist.
-                The game follows Demetreus, a farmer whose life was upended when imperial forces invaded his homeland.
+                The game follows Demetrius, a farmer whose life was upended when imperial forces invaded his homeland.
               </p>
               <p>
                 This project combines immersive storytelling with gameplay mechanics inspired by games like Undertale,

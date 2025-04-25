@@ -136,7 +136,7 @@ export default function BattleSystem({ opponent, playerStats, onBattleEnd, onPla
         {/* Health bars */}
         <div className="flex justify-between mb-6 gap-8">
           <div className="w-1/2">
-            <div className="text-base mb-2 font-medium text-emerald-400">Demetreus</div>
+            <div className="text-base mb-2 font-medium text-emerald-400">Demetrius</div>
             <HealthBar currentHP={playerStats.hp} maxHP={playerStats.maxHp} />
           </div>
 
