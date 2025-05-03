@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Asset Positioner - Portfolio Putri Zahara</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: system-ui, -apple-system, sans-serif;
+            background: #1a1a1a;
+            color: #fff;
+            min-height: 100vh;
+            display: grid;
+            grid-template-columns: 250px 1fr;
+        }
+        .sidebar {
+            background: #252525;
+            padding: 1rem;
+            border-right: 1px solid #333;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        .main-content {
+            position: relative;
+            overflow: hidden;
+            background: #202020;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .stage {
+            position: relative;
+            width: 1280px;
+            height: 720px;
+            background: #181818;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 0 30px rgba(0, 255, 157, 0.1);
+        }
+        .character {
+            position: absolute;
+            cursor: move;
+            user-select: none;
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+            border-radius: 8px;
+        }
+        .character.selected {
+            border-color: #00ff9d;
+            box-shadow: 0 0 20px rgba(0, 255, 157, 0.3);
+        }
+        .character img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            border-radius: 6px;
+        }
+        .resize-handle {
+            position: absolute;
+            width: 12px;
+            height: 12px;
+            background: #00ff9d;
+            border-radius: 50%;
+            box-shadow: 0 0 10px rgba(0, 255, 157, 0.5);
+            transition: transform 0.2s;
+        }
+        .resize-handle:hover {
+            transform: scale(1.2);
+        }
+        .resize-handle.nw { top: -6px; left: -6px; cursor: nw-resize; }
+        .resize-handle.ne { top: -6px; right: -6px; cursor: ne-resize; }
+        .resize-handle.sw { bottom: -6px; left: -6px; cursor: sw-resize; }
+        .resize-handle.se { bottom: -6px; right: -6px; cursor: se-resize; }
+        
+        select, button {
+            padding: 0.75rem;
+            background: #333;
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: all 0.2s;
+        }
+        select:hover, button:hover {
+            background: #444;
+            box-shadow: 0 0 15px rgba(0, 255, 157, 0.2);
+        }
+        button {
+            background: #2a6;
+            font-weight: 500;
+        }
+        button:hover {
+            background: #3b7;
+            transform: translateY(-1px);
+        }
+        .info {
+            position: fixed;
+            bottom: 1rem;
+            left: 1rem;
+            background: rgba(0,0,0,0.8);
+            padding: 0.75rem;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            color: #aaa;
+            backdrop-filter: blur(5px);
+            border: 1px solid #333;
+        }
+        .scene-select {
+            margin-bottom: 1rem;
+        }
+        .character-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            overflow-y: auto;
+            flex: 1;
+        }
+        .character-item {
+            padding: 0.75rem;
+            background: #333;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .character-item:hover {
+            background: #444;
+            transform: translateX(2px);
+        }
+        .character-item.active {
+            background: #2a6;
+            box-shadow: 0 0 15px rgba(0, 255, 157, 0.2);
+        }
+        .character-item img {
+            width: 30px;
+            height: 30px;
+            border-radius: 4px;
+            object-fit: cover;
+        }
+        #saveButton {
+            margin-top: auto;
+        }
+        .loading {
+            position: fixed;
+            top: 1rem;
+            right: 1rem;
+            background: #2a6;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            display: none;
+        }
+        .loading.visible {
+            display: block;
+            animation: pulse 1s infinite;
+        }
+        @keyframes pulse {
+            0% { opacity: 0.8; }
+            50% { opacity: 1; }
+            100% { opacity: 0.8; }
+        }
+    </style>
+</head>
+<body>
+    <div class="sidebar">
+        <select id="sceneSelect" class="scene-select">
+            <option value="default">Scène par défaut</option>
+            <option value="intro">Introduction</option>
+            <option value="labor_camp">Camp de travail</option>
+            <option value="milo_confrontation">Confrontation avec Milo</option>
+            <option value="hades_battle">Combat contre Hadès</option>
+            <option value="meet_ellis">Rencontre avec Ellis</option>
+            <option value="guard_encounter">Rencontre avec le garde</option>
+        </select>
+        <div id="characterList" class="character-list"></div>
+        <button id="saveButton"> Sauvegarder les positions</button>
+    </div>
+    <div class="main-content">
+        <div class="stage" id="canvas"></div>
+        <div class="info">
+            Position: <span id="posInfo">-</span><br>
+            Taille: <span id="sizeInfo">-</span>
+        </div>
+        <div class="loading">Sauvegarde en cours...</div>
+    </div>
+
+    <script>
+        let config = null;
+        let currentScene = 'default';
+        let selectedCharacter = null;
+        let assets = null;
+        const canvas = document.getElementById('canvas');
+        const sceneSelect = document.getElementById('sceneSelect');
+        const characterList = document.getElementById('characterList');
+        const saveButton = document.getElementById('saveButton');
+        const posInfo = document.getElementById('posInfo');
+        const sizeInfo = document.getElementById('sizeInfo');
+        const loadingIndicator = document.querySelector('.loading');
+
+        // Charger les assets
+        async function loadAssets() {
+            try {
+                const response = await fetch('/api/assets');
+                const data = await response.json();
+                assets = data.assets;
+            } catch (error) {
+                console.error('Erreur de chargement des assets:', error);
+            }
+        }
+
+        // Charger la configuration
+        async function loadConfig() {
+            try {
+                const response = await fetch('/config/character-config.json');
+                config = await response.json();
+                renderScene();
+                updateCharacterList();
+            } catch (error) {
+                console.error('Erreur de chargement:', error);
+            }
+        }
+
+        // Mettre à jour la liste des personnages
+        function updateCharacterList() {
+            characterList.innerHTML = '';
+            Object.keys(config.characters).forEach(charId => {
+                const div = document.createElement('div');
+                div.className = `character-item ${selectedCharacter === charId ? 'active' : ''}`;
+                
+                // Image du personnage (placeholder pour l'instant)
+                const img = document.createElement('div');
+                img.style.width = '30px';
+                img.style.height = '30px';
+                img.style.background = `hsl(${Math.random() * 360}, 70%, 50%)`;
+                img.style.borderRadius = '4px';
+                
+                const name = document.createElement('span');
+                name.textContent = charId;
+                
+                div.appendChild(img);
+                div.appendChild(name);
+                div.onclick = () => selectCharacter(charId);
+                characterList.appendChild(div);
+            });
+        }
+
+        // Sélectionner un personnage
+        function selectCharacter(charId) {
+            selectedCharacter = charId;
+            const chars = document.querySelectorAll('.character');
+            chars.forEach(c => c.classList.remove('selected'));
+            const char = document.querySelector(`[data-character="${charId}"]`);
+            if (char) {
+                char.classList.add('selected');
+            }
+            updateCharacterList();
+        }
+
+        // Rendre la scène
+        function renderScene() {
+            canvas.innerHTML = '';
+            Object.entries(config.characters).forEach(([charId, charConfig]) => {
+                const charDiv = document.createElement('div');
+                charDiv.className = 'character';
+                charDiv.dataset.character = charId;
+                
+                // Position et taille
+                const sceneConfig = charConfig.scenes?.[currentScene] || charConfig.default;
+                const pos = sceneConfig.position;
+                if (pos.left) charDiv.style.left = pos.left;
+                if (pos.right) charDiv.style.right = pos.right;
+                if (pos.bottom) charDiv.style.bottom = pos.bottom;
+                if (pos.center) {
+                    charDiv.style.left = '50%';
+                    charDiv.style.transform = 'translateX(-50%)';
+                }
+                
+                const size = sceneConfig.size || config.defaultSizes.normal;
+                charDiv.style.width = `${size.width}px`;
+                charDiv.style.height = `${size.height}px`;
+
+                // Image du personnage
+                const img = document.createElement('div');
+                img.style.width = '100%';
+                img.style.height = '100%';
+                img.style.background = `hsl(${Math.random() * 360}, 70%, 50%)`;
+                img.style.borderRadius = '6px';
+                charDiv.appendChild(img);
+
+                // Poignées de redimensionnement
+                ['nw', 'ne', 'sw', 'se'].forEach(pos => {
+                    const handle = document.createElement('div');
+                    handle.className = `resize-handle ${pos}`;
+                    charDiv.appendChild(handle);
+                });
+
+                canvas.appendChild(charDiv);
+                makeDraggable(charDiv);
+                makeResizable(charDiv);
+            });
+        }
+
+        // Rendre un élément déplaçable
+        function makeDraggable(element) {
+            let isDragging = false;
+            let currentX;
+            let currentY;
+            let initialX;
+            let initialY;
+
+            element.addEventListener('mousedown', dragStart);
+            document.addEventListener('mousemove', drag);
+            document.addEventListener('mouseup', dragEnd);
+
+            function dragStart(e) {
+                if (e.target.classList.contains('resize-handle')) return;
+                
+                initialX = e.clientX - element.offsetLeft;
+                initialY = e.clientY - element.offsetTop;
+                
+                if (e.target === element || e.target.parentNode === element) {
+                    isDragging = true;
+                    selectCharacter(element.dataset.character);
+                }
+            }
+
+            function drag(e) {
+                if (!isDragging) return;
+
+                e.preventDefault();
+                currentX = e.clientX - initialX;
+                currentY = e.clientY - initialY;
+
+                // Limites de la scène
+                const rect = element.getBoundingClientRect();
+                const canvasRect = canvas.getBoundingClientRect();
+                
+                currentX = Math.max(-rect.width/2, Math.min(currentX, canvasRect.width - rect.width/2));
+                currentY = Math.max(-rect.height/2, Math.min(currentY, canvasRect.height - rect.height/2));
+
+                element.style.left = `${currentX}px`;
+                element.style.top = `${currentY}px`;
+                
+                updatePositionInfo(element);
+            }
+
+            function dragEnd() {
+                isDragging = false;
+            }
+        }
+
+        // Rendre un élément redimensionnable
+        function makeResizable(element) {
+            const handles = element.querySelectorAll('.resize-handle');
+            handles.forEach(handle => {
+                handle.addEventListener('mousedown', initResize);
+            });
+
+            function initResize(e) {
+                e.stopPropagation();
+                const handle = e.target;
+                const isLeft = handle.classList.contains('nw') || handle.classList.contains('sw');
+                const isTop = handle.classList.contains('nw') || handle.classList.contains('ne');
+                
+                const startX = e.clientX;
+                const startY = e.clientY;
+                const startWidth = element.offsetWidth;
+                const startHeight = element.offsetHeight;
+                const startLeft = element.offsetLeft;
+                const startTop = element.offsetTop;
+
+                function resize(e) {
+                    const dx = e.clientX - startX;
+                    const dy = e.clientY - startY;
+                    
+                    // Maintenir le ratio d'aspect
+                    const ratio = startWidth / startHeight;
+                    let newWidth, newHeight;
+                    
+                    if (Math.abs(dx) > Math.abs(dy)) {
+                        newWidth = startWidth + (isLeft ? -dx : dx);
+                        newHeight = newWidth / ratio;
+                    } else {
+                        newHeight = startHeight + (isTop ? -dy : dy);
+                        newWidth = newHeight * ratio;
+                    }
+                    
+                    // Limites de taille
+                    newWidth = Math.max(100, Math.min(newWidth, 1000));
+                    newHeight = Math.max(100, Math.min(newHeight, 1000));
+                    
+                    if (isLeft) {
+                        element.style.width = `${newWidth}px`;
+                        element.style.left = `${startLeft + (startWidth - newWidth)}px`;
+                    } else {
+                        element.style.width = `${newWidth}px`;
+                    }
+                    
+                    if (isTop) {
+                        element.style.height = `${newHeight}px`;
+                        element.style.top = `${startTop + (startHeight - newHeight)}px`;
+                    } else {
+                        element.style.height = `${newHeight}px`;
+                    }
+                    
+                    updatePositionInfo(element);
+                }
+
+                function stopResize() {
+                    document.removeEventListener('mousemove', resize);
+                    document.removeEventListener('mouseup', stopResize);
+                }
+
+                document.addEventListener('mousemove', resize);
+                document.addEventListener('mouseup', stopResize);
+            }
+        }
+
+        // Mettre à jour les informations de position
+        function updatePositionInfo(element) {
+            const rect = element.getBoundingClientRect();
+            const canvasRect = canvas.getBoundingClientRect();
+            
+            const x = Math.round(((rect.left - canvasRect.left) / canvasRect.width) * 100);
+            const y = Math.round(((rect.top - canvasRect.top) / canvasRect.height) * 100);
+            
+            posInfo.textContent = `X: ${x}%, Y: ${y}%`;
+            sizeInfo.textContent = `L: ${Math.round(rect.width)}px, H: ${Math.round(rect.height)}px`;
+        }
+
+        // Sauvegarder la configuration
+        async function saveConfig() {
+            loadingIndicator.classList.add('visible');
+            const characters = document.querySelectorAll('.character');
+            characters.forEach(char => {
+                const charId = char.dataset.character;
+                const rect = char.getBoundingClientRect();
+                const canvasRect = canvas.getBoundingClientRect();
+                const charConfig = config.characters[charId];
+                
+                if (!charConfig.scenes[currentScene]) {
+                    charConfig.scenes[currentScene] = { position: {}, size: {} };
+                }
+                
+                const sceneConfig = charConfig.scenes[currentScene];
+                
+                // Calculer les positions relatives
+                const left = ((rect.left - canvasRect.left) / canvasRect.width) * 100;
+                const top = ((rect.top - canvasRect.top) / canvasRect.height) * 100;
+                
+                sceneConfig.position = {
+                    left: `${Math.round(left)}%`,
+                    top: `${Math.round(top)}%`
+                };
+                
+                sceneConfig.size = {
+                    width: Math.round(rect.width),
+                    height: Math.round(rect.height)
+                };
+            });
+
+            try {
+                const response = await fetch('/api/save-config', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(config)
+                });
+                
+                if (response.ok) {
+                    loadingIndicator.classList.remove('visible');
+                    saveButton.style.background = '#4c8';
+                    saveButton.textContent = ' Sauvegardé !';
+                    setTimeout(() => {
+                        saveButton.style.background = '';
+                        saveButton.textContent = ' Sauvegarder les positions';
+                    }, 2000);
+                }
+            } catch (error) {
+                console.error('Erreur de sauvegarde:', error);
+                loadingIndicator.classList.remove('visible');
+                alert('Erreur lors de la sauvegarde');
+            }
+        }
+
+        // Event listeners
+        sceneSelect.addEventListener('change', (e) => {
+            currentScene = e.target.value;
+            renderScene();
+        });
+
+        saveButton.addEventListener('click', saveConfig);
+
+        // Initialisation
+        loadAssets().then(loadConfig);
+    </script>
+</body>
+</html>

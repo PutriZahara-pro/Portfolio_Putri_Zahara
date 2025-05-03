@@ -1,0 +1,12 @@
+User-agent: *
+Disallow: /config/
+Disallow: /api/
+
+# Protection contre la collecte de données personnelles
+Disallow: /user/
+Disallow: /admin/
+Disallow: /login/
+Disallow: /profile/
+
+# Pour éviter l'indexation de certaines ressources
+Disallow: /*.json$
