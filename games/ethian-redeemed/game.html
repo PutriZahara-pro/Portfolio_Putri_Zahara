@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Ethians Redeemed</title>
+    <link rel="stylesheet" href="assets/gui/fonts.css">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background-color: #000;
+        }
+        #game {
+            width: 100%;
+            height: 100vh;
+            margin: 0 auto;
+        }
+        #loading-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+        #loading-text {
+            color: #10b981;
+            font-size: 24px;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+        #loading-bar-container {
+            width: 300px;
+            height: 8px;
+            background-color: #374151;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        #loading-bar {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, #10b981, #34d399);
+            border-radius: 4px;
+            transition: width 0.3s ease;
+        }
+    </style>
+    <!-- Chargement de Phaser avant tout -->
+    <script src="https://cdn.jsdelivr.net/npm/phaser@2.6.2/build/phaser.min.js"></script>
+</head>
+<body>
+    <div id="game"></div>
+    
+    <!-- Overlay de chargement -->
+    <div id="loading-overlay">
+        <div id="loading-text">Chargement en cours...</div>
+        <div id="loading-bar-container">
+            <div id="loading-bar"></div>
+        </div>
+    </div>
+    
+    <!-- Chargement de RenJS -->
+    <script>
+        // Afficher la progression du chargement
+        function updateLoadingBar(progress) {
+            const loadingBar = document.getElementById('loading-bar');
+            if (loadingBar) {
+                loadingBar.style.width = `${progress * 100}%`;
+            }
+        }
+        
+        window.onload = function() {
+            // Informer la page parent que le chargement a commencé
+            if (window.parent) {
+                window.parent.postMessage('game:loading', '*');
+            }
+            
+            // Démarrer avec 10% sur la barre de chargement
+            updateLoadingBar(0.1);
+            
+            // Vérifier si Phaser est chargé
+            if (typeof Phaser === 'undefined') {
+                console.error('Phaser is not loaded!');
+                document.getElementById('loading-text').innerText = 'Erreur: Phaser non chargé';
+                document.getElementById('loading-text').style.color = '#ef4444';
+                
+                if (window.parent) {
+                    window.parent.postMessage('game:error', '*');
+                }
+                return;
+            }
+            
+            // Charger RenJS
+            const script = document.createElement('script');
+            script.type = 'text/javascript';
+            script.src = 'renjs.js';
+            script.onload = function() {
+                // Mettre à jour la barre à 50%
+                updateLoadingBar(0.5);
+                
+                if (typeof RenJS === 'undefined') {
+                    console.error('RenJS is not loaded correctly!');
+                    document.getElementById('loading-text').innerText = 'Erreur: RenJS non chargé';
+                    document.getElementById('loading-text').style.color = '#ef4444';
+                    
+                    if (window.parent) {
+                        window.parent.postMessage('game:error', '*');
+                    }
+                    return;
+                }
+                
+                // Configurer RenJS
+                const RenJSConfig = {
+                    'name': 'The Ethians Redeemed',
+                    'w': 800,
+                    'h': 600,
+                    'renderer': Phaser.AUTO,
+                    'scaleMode': Phaser.ScaleManager.SHOW_ALL,
+                    'loadingScreen': {
+                        'background': 'assets/gui/loaderloaderbackground.png',
+                        'loadingBar': {
+                            'asset': 'assets/gui/loaderloading-bar.png',
+                            'position': {
+                                'x': 109,
+                                'y': 458
+                            },
+                            'size': {
+                                'w': 578,
+                                'h': 82
+                            }
+                        }
+                    },
+                    'fonts': 'assets/gui/fonts.css',
+                    'guiConfig': 'story/GUI.yaml',
+                    'storyConfig': 'story/Config.yaml',
+                    'storySetup': 'story/Setup.yaml',
+                    'storyText': [
+                        'story/Story.yaml'
+                    ],
+                    'logChoices': true,
+                    'parent': 'game'
+                };
+                
+                // Mettre à jour la barre à 75%
+                updateLoadingBar(0.75);
+                
+                try {
+                    console.log('Initializing RenJS game with config:', RenJSConfig);
+                    
+                    // Initialiser le jeu RenJS
+                    const RenJSGame = new RenJS.game(RenJSConfig);
+                    
+                    // Écouter l'événement de progression du chargement
+                    RenJSGame.on('loadprogress', function(progress) {
+                        console.log('Load progress:', progress);
+                        // Mise à jour de la barre de chargement (75% à 95%)
+                        updateLoadingBar(0.75 + (progress * 0.2));
+                    });
+                    
+                    // Écouter quand le jeu est prêt à démarrer
+                    RenJSGame.on('start', function() {
+                        console.log('Game started!');
+                        // Mettre à jour la barre à 100%
+                        updateLoadingBar(1);
+                        
+                        // Masquer l'overlay de chargement
+                        setTimeout(function() {
+                            const loadingOverlay = document.getElementById('loading-overlay');
+                            if (loadingOverlay) {
+                                loadingOverlay.style.display = 'none';
+                            }
+                            
+                            // Informer la page parent que le jeu est prêt
+                            if (window.parent) {
+                                window.parent.postMessage('game:ready', '*');
+                            }
+                        }, 500);
+                    });
+                    
+                    // Écouter les erreurs globales
+                    window.addEventListener('error', function(event) {
+                        console.error('Game error:', event.error);
+                        document.getElementById('loading-text').innerText = 'Erreur: ' + (event.error ? event.error.message : 'Inconnue');
+                        document.getElementById('loading-text').style.color = '#ef4444';
+                        
+                        if (window.parent) {
+                            window.parent.postMessage('game:error', '*');
+                        }
+                    });
+                    
+                    // Lancer le jeu
+                    console.log('Launching RenJS game...');
+                    RenJSGame.launch();
+                    
+                    // Écouter les commandes de la page parent
+                    window.addEventListener('message', function(event) {
+                        if (event.data && typeof event.data === 'string' && event.data.startsWith('command:')) {
+                            const command = event.data.split(':')[1];
+                            console.log('Received command:', command);
+                        }
+                    });
+                } catch (error) {
+                    console.error('Error initializing RenJS:', error);
+                    document.getElementById('loading-text').innerText = 'Erreur: ' + (error ? error.message : 'Initialisation échouée');
+                    document.getElementById('loading-text').style.color = '#ef4444';
+                    
+                    if (window.parent) {
+                        window.parent.postMessage('game:error', '*');
+                    }
+                }
+            };
+            
+            script.onerror = function() {
+                console.error('Failed to load RenJS script');
+                document.getElementById('loading-text').innerText = 'Erreur: Impossible de charger RenJS';
+                document.getElementById('loading-text').style.color = '#ef4444';
+                
+                if (window.parent) {
+                    window.parent.postMessage('game:error', '*');
+                }
+            };
+            
+            document.body.appendChild(script);
+        };
+    </script>
+</body>
+</html>
