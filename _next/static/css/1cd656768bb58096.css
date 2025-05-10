@@ -1,1 +1,0 @@
-@keyframes flash{0%,to{opacity:0}50%{opacity:.3}}.battle-flash{animation:flash .3s ease-out}@keyframes shake{0%,to{transform:translateX(0)}25%{transform:translateX(-5px)}50%{transform:translateX(5px)}75%{transform:translateX(-3px)}}.battle-shake{animation:shake .3s ease-in-out}
