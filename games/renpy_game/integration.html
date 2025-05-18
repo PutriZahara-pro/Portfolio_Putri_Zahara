@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Intégration The Ethians Redeemed - Ren'Py</title>
+    <style>
+        body {
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #111827, #1f2937);
+            color: #f3f4f6;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            background-color: rgba(31, 41, 55, 0.8);
+            border: 1px solid #374151;
+            border-radius: 24px;
+            padding: 2.5rem;
+            max-width: 800px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+        }
+        h1 {
+            color: #10b981;
+            margin-bottom: 1.5rem;
+            font-size: 2rem;
+            text-align: center;
+        }
+        p {
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+        .game-container {
+            width: 100%;
+            height: 600px;
+            margin: 2rem 0;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 0 20px rgba(16, 185, 129, 0.4);
+            border: 2px solid #10b981;
+        }
+        .game-container iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        .instructions {
+            background-color: rgba(16, 185, 129, 0.1);
+            border-radius: 15px;
+            padding: 1.5rem;
+            margin-top: 2rem;
+        }
+        .instructions h2 {
+            color: #10b981;
+            margin-top: 0;
+        }
+        .btn {
+            display: inline-block;
+            background-color: #10b981;
+            color: white;
+            text-decoration: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 9999px;
+            font-weight: 500;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+            text-align: center;
+            margin-top: 1rem;
+        }
+        .btn:hover {
+            background-color: #059669;
+            transform: translateY(-2px);
+            box-shadow: 0 0 15px rgba(16, 185, 129, 0.6);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>The Ethians Redeemed</h1>
+        <p>
+            Ce jeu utilise Ren'Py, un moteur spécialisé dans les visual novels. Une fois compilé, le jeu sera affiché
+            dans le cadre ci-dessous. Pour l'instant, ce n'est qu'une maquette pour montrer comment l'intégration fonctionnera.
+        </p>
+        
+        <div class="game-container">
+            <!-- Iframe pointant vers le jeu Ren'Py compilé -->
+            <iframe src="/games/ethians_web/index.html" title="The Ethians Redeemed"></iframe>
+        </div>
+        
+        <div class="instructions">
+            <h2>Intégration</h2>
+            <p>
+                Pour intégrer votre jeu Ren'Py à votre portfolio, vous devrez :
+            </p>
+            <ol>
+                <li>Créer tous les assets graphiques nécessaires (fonds, personnages, GUI)</li>
+                <li>Développer votre jeu avec Ren'Py sur votre machine locale</li>
+                <li>Utiliser l'option "Build Web" dans Ren'Py pour compiler le jeu pour le web</li>
+                <li>Héberger les fichiers compilés et les référencer dans un iframe comme celui-ci</li>
+            </ol>
+            <p>
+                Une fois compilé, le jeu sera accessible directement depuis votre portfolio avec
+                tous les effets visuels modernes que vous souhaitez (néon, éléments arrondis, etc.).
+            </p>
+            <a href="../index.html" class="btn">Retour au portfolio</a>
+        </div>
+    </div>
+</body>
+</html>
