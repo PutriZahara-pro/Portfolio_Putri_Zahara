@@ -31,20 +31,69 @@
       "static/chunks/main-app.js",
       "static/chunks/app/page.js"
     ],
+    "/_not-found/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/_not-found/page.js"
+    ],
+    "/portfolio/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/portfolio/page.js"
+    ],
+    "/about/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/about/page.js"
+    ],
     "/news/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
       "static/chunks/app/news/page.js"
     ],
-    "/fr/news/page": [
+    "/contact/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/chunks/app/fr/news/page.js"
+      "static/chunks/app/contact/page.js"
     ],
-    "/_not-found/page": [
+    "/game/layout": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/chunks/app/_not-found/page.js"
+      "static/chunks/app/game/layout.js"
+    ],
+    "/game/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/game/page.js"
+    ],
+    "/portfolio/The_Ethians_Redeemed/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/css/app/portfolio/The_Ethians_Redeemed/page.css",
+      "static/chunks/app/portfolio/The_Ethians_Redeemed/page.js"
+    ],
+    "/portfolio/other-works/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/css/app/portfolio/other-works/page.css",
+      "static/chunks/app/portfolio/other-works/page.js"
+    ],
+    "/portfolio/ps-apocalypse/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/css/app/portfolio/ps-apocalypse/page.css",
+      "static/chunks/app/portfolio/ps-apocalypse/page.js"
+    ],
+    "/fr/portfolio/layout": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/fr/portfolio/layout.js"
+    ],
+    "/fr/portfolio/The_Ethians_Redeemed/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/css/app/fr/portfolio/The_Ethians_Redeemed/page.css",
+      "static/chunks/app/fr/portfolio/The_Ethians_Redeemed/page.js"
     ]
   }
 }
