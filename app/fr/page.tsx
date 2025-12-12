@@ -1,5 +1,35 @@
 import Link from "next/link"
 import { ChevronRight, ArrowRight } from "lucide-react"
+import GithubImage from "@/components/github-image"
+import InnovativeButtons from "@/components/innovative-buttons"
+import { Metadata } from "next"
+import { pagesSEO } from "@/data/seo-content"
+
+export const metadata: Metadata = {
+  title: pagesSEO.home.title,
+  description: pagesSEO.home.description,
+  keywords: pagesSEO.home.keywords.join(", "),
+  openGraph: {
+    title: pagesSEO.home.openGraph?.title,
+    description: pagesSEO.home.openGraph?.description,
+    images: [pagesSEO.home.openGraph?.image || ""],
+    type: "website",
+    locale: "fr_FR",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: pagesSEO.home.openGraph?.title,
+    description: pagesSEO.home.openGraph?.description,
+    images: [pagesSEO.home.openGraph?.image || ""],
+  },
+  alternates: {
+    canonical: "https://putrizahara.com/fr/",
+    languages: {
+      'en': "https://putrizahara.com/en/",
+      'fr': "https://putrizahara.com/fr/",
+    },
+  },
+}
 
 export default function PageFr() {
   return (
@@ -7,38 +37,27 @@ export default function PageFr() {
       {/* Section Héros */}
       <section className="relative h-screen flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0 z-0">
-          <img
-            src="/Portfolio_Putri_Zahara/key_frame_base_camp.jpg"
-            alt="Illustration conceptuelle montrant une clairière avec de petites structures"
+          <GithubImage
+            src="images/environement/key_frame_base_camp.jpg"
+            alt="Concept art environnement The Ethians Redeemed - Vue panoramique d'un camp de base dystopique avec structures détaillées par Putri Zahara concept artist"
             className="object-cover opacity-40 w-full h-full"
+            priority={true}
+            loading="eager"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-zinc-900 to-transparent" />
         </div>
 
         <div className="container mx-auto px-4 z-10 relative">
-          <div className="max-w-3xl">
-            <h1 className="text-5xl md:text-7xl font-bold mb-4 tracking-tight">
-              <span className="text-emerald-400">Putri Zahara</span>
-              <br />
-              Concept Artist
+          <div className="max-w-3xl text-center mx-auto">
+            <h1 className="text-5xl md:text-7xl font-bold tracking-tight">
+              <span className="text-emerald-400 bg-gradient-to-r from-green-400 to-emerald-600 bg-clip-text text-transparent">Putri Zahara</span>
             </h1>
-            <p className="text-xl md:text-2xl text-zinc-300 mb-8">
-              Je crée des mondes immersifs et des récits captivants grâce à la narration visuelle.
+            <h2 className="text-3xl md:text-4xl font-semibold mt-2 mb-4 text-zinc-100">Concept Artist</h2>
+            <p className="text-xl md:text-2xl text-zinc-300 mb-10 max-w-2xl mx-auto">
+              Je crée des mondes immersifs et des récits captivants grâce à la narration visuelle
             </p>
-            <div className="flex flex-col sm:flex-row gap-4">
-              <Link
-                href="/fr/portfolio"
-                className="bg-emerald-600 hover:bg-emerald-700 text-white px-8 py-3 rounded-md font-medium flex items-center justify-center group transition-all"
-              >
-                Voir le portfolio
-                <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
-              </Link>
-              <Link
-                href="/fr/about"
-                className="border border-zinc-600 hover:border-zinc-400 px-8 py-3 rounded-md font-medium flex items-center justify-center"
-              >
-                À propos
-              </Link>
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
+              <InnovativeButtons frenchVersion={true} />
             </div>
           </div>
         </div>

@@ -2,25 +2,42 @@
 import Link from "next/link"
 import { ArrowLeft } from "lucide-react"
 import { useState } from "react"
-import ImageLightbox from "@/components/image-lightbox"
+import ImageLightbox, { ZoomableImage } from "@/components/image-lightbox"
 
 const images = [
-  '/Portfolio_Putri_Zahara/images/Portfolio/The_Ethians_Redeemed/camp_du_travail_keyframe.jpg',
-  '/Portfolio_Putri_Zahara/images/Portfolio/The_Ethians_Redeemed/design_dome_yirie.jpg',
-  '/Portfolio_Putri_Zahara/images/Portfolio/The_Ethians_Redeemed/design_yirie_banner.jpg',
-  '/Portfolio_Putri_Zahara/images/Portfolio/The_Ethians_Redeemed/dug_out_house.jpg',
-  '/Portfolio_Putri_Zahara/images/Portfolio/The_Ethians_Redeemed/gate_capital_yirie.png',
-  '/Portfolio_Putri_Zahara/images/Portfolio/The_Ethians_Redeemed/key_frame_base_camp.jpg',
-  '/Portfolio_Putri_Zahara/images/Portfolio/The_Ethians_Redeemed/planche_perso_dimi_new.jpg',
-  '/Portfolio_Putri_Zahara/images/Portfolio/The_Ethians_Redeemed/planche_perso_haikal_new.jpg',
-  '/Portfolio_Putri_Zahara/images/Portfolio/The_Ethians_Redeemed/set_design_camp_travail.jpg',
-  '/Portfolio_Putri_Zahara/images/Portfolio/The_Ethians_Redeemed/set_design_dug_out_house.jpg',
-  '/Portfolio_Putri_Zahara/images/Portfolio/The_Ethians_Redeemed/set_design_yirie.jpg'
-].map((src, index) => ({
-  src,
-  alt: `Image ${index + 1} of The Ethians Redeemed Project`,
-  description: 'Illustration for The Ethians Redeemed project'
-}));
+  'https://putrizahara-pro.github.io/Portfolio_Putri_Zahara/images/Portfolio/The_Ethians_Redeemed/camp_du_travail_keyframe.jpg',
+  'https://putrizahara-pro.github.io/Portfolio_Putri_Zahara/images/Portfolio/The_Ethians_Redeemed/set_design_camp_travail.jpg',
+  'https://putrizahara-pro.github.io/Portfolio_Putri_Zahara/images/Portfolio/The_Ethians_Redeemed/gate_capital_yirie.png',
+  'https://putrizahara-pro.github.io/Portfolio_Putri_Zahara/images/Portfolio/The_Ethians_Redeemed/set_design_yirie.jpg',
+  'https://putrizahara-pro.github.io/Portfolio_Putri_Zahara/images/Portfolio/The_Ethians_Redeemed/design_dome_yirie.jpg',
+  'https://putrizahara-pro.github.io/Portfolio_Putri_Zahara/images/Portfolio/The_Ethians_Redeemed/design_yirie_banner.jpg',
+  'https://putrizahara-pro.github.io/Portfolio_Putri_Zahara/images/Portfolio/The_Ethians_Redeemed/key_frame_base_camp.jpg',
+  'https://putrizahara-pro.github.io/Portfolio_Putri_Zahara/images/Portfolio/The_Ethians_Redeemed/dug_out_house.jpg',
+  'https://putrizahara-pro.github.io/Portfolio_Putri_Zahara/images/Portfolio/The_Ethians_Redeemed/set_design_dug_out_house.jpg',
+  'https://putrizahara-pro.github.io/Portfolio_Putri_Zahara/images/Portfolio/The_Ethians_Redeemed/planche_perso_dimi_new.jpg',
+  'https://putrizahara-pro.github.io/Portfolio_Putri_Zahara/images/Portfolio/The_Ethians_Redeemed/planche_perso_haikal_new.jpg',
+  'https://putrizahara-pro.github.io/Portfolio_Putri_Zahara/images/Portfolio/The_Ethians_Redeemed/planche_perso_milo_new.jpg'
+].map((src, index) => {
+  const descriptions = [
+    'Labor camp environment design',
+    'Set design of the labor camp',
+    'Environment art of the gate of the Yirie capital',
+    'Set design of Yirie castle',
+    'The design of the Yirie main building',
+    'Design Yirie banner and the main gate',
+    'Environment concept of Demetrius base camp',
+    'Design of the dug out house',
+    'Set design of the dug out house',
+    'Character design of Demetrius',
+    'Character design of Haikal',
+    'Character design of Milo'
+  ];
+  return {
+    src,
+    alt: descriptions[index],
+    description: descriptions[index]
+  };
+});
 
 export default function EthianRedemPage() {
   const [lightboxOpen, setLightboxOpen] = useState(false)
@@ -52,7 +69,7 @@ export default function EthianRedemPage() {
           <div className="max-w-4xl">
             <h1 className="text-4xl md:text-5xl font-bold mb-6">The Ethians Redeemed</h1>
             <p className="text-xl text-zinc-300 mb-8">
-              Character designs and key art for a fantasy RPG set in the mythical world of Ethian.
+              A concept art project for video game RPG, neo-medieval where the slave, Demetrius, rises and fights against the cruel empire.
             </p>
 
             <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-sm">
@@ -82,16 +99,15 @@ export default function EthianRedemPage() {
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
             {images.map((image, index) => (
-              <div key={index} className="bg-zinc-800 rounded-lg overflow-hidden shadow-lg">
-                <div 
-                  className="overflow-hidden cursor-pointer"
-                  onClick={() => openLightbox(index)}
+              <div key={index} className="bg-zinc-800 rounded-xl overflow-hidden shadow-lg hover:shadow-emerald-500/20 transition-all duration-300">
+                <div
+                  className="overflow-hidden"
                 >
-                  <img 
+                  <ZoomableImage 
                     src={image.src} 
                     alt={image.alt} 
-                    className="w-full object-cover" 
-                    loading={index === 0 ? "eager" : "lazy"}
+                    className="w-full object-cover h-[300px]" 
+                    onClick={() => openLightbox(index)}
                   />
                 </div>
                 <div className="p-6">
@@ -110,17 +126,22 @@ export default function EthianRedemPage() {
           <div className="max-w-3xl mx-auto">
             <h2 className="text-3xl font-bold mb-8">About This Project</h2>
             <div className="prose prose-invert max-w-none">
-              <p>
-                The Ethians Redeemed is a narrative RPG set in a dystopian world where the Yirie Empire rules with an iron fist.
-                The game follows Demetrius, a farmer whose life was upended when imperial forces invaded his homeland.
+              <p className="mb-4">
+                <em>Note: The game shown here is not representative of the final visual and systematic design, but serves to illustrate the point of view and storyline.</em>
               </p>
               <p>
-                This project combines immersive storytelling with gameplay mechanics inspired by games like Undertale,
-                where player choices directly influence the story progression and relationships with other characters.
+                The Ethians Redeemed is a narrative RPG set in a neo-medieval dystopian world where the Yirie Empire rules with an iron fist.
+                The game follows Demetrius, a slave who rises up to fight against the oppressive empire that has devastated his homeland.
               </p>
               <p>
-                My role in this project was to create the main character designs, key environment concepts,
-                and develop an immersive user interface that reflects the oppressive atmosphere of this world.
+                The concept art showcases various environments including labor camps, the imposing Yirie capital, Demetrius's hidden base camp, 
+                and character designs that reflect the harsh reality of this world. The visual style blends medieval aesthetics with dystopian elements
+                to create a unique atmosphere.
+              </p>
+              <p>
+                My role in this project was to develop the overall visual identity, including environment concepts, character designs, 
+                and architectural elements that tell the story of oppression and resistance. Each location and character was designed
+                to convey specific narrative elements and emotional resonance.
               </p>
             </div>
           </div>

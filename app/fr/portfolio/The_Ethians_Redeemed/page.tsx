@@ -5,44 +5,88 @@ import { useState } from "react"
 import ImageLightbox, { ZoomableImage } from "@/components/image-lightbox"
 
 const images = [
-  'https://putrizahara-pro.github.io/Portfolio_Putri_Zahara/images/Portfolio/The_Ethians_Redeemed/camp_du_travail_keyframe.jpg',
-  'https://putrizahara-pro.github.io/Portfolio_Putri_Zahara/images/Portfolio/The_Ethians_Redeemed/set_design_camp_travail.jpg',
-  'https://putrizahara-pro.github.io/Portfolio_Putri_Zahara/images/Portfolio/The_Ethians_Redeemed/gate_capital_yirie.png',
-  'https://putrizahara-pro.github.io/Portfolio_Putri_Zahara/images/Portfolio/The_Ethians_Redeemed/set_design_yirie.jpg',
-  'https://putrizahara-pro.github.io/Portfolio_Putri_Zahara/images/Portfolio/The_Ethians_Redeemed/design_dome_yirie.jpg',
-  'https://putrizahara-pro.github.io/Portfolio_Putri_Zahara/images/Portfolio/The_Ethians_Redeemed/design_yirie_banner.jpg',
-  'https://putrizahara-pro.github.io/Portfolio_Putri_Zahara/images/Portfolio/The_Ethians_Redeemed/key_frame_base_camp.jpg',
-  'https://putrizahara-pro.github.io/Portfolio_Putri_Zahara/images/Portfolio/The_Ethians_Redeemed/dug_out_house.jpg',
-  'https://putrizahara-pro.github.io/Portfolio_Putri_Zahara/images/Portfolio/The_Ethians_Redeemed/set_design_dug_out_house.jpg',
-  'https://putrizahara-pro.github.io/Portfolio_Putri_Zahara/images/Portfolio/The_Ethians_Redeemed/planche_perso_dimi_new.jpg',
-  'https://putrizahara-pro.github.io/Portfolio_Putri_Zahara/images/Portfolio/The_Ethians_Redeemed/planche_perso_ellis_new.jpg',
-  'https://putrizahara-pro.github.io/Portfolio_Putri_Zahara/images/Portfolio/The_Ethians_Redeemed/planche_perso_hades_new.jpg',
-  'https://putrizahara-pro.github.io/Portfolio_Putri_Zahara/images/Portfolio/The_Ethians_Redeemed/planche_perso_haikal_new.jpg',
-  'https://putrizahara-pro.github.io/Portfolio_Putri_Zahara/images/Portfolio/The_Ethians_Redeemed/planche_perso_milo_new.jpg',
-  'https://putrizahara-pro.github.io/Portfolio_Putri_Zahara/images/Portfolio/The_Ethians_Redeemed/planche_castle_vulkan.jpg',
-  'https://putrizahara-pro.github.io/Portfolio_Putri_Zahara/images/Portfolio/The_Ethians_Redeemed/planche_props_forest.jpg',
-  'https://putrizahara-pro.github.io/Portfolio_Putri_Zahara/images/Portfolio/The_Ethians_Redeemed/planche_props_slave.jpg',
-  'https://putrizahara-pro.github.io/Portfolio_Putri_Zahara/images/Portfolio/The_Ethians_Redeemed/planche_set_design_ether.jpg'
+  // Ordre spécifique demandé
+  '/images/Portfolio/The_Ethians_Redeemed/carte_monde.jpg', // 1. carte du monde
+  '/images/Portfolio/The_Ethians_Redeemed/Concept_village_demetrius.jpg', // 2. concept art village de demetrius
+  '/images/Portfolio/The_Ethians_Redeemed/camp_du_travail_keyframe.jpg', // 3. design d'environnement du camp de travail
+  '/images/Portfolio/The_Ethians_Redeemed/set_design_camp_travail.jpg', // 4. design de décor du camp de travail
+  '/images/Portfolio/The_Ethians_Redeemed/planche_props_slave.jpg', // 5. designs des accessoires des esclaves
+  '/images/Portfolio/The_Ethians_Redeemed/procesuce_creation_camp_de_travaill.jpg', // 6. processus de création du camp de travail
+  '/images/Portfolio/The_Ethians_Redeemed/Carte_3D_camp_de_travaille.jpg', // 7. carte 3D du camp de travail
+  '/images/Portfolio/The_Ethians_Redeemed/key_frame_base_camp.jpg', // 8. concept d'environnement du camp de base
+  '/images/Portfolio/The_Ethians_Redeemed/dug_out_house.jpg', // 9. design de la maison creusée
+  '/images/Portfolio/The_Ethians_Redeemed/set_design_dug_out_house.jpg', // 10. design de décor de la maison creusée
+  '/images/Portfolio/The_Ethians_Redeemed/planche_props_forest.jpg', // 11. designs des accessoires de la forêt
+  '/images/Portfolio/The_Ethians_Redeemed/gate_capital_yirie.png', // 12. art d'environnement de la porte de la capitale Yirie
+  '/images/Portfolio/The_Ethians_Redeemed/Concept_ville_yirie.jpg', // 13. concept art de la ville de Yirie
+  '/images/Portfolio/The_Ethians_Redeemed/set_design_yirie.jpg', // 14. design de décor du château de Yirie
+  '/images/Portfolio/The_Ethians_Redeemed/design_dome_yirie.jpg', // 15. design du bâtiment principal de Yirie
+  '/images/Portfolio/The_Ethians_Redeemed/design_yirie_banner.jpg', // 16. design de la bannière et de la porte principale de Yirie
+  '/images/Portfolio/The_Ethians_Redeemed/planche_recherche_yirie.jpg', // 17. croquis de recherche pour l'environnement de Yirie
+  '/images/Portfolio/The_Ethians_Redeemed/Concept_chateau_de_ether.jpg', // 18. concept art du château d'Ether
+  '/images/Portfolio/The_Ethians_Redeemed/planche_set_design_ether.jpg', // 19. concept artistique du monde d'Ether
+  '/images/Portfolio/The_Ethians_Redeemed/Props_ether.jpg', // 20. accessoires du royaume d'Ether
+  '/images/Portfolio/The_Ethians_Redeemed/plnche_recherche_ether.jpg', // 21. croquis de recherche pour le royaume d'Ether
+  '/images/Portfolio/The_Ethians_Redeemed/Concept_chateau_de_vulkan.jpg', // 22. concept art final du château de Vulkan
+  '/images/Portfolio/The_Ethians_Redeemed/planche_castle_vulkan.jpg', // 23. concept du château de Vulkan
+  '/images/Portfolio/The_Ethians_Redeemed/Props_vulcan.jpg', // 24. accessoires du château de Vulkan
+  '/images/Portfolio/The_Ethians_Redeemed/planche_de_recherche_vulkan.jpg', // 25. croquis de recherche pour l'environnement de Vulkan
+  '/images/Portfolio/The_Ethians_Redeemed/planche_perso_dimi_new.jpg', // 26. design du personnage Demetrius
+  '/images/Portfolio/The_Ethians_Redeemed/planche_de_vetement.jpg', // 27. designs de vêtements pour tous les personnages
+  '/images/Portfolio/The_Ethians_Redeemed/processuce_creation_demetrius.jpg', // 28. processus de création de Demetrius
+  '/images/Portfolio/The_Ethians_Redeemed/planche_perso_haikal_new.jpg', // 29. design du personnage Haikal
+  '/images/Portfolio/The_Ethians_Redeemed/planche_de_vetement_haikal.jpg', // 30. designs de vêtements pour Haikal
+  '/images/Portfolio/The_Ethians_Redeemed/planche_perso_ellis_new.jpg', // 31. design du personnage Ellis
+  '/images/Portfolio/The_Ethians_Redeemed/planche_de_vetement_elis.jpg', // 32. designs de vêtements pour Ellis
+  '/images/Portfolio/The_Ethians_Redeemed/recherche_ellis.jpg', // 33. croquis de recherche pour le personnage d'Ellis
+  '/images/Portfolio/The_Ethians_Redeemed/planche_perso_milo_new.jpg', // 34. design du personnage Milo
+  '/images/Portfolio/The_Ethians_Redeemed/planche_de_vetement_milo.jpg', // 35. designs de vêtements pour Milo
+  '/images/Portfolio/The_Ethians_Redeemed/planche_perso_hades_new.jpg', // 36. design du personnage Hades
+  '/images/Portfolio/The_Ethians_Redeemed/planche_de_vetement_hades.jpg', // 37. designs de vêtements pour Hades
+  '/images/Portfolio/The_Ethians_Redeemed/concept_UIX_jeux.jpg', // 38. concepts d'interface utilisateur pour le jeu
+  '/images/Portfolio/The_Ethians_Redeemed/ui_icons.jpg' // 39. icônes et éléments d'interface du jeu
 ].map((src, index) => {
   const descriptions = [
-    'Design d\'environnement du camp de travail',
-    'Design de décor du camp de travail',
-    'Art d\'environnement de la porte de la capitale Yirie',
-    'Design de décor du château de Yirie',
-    'Design du bâtiment principal de Yirie',
-    'Design de la bannière et de la porte principale de Yirie',
-    'Concept d\'environnement du camp de base de Demetrius',
-    'Design de la maison creusée',
-    'Design de décor de la maison creusée',
-    'Design du personnage Demetrius',
-    'Design du personnage Ellis',
-    'Design du personnage Hades',
-    'Design du personnage Haikal',
-    'Design du personnage Milo',
-    'Concepts de design du Château Vulkan',
-    'Designs des accessoires de la forêt',
-    'Designs des équipements d\'esclave',
-    'Design d\'environnement Ether'
+    // Descriptions suivant l'ordre demandé
+    'Carte du monde de l\'univers The Ethians Redeemed', // 1
+    'Concept art du village de Demetrius', // 2
+    'Design d\'environnement du camp de travail', // 3
+    'Design de décor du camp de travail', // 4
+    'Designs des accessoires des esclaves', // 5
+    'Processus de création de l\'environnement du camp de travail', // 6
+    'Carte 3D du camp de travail', // 7
+    'Concept d\'environnement du camp de base de Demetrius', // 8
+    'Design de la maison creusée', // 9
+    'Design de décor de la maison creusée', // 10
+    'Designs des accessoires de la forêt', // 11
+    'Art d\'environnement de la porte de la capitale Yirie', // 12
+    'Concept art de la ville de Yirie', // 13
+    'Design de décor du château de Yirie', // 14
+    'Design du bâtiment principal de Yirie', // 15
+    'Design de la bannière et de la porte principale de Yirie', // 16
+    'Croquis de recherche pour l\'environnement de Yirie', // 17
+    'Concept art du château d\'Ether', // 18
+    'Concept artistique du monde d\'Ether', // 19
+    'Accessoires du royaume d\'Ether', // 20
+    'Croquis de recherche pour le royaume d\'Ether', // 21
+    'Concept art final du château de Vulkan', // 22
+    'Concept du château de Vulkan', // 23
+    'Accessoires du château de Vulkan', // 24
+    'Croquis de recherche pour l\'environnement de Vulkan', // 25
+    'Design du personnage Demetrius', // 26
+    'Designs de vêtements pour tous les personnages', // 27
+    'Processus de création du personnage de Demetrius et de son environnement', // 28
+    'Design du personnage Haikal', // 29
+    'Designs de vêtements pour Haikal', // 30
+    'Design du personnage Ellis', // 31
+    'Designs de vêtements pour Ellis', // 32
+    'Croquis de recherche pour le personnage d\'Ellis', // 33
+    'Design du personnage Milo', // 34
+    'Designs de vêtements pour Milo', // 35
+    'Design du personnage Hades', // 36
+    'Designs de vêtements pour Hades', // 37
+    'Concepts d\'interface utilisateur pour le jeu', // 38
+    'Icônes et éléments d\'interface du jeu' // 39
   ];
   return {
     src,
@@ -84,7 +128,7 @@ export default function EthianRedemPageFr() {
               Un projet de concept art pour un RPG néo-médiéval où l'esclave Demetrius se soulève et combat contre un empire cruel.
             </p>
 
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-sm">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-sm mb-6">
               <div>
                 <h3 className="text-zinc-400 mb-1">CLIENT</h3>
                 <p>Projet de fin d'année</p>
@@ -101,6 +145,14 @@ export default function EthianRedemPageFr() {
                 <h3 className="text-zinc-400 mb-1">LIVRABLES</h3>
                 <p>Designs de personnages, concepts d'environnements, interface utilisateur</p>
               </div>
+            </div>
+            
+            <div className="mb-6">
+              <h3 className="text-zinc-400 mb-1">OUTILS</h3>
+              <p className="flex items-center gap-3">
+                <span className="bg-zinc-700 px-3 py-1 rounded-full">Photoshop</span>
+                <span className="bg-zinc-700 px-3 py-1 rounded-full">Blender</span>
+              </p>
             </div>
           </div>
         </div>

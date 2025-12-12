@@ -1,10 +1,11 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import Image from "next/image"
 import { Button } from "@/components/ui/button"
+import { Shield, Sword, Heart, ArrowRight } from "lucide-react"
 import type { Character } from "@/components/game/types"
-import HealthBar from "./health-bar"
+import CharacterSprite from "./character-sprite"
+import { motion } from "framer-motion"
 
 interface BattleSystemProps {
   opponent: Character
@@ -30,6 +31,7 @@ export default function BattleSystem({ opponent, playerStats, onBattleEnd, onPla
   const [mercyAttempts, setMercyAttempts] = useState(0)
   const [mercyThreshold, setMercyThreshold] = useState(3)
   const [battleState, setBattleState] = useState<"active" | "victory" | "defeat" | "mercy" | "flee">("active")
+  const [currentAction, setCurrentAction] = useState<"none" | "attack" | "defend" | "mercy" | "flee">("none")
 
   // Handle opponent's turn
   useEffect(() => {
@@ -42,6 +44,7 @@ export default function BattleSystem({ opponent, playerStats, onBattleEnd, onPla
         setTimeout(() => {
           setPlayerTurn(true)
           setBattleText("What will you do?")
+          setCurrentAction("none")
         }, 1500)
       }, 1000)
 
@@ -61,9 +64,30 @@ export default function BattleSystem({ opponent, playerStats, onBattleEnd, onPla
     }
   }, [opponentStats.hp, battleState, opponent.name, onBattleEnd])
 
-  const handleAttack = () => {
+  const handleAction = (action: "attack" | "defend" | "mercy" | "flee") => {
     if (!playerTurn || battleState !== "active") return
+    
+    setCurrentAction(action)
+    
+    switch(action) {
+      case "attack":
+        handleAttack()
+        break
+      case "defend":
+        // Special defense logic
+        setBattleText(`You brace yourself for the enemy's attack.`)
+        setPlayerTurn(false)
+        break
+      case "mercy":
+        handleMercy()
+        break
+      case "flee":
+        handleFlee()
+        break
+    }
+  }
 
+  const handleAttack = () => {
     const damage = Math.max(1, playerStats.attack - opponentStats.defense)
     const newHp = Math.max(0, opponentStats.hp - damage)
 
@@ -73,8 +97,6 @@ export default function BattleSystem({ opponent, playerStats, onBattleEnd, onPla
   }
 
   const handleMercy = () => {
-    if (!playerTurn || battleState !== "active") return
-
     const newMercyAttempts = mercyAttempts + 1
     setMercyAttempts(newMercyAttempts)
 
@@ -92,8 +114,6 @@ export default function BattleSystem({ opponent, playerStats, onBattleEnd, onPla
   }
 
   const handleFlee = () => {
-    if (!playerTurn || battleState !== "active") return
-
     const fleeChance = Math.random()
 
     if (fleeChance > 0.5) {
@@ -111,69 +131,98 @@ export default function BattleSystem({ opponent, playerStats, onBattleEnd, onPla
 
   return (
     <div className="absolute inset-0 flex flex-col overflow-visible">
-      {/* Opponent */}
-      <div className="flex-1 flex items-center justify-center">
-        <div className="relative h-[28rem] w-96 mb-4">
-          <div className="absolute -top-12 left-1/2 -translate-x-1/2 bg-zinc-800/90 px-4 py-2 rounded-full text-base font-medium text-white z-10 shadow-md">
-            {opponent.name}
-          </div>
-          <Image 
-            src={opponent.image || "/placeholder.svg"} 
-            alt={opponent.name} 
-            fill 
-            className="object-contain" 
-            style={{
-              objectPosition: opponent.id === 'milo' ? '50% 40%' : opponent.id === 'hades' ? '50% 40%' : '50% 20%',
-              transform: opponent.id === 'milo' ? 'scale(1.5)' : opponent.id === 'hades' ? 'scale(1.5)' : 'scale(2.5)',
-              transformOrigin: 'center 20%'
-            }}
-          />
-        </div>
+      {/* Afficher le personnage adverse centré (style maj) */}
+      <div className="flex-1 relative">
+        <CharacterSprite
+          character={opponent}
+          position="center"
+          isBattle={true}
+          animation={battleState === "victory" ? "defeat" : battleState === "defeat" ? "victory" : "idle"}
+        />
       </div>
 
-      {/* Battle UI */}
-      <div className="bg-zinc-900/95 p-6 border-t-2 border-emerald-500 rounded-t-xl shadow-lg relative z-30 mb-0">
-        {/* Health bars */}
-        <div className="flex justify-between mb-6 gap-8">
-          <div className="w-1/2">
-            <div className="text-base mb-2 font-medium text-emerald-400">Demetrius</div>
-            <HealthBar currentHP={playerStats.hp} maxHP={playerStats.maxHp} />
+      {/* Interface de combat */}
+      <div className="absolute bottom-[180px] left-0 right-0 z-20 px-4">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+          className="bg-zinc-900/90 border-2 border-emerald-500 rounded-lg p-4 shadow-lg"
+        >
+          {/* Battle message */}
+          <div className="text-white text-center mb-4 min-h-[24px] font-medium">{battleText}</div>
+
+          {/* Health bars */}
+          <div className="flex justify-between mb-4">
+            <div className="w-[48%]">
+              <div className="flex justify-between text-sm mb-1">
+                <span className="font-bold text-blue-400">You</span>
+                <span className="text-blue-300">
+                  {playerStats.hp}/{playerStats.maxHp} HP
+                </span>
+              </div>
+              <div className="w-full bg-zinc-700 rounded-full h-3 p-0.5 border border-blue-700/50 overflow-hidden">
+                <motion.div
+                  initial={{ width: "100%" }}
+                  animate={{ width: `${(playerStats.hp / playerStats.maxHp) * 100}%` }}
+                  transition={{ type: "spring", stiffness: 100 }}
+                  className="bg-gradient-to-r from-blue-600 to-blue-400 h-full rounded-full shadow-inner shadow-white/10"
+                />
+              </div>
+            </div>
+
+            <div className="w-[48%]">
+              <div className="flex justify-between text-sm mb-1">
+                <span className="font-bold text-red-400">{opponent.name}</span>
+                <span className="text-red-300">
+                  {opponentStats.hp}/{opponentStats.maxHp} HP
+                </span>
+              </div>
+              <div className="w-full bg-zinc-700 rounded-full h-3 p-0.5 border border-red-700/50 overflow-hidden">
+                <motion.div
+                  initial={{ width: "100%" }}
+                  animate={{ width: `${(opponentStats.hp / opponentStats.maxHp) * 100}%` }}
+                  transition={{ type: "spring", stiffness: 100 }}
+                  className="bg-gradient-to-r from-red-600 to-red-400 h-full rounded-full shadow-inner shadow-white/10"
+                />
+              </div>
+            </div>
           </div>
 
-          <div className="w-1/2">
-            <div className="text-base mb-2 font-medium text-red-400 text-right">{opponent.name}</div>
-            <HealthBar currentHP={opponentStats.hp} maxHP={opponentStats.maxHp} />
-          </div>
-        </div>
-
-        {/* Battle text */}
-        <div className="min-h-[50px] mb-5 text-center p-3 bg-zinc-800/80 rounded-lg border border-zinc-700 text-white">
-          {battleText}
-        </div>
-
-        {/* Battle actions */}
-        {playerTurn && battleState === "active" && (
-          <div className="grid grid-cols-3 gap-4">
-            <Button 
-              onClick={handleAttack} 
-              className="bg-red-600 hover:bg-red-700 border-2 border-red-400 text-white py-3 rounded-xl shadow-md"
-            >
-              Attack
-            </Button>
-            <Button 
-              onClick={handleMercy} 
-              className="bg-yellow-600 hover:bg-yellow-700 border-2 border-yellow-400 text-white py-3 rounded-xl shadow-md"
-            >
-              Mercy
-            </Button>
-            <Button 
-              onClick={handleFlee} 
-              className="bg-blue-600 hover:bg-blue-700 border-2 border-blue-400 text-white py-3 rounded-xl shadow-md"
-            >
-              Flee
-            </Button>
-          </div>
-        )}
+          {/* Battle actions */}
+          {currentAction === "none" && (
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
+              <Button
+                onClick={() => handleAction("attack")}
+                className="bg-gradient-to-b from-red-600 to-red-800 hover:from-red-500 hover:to-red-700 flex items-center justify-center gap-2 text-sm sm:text-base border border-red-400/30 shadow-md"
+              >
+                <Sword size={16} className="animate-pulse" />
+                <span className="hidden sm:inline">Attack</span>
+              </Button>
+              <Button
+                onClick={() => handleAction("defend")}
+                className="bg-gradient-to-b from-blue-600 to-blue-800 hover:from-blue-500 hover:to-blue-700 flex items-center justify-center gap-2 text-sm sm:text-base border border-blue-400/30 shadow-md"
+              >
+                <Shield size={16} />
+                <span className="hidden sm:inline">Defend</span>
+              </Button>
+              <Button
+                onClick={() => handleAction("mercy")}
+                className="bg-gradient-to-b from-emerald-600 to-emerald-800 hover:from-emerald-500 hover:to-emerald-700 flex items-center justify-center gap-2 text-sm sm:text-base border border-emerald-400/30 shadow-md"
+              >
+                <Heart size={16} />
+                <span className="hidden sm:inline">Mercy</span>
+              </Button>
+              <Button
+                onClick={() => handleAction("flee")}
+                className="bg-gradient-to-b from-zinc-600 to-zinc-800 hover:from-zinc-500 hover:to-zinc-700 flex items-center justify-center gap-2 text-sm sm:text-base border border-zinc-400/30 shadow-md"
+              >
+                <ArrowRight size={16} />
+                <span className="hidden sm:inline">Flee</span>
+              </Button>
+            </div>
+          )}
+        </motion.div>
       </div>
     </div>
   )

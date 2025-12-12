@@ -2,6 +2,9 @@
 
 import React, { useState, useRef, useEffect } from "react";
 import Link from "next/link";
+import { getImagePath } from "../utils/image-path";
+import { getImageSEO, generateSEOAlt } from "../data/seo-content";
+import GithubImage from "./github-image";
 
 interface CardProps {
   id: string;
@@ -28,6 +31,10 @@ export default function InteractiveCard({ id, title, description, image, href, c
     transition: "box-shadow 0.3s ease, transform 0.3s ease",
     borderRadius: "0.5rem", // 8px
   };
+
+  // Récupérer les données SEO pour cette image
+  const seoData = getImageSEO(image);
+  const optimizedAlt = seoData?.alt || generateSEOAlt(title, description, ["concept art", "portfolio"]);
 
   useEffect(() => {
     const el = ref.current;
@@ -88,10 +95,12 @@ export default function InteractiveCard({ id, title, description, image, href, c
                   : "scale(1) translateZ(0)",
               }}
             >
-              <img 
-                src={image} 
-                alt={title}
+              <GithubImage 
+                src={getImagePath(image)} 
+                alt={optimizedAlt}
                 className="w-full h-full object-cover"
+                loading="lazy"
+                priority={false}
               />
             </div>
           </div>

@@ -10,19 +10,24 @@ export default function AboutPage() {
             <div>
               <h1 className="text-4xl md:text-5xl font-bold mb-6">About Me</h1>
               <p className="text-xl text-zinc-300 mb-8">
-                I'm Putri Zahara, a concept artist with a passion for creating immersive worlds and compelling
-                narratives.
+                Hello! I'm Putri Zahara, an International student in Graphic Arts - Concept Art at Brassart Lyon.
               </p>
               <div className="space-y-4 text-zinc-300">
                 <p>
-                  With over 5 years of experience in the industry, I've had the privilege of working on various projects
-                  ranging from indie games to major studio productions. My work focuses on environmental design,
-                  character concepts, and world-building.
+                  I've always been passionate about creating worlds and characters, especially for video games and films. 
+                  I love working with tools like Photoshop, Procreate, and Blender, which allow me to bring my concepts to life.
                 </p>
                 <p>
-                  I believe that great concept art is not just about creating beautiful images, but about telling
-                  stories and building worlds that captivate and inspire. Each piece I create is carefully crafted to
-                  convey emotion, atmosphere, and narrative.
+                  Whether I'm designing characters, environments, or other elements, I find great joy in the creative process, 
+                  always seeking to create something unique and memorable.
+                </p>
+                <p>
+                  I strongly believe in the power of teamwork. I think the best ideas come from collaboration and sharing creativity, 
+                  and I love being part of that dynamic. At the same time, I'm always looking for new ways to improve and grow as an artist.
+                </p>
+                <p>
+                  When I'm not working on my projects, I explore other art forms, watch movies, or dive into the latest games for inspiration. 
+                  My dream is to contribute to projects that leave a lasting impression and bring incredible stories to life.
                 </p>
               </div>
             </div>
@@ -31,7 +36,7 @@ export default function AboutPage() {
               <div className="relative h-[600px] w-[500px] rounded-3xl overflow-hidden bg-zinc-800/50 backdrop-blur-sm border border-emerald-500/20 p-5 shadow-lg shadow-emerald-500/10">
                 <div className="absolute bottom-0 left-0 right-0 h-1/3 bg-gradient-to-t from-zinc-800/80 to-transparent z-10"></div>
                 <img
-                  src="/Portfolio_Putri_Zahara/images/putri-zahara-portrait.png"
+                  src="https://putrizahara-pro.github.io/Portfolio_Putri_Zahara/images/putri-zahara-portrait.png"
                   alt="Putri Zahara portrait"
                   className="object-cover h-full w-full object-top rounded-2xl"
                 />

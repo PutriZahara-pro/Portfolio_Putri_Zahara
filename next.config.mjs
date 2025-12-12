@@ -2,9 +2,10 @@
 const isGitHubAction = process.env.GITHUB_ACTIONS === 'true'
 const nextConfig = {
   output: 'export',
-  basePath: isGitHubAction ? '/Portfolio_Putri_Zahara' : '',
-  assetPrefix: isGitHubAction ? '/Portfolio_Putri_Zahara/' : '',
+  basePath: '',
+  assetPrefix: '',
   trailingSlash: true,
+  outputFileTracingRoot: process.cwd(),
   eslint: {
     ignoreDuringBuilds: true,
   },

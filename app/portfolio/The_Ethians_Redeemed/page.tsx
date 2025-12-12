@@ -5,44 +5,88 @@ import { useState } from "react"
 import ImageLightbox, { ZoomableImage } from "@/components/image-lightbox"
 
 const images = [
-  'https://putrizahara-pro.github.io/Portfolio_Putri_Zahara/images/Portfolio/The_Ethians_Redeemed/camp_du_travail_keyframe.jpg',
-  'https://putrizahara-pro.github.io/Portfolio_Putri_Zahara/images/Portfolio/The_Ethians_Redeemed/set_design_camp_travail.jpg',
-  'https://putrizahara-pro.github.io/Portfolio_Putri_Zahara/images/Portfolio/The_Ethians_Redeemed/gate_capital_yirie.png',
-  'https://putrizahara-pro.github.io/Portfolio_Putri_Zahara/images/Portfolio/The_Ethians_Redeemed/set_design_yirie.jpg',
-  'https://putrizahara-pro.github.io/Portfolio_Putri_Zahara/images/Portfolio/The_Ethians_Redeemed/design_dome_yirie.jpg',
-  'https://putrizahara-pro.github.io/Portfolio_Putri_Zahara/images/Portfolio/The_Ethians_Redeemed/design_yirie_banner.jpg',
-  'https://putrizahara-pro.github.io/Portfolio_Putri_Zahara/images/Portfolio/The_Ethians_Redeemed/key_frame_base_camp.jpg',
-  'https://putrizahara-pro.github.io/Portfolio_Putri_Zahara/images/Portfolio/The_Ethians_Redeemed/dug_out_house.jpg',
-  'https://putrizahara-pro.github.io/Portfolio_Putri_Zahara/images/Portfolio/The_Ethians_Redeemed/set_design_dug_out_house.jpg',
-  'https://putrizahara-pro.github.io/Portfolio_Putri_Zahara/images/Portfolio/The_Ethians_Redeemed/planche_perso_dimi_new.jpg',
-  'https://putrizahara-pro.github.io/Portfolio_Putri_Zahara/images/Portfolio/The_Ethians_Redeemed/planche_perso_ellis_new.jpg',
-  'https://putrizahara-pro.github.io/Portfolio_Putri_Zahara/images/Portfolio/The_Ethians_Redeemed/planche_perso_hades_new.jpg',
-  'https://putrizahara-pro.github.io/Portfolio_Putri_Zahara/images/Portfolio/The_Ethians_Redeemed/planche_perso_haikal_new.jpg',
-  'https://putrizahara-pro.github.io/Portfolio_Putri_Zahara/images/Portfolio/The_Ethians_Redeemed/planche_perso_milo_new.jpg',
-  'https://putrizahara-pro.github.io/Portfolio_Putri_Zahara/images/Portfolio/The_Ethians_Redeemed/planche_castle_vulkan.jpg',
-  'https://putrizahara-pro.github.io/Portfolio_Putri_Zahara/images/Portfolio/The_Ethians_Redeemed/planche_props_forest.jpg',
-  'https://putrizahara-pro.github.io/Portfolio_Putri_Zahara/images/Portfolio/The_Ethians_Redeemed/planche_props_slave.jpg',
-  'https://putrizahara-pro.github.io/Portfolio_Putri_Zahara/images/Portfolio/The_Ethians_Redeemed/planche_set_design_ether.jpg'
+  // Ordre spécifique demandé
+  '/images/Portfolio/The_Ethians_Redeemed/carte_monde.jpg', // 1. world map
+  '/images/Portfolio/The_Ethians_Redeemed/Concept_village_demetrius.jpg', // 2. concept art demetrius village
+  '/images/Portfolio/The_Ethians_Redeemed/camp_du_travail_keyframe.jpg', // 3. labor camp environnement design
+  '/images/Portfolio/The_Ethians_Redeemed/set_design_camp_travail.jpg', // 4. set design of labor camp
+  '/images/Portfolio/The_Ethians_Redeemed/planche_props_slave.jpg', // 5. slaves props design
+  '/images/Portfolio/The_Ethians_Redeemed/procesuce_creation_camp_de_travaill.jpg', // 6. creation process of the labor camp
+  '/images/Portfolio/The_Ethians_Redeemed/Carte_3D_camp_de_travaille.jpg', // 7. 3d map of the labor camp
+  '/images/Portfolio/The_Ethians_Redeemed/key_frame_base_camp.jpg', // 8. environnement concept of demetrius
+  '/images/Portfolio/The_Ethians_Redeemed/dug_out_house.jpg', // 9. design of the dug house
+  '/images/Portfolio/The_Ethians_Redeemed/set_design_dug_out_house.jpg', // 10. set design of the dug house
+  '/images/Portfolio/The_Ethians_Redeemed/planche_props_forest.jpg', // 11. forest props designs
+  '/images/Portfolio/The_Ethians_Redeemed/gate_capital_yirie.png', // 12. environnement art of the gate of the yirie capital
+  '/images/Portfolio/The_Ethians_Redeemed/Concept_ville_yirie.jpg', // 13. concept art yirie city
+  '/images/Portfolio/The_Ethians_Redeemed/set_design_yirie.jpg', // 14. set design of yirie castle
+  '/images/Portfolio/The_Ethians_Redeemed/design_dome_yirie.jpg', // 15. the design of the yirie main building
+  '/images/Portfolio/The_Ethians_Redeemed/design_yirie_banner.jpg', // 16. design yirie banner and the main gate
+  '/images/Portfolio/The_Ethians_Redeemed/planche_recherche_yirie.jpg', // 17. research sketches for yirie environnement
+  '/images/Portfolio/The_Ethians_Redeemed/Concept_chateau_de_ether.jpg', // 18. concept art of ether castle
+  '/images/Portfolio/The_Ethians_Redeemed/planche_set_design_ether.jpg', // 19. ether world artistic concept
+  '/images/Portfolio/The_Ethians_Redeemed/Props_ether.jpg', // 20. props from ether realm
+  '/images/Portfolio/The_Ethians_Redeemed/plnche_recherche_ether.jpg', // 21. research sketches for ether realm
+  '/images/Portfolio/The_Ethians_Redeemed/Concept_chateau_de_vulkan.jpg', // 22. final concept art of vulkan castle
+  '/images/Portfolio/The_Ethians_Redeemed/planche_castle_vulkan.jpg', // 23. concept of vulkan castle
+  '/images/Portfolio/The_Ethians_Redeemed/Props_vulcan.jpg', // 24. props from vulkan castle
+  '/images/Portfolio/The_Ethians_Redeemed/planche_de_recherche_vulkan.jpg', // 25. research sketch for vulkan environnement
+  '/images/Portfolio/The_Ethians_Redeemed/planche_perso_dimi_new.jpg', // 26. chara design demetrius
+  '/images/Portfolio/The_Ethians_Redeemed/planche_de_vetement.jpg', // 27. clothing design for all charaters
+  '/images/Portfolio/The_Ethians_Redeemed/processuce_creation_demetrius.jpg', // 28. creation process of demetrius
+  '/images/Portfolio/The_Ethians_Redeemed/planche_perso_haikal_new.jpg', // 29. chara design haikal
+  '/images/Portfolio/The_Ethians_Redeemed/planche_de_vetement_haikal.jpg', // 30. clothing design for haikal
+  '/images/Portfolio/The_Ethians_Redeemed/planche_perso_ellis_new.jpg', // 31. chara design for ellis
+  '/images/Portfolio/The_Ethians_Redeemed/planche_de_vetement_elis.jpg', // 32. clothing designs for ellis
+  '/images/Portfolio/The_Ethians_Redeemed/recherche_ellis.jpg', // 33. research sketches for ellis characther
+  '/images/Portfolio/The_Ethians_Redeemed/planche_perso_milo_new.jpg', // 34. characther design milo
+  '/images/Portfolio/The_Ethians_Redeemed/planche_de_vetement_milo.jpg', // 35. clothing designs for milo
+  '/images/Portfolio/The_Ethians_Redeemed/planche_perso_hades_new.jpg', // 36. charc design of hades
+  '/images/Portfolio/The_Ethians_Redeemed/planche_de_vetement_hades.jpg', // 37. clothing designs for hades
+  '/images/Portfolio/The_Ethians_Redeemed/concept_UIX_jeux.jpg', // 38. user interface concept for the games
+  '/images/Portfolio/The_Ethians_Redeemed/ui_icons.jpg' // 39. games icon and ui elements
 ].map((src, index) => {
   const descriptions = [
-    'Labor camp environment design',
-    'Set design of the labor camp',
-    'Environment art of the gate of the Yirie capital',
-    'Set design of Yirie castle',
-    'The design of the Yirie main building',
-    'Design Yirie banner and the main gate',
-    'Environment concept of Demetrius base camp',
-    'Design of the dug out house',
-    'Set design of the dug out house',
-    'Character design of Demetrius',
-    'Character design of Ellis',
-    'Character design of Hades',
-    'Character design of Haikal',
-    'Character design of Milo',
-    'Castle Vulkan design concepts',
-    'Forest props designs',
-    'Slave equipment props designs',
-    'Ether environment set design'
+    // Descriptions suivant l'ordre demandé
+    'World map of The Ethians Redeemed universe', // 1
+    'Concept art of Demetrius village', // 2
+    'Labor camp environment design', // 3
+    'Set design of the labor camp', // 4
+    'Slave props designs', // 5
+    'Creation process of the labor camp environment', // 6
+    '3D map of the labor camp', // 7
+    'Environment concept of Demetrius base camp', // 8
+    'Design of the dug out house', // 9
+    'Set design of the dug out house', // 10
+    'Forest props designs', // 11
+    'Environment art of the gate of the Yirie capital', // 12
+    'Concept art of Yirie city', // 13
+    'Set design of Yirie castle', // 14
+    'The design of the Yirie main building', // 15
+    'Design Yirie banner and the main gate', // 16
+    'Research sketches for Yirie environment', // 17
+    'Concept art of Ether castle', // 18
+    'Ether world artistic concept', // 19
+    'Props from the Ether realm', // 20
+    'Research sketches for Ether realm', // 21
+    'Final concept art of Vulkan castle', // 22
+    'Concept of Vulkan castle', // 23
+    'Props from Vulkan castle', // 24
+    'Research sketches for Vulkan environment', // 25
+    'Character design of Demetrius', // 26
+    'Clothing designs for all characters', // 27
+    'Creation process of Demetrius character and environment', // 28
+    'Character design of Haikal', // 29
+    'Clothing designs for Haikal', // 30
+    'Character design of Ellis', // 31
+    'Clothing designs for Ellis', // 32
+    'Research sketches for Ellis character', // 33
+    'Character design of Milo', // 34
+    'Clothing designs for Milo', // 35
+    'Character design of Hades', // 36
+    'Clothing designs for Hades', // 37
+    'User interface concepts for the game', // 38
+    'Game icons and UI elements' // 39
   ];
   return {
     src,
@@ -84,7 +128,7 @@ export default function EthianRedemPage() {
               A concept art project for video game RPG, neo-medieval where the slave, Demetrius, rises and fights against the cruel empire.
             </p>
 
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-sm">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-sm mb-6">
               <div>
                 <h3 className="text-zinc-400 mb-1">CLIENT</h3>
                 <p>End-of-year project</p>
@@ -101,6 +145,14 @@ export default function EthianRedemPage() {
                 <h3 className="text-zinc-400 mb-1">DELIVERABLES</h3>
                 <p>Character Designs, Environment Concepts, UI</p>
               </div>
+            </div>
+            
+            <div className="mb-6">
+              <h3 className="text-zinc-400 mb-1">TOOLS</h3>
+              <p className="flex items-center gap-3">
+                <span className="bg-zinc-700 px-3 py-1 rounded-full">Photoshop</span>
+                <span className="bg-zinc-700 px-3 py-1 rounded-full">Blender</span>
+              </p>
             </div>
           </div>
         </div>

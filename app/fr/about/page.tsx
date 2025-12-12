@@ -10,14 +10,26 @@ export default function AboutPageFr() {
             <div>
               <h1 className="text-4xl md:text-5xl font-bold mb-6">À propos</h1>
               <p className="text-xl text-zinc-300 mb-8">
-                Je suis Putri Zahara, artiste conceptuelle passionnée par la création de mondes immersifs et de récits captivants.
+                Salut ! Je m'appelle Putri Zahara. Je suis une étudiante Internationale en Art Graphique - Spé Concept Art à Brassart Lyon.
               </p>
               <div className="space-y-4 text-zinc-300">
                 <p>
-                  Avec plus de 5 ans d'expérience dans l'industrie, j'ai eu le privilège de travailler sur divers projets allant des jeux indépendants aux productions de grands studios. Mon travail se concentre sur la conception d'environnements, les concepts de personnages et la création d'univers.
+                  Depuis toujours, je suis passionnée par la création de mondes et de personnages, surtout pour les jeux vidéo et les films. 
+                  J'aime travailler avec des outils comme Photoshop, Procreate et Blender, qui me permettent de donner vie à mes concepts.
                 </p>
                 <p>
-                  Je crois qu'un excellent concept art ne consiste pas seulement à créer de belles images, mais à raconter des histoires et à construire des mondes qui captivent et inspirent. Chaque pièce que je crée est soigneusement conçue pour transmettre émotion, atmosphère et narration.
+                  Que ce soit pour concevoir des personnages, des environnements ou d'autres éléments, je prends beaucoup de plaisir dans le 
+                  processus créatif, en cherchant toujours à créer quelque chose d'unique et de marquant.
+                </p>
+                <p>
+                  Je crois beaucoup à la force du travail en équipe. Je pense que les meilleures idées naissent de la collaboration et du 
+                  partage de créativité, et j'adore faire partie de cette dynamique. En parallèle, je suis toujours à la recherche de 
+                  nouvelles façons de m'améliorer et de grandir en tant qu'artiste.
+                </p>
+                <p>
+                  Quand je ne travaille pas sur mes projets, il m'arrive d'explorer d'autres formes d'art, de regarder des films ou de 
+                  plonger dans les derniers jeux pour m'inspirer. Mon rêve est de participer à des projets qui laissent une empreinte 
+                  durable et qui donnent vie à des histoires incroyables.
                 </p>
               </div>
             </div>
@@ -26,7 +38,7 @@ export default function AboutPageFr() {
               <div className="relative h-[600px] w-[500px] rounded-3xl overflow-hidden bg-zinc-800/50 backdrop-blur-sm border border-emerald-500/20 p-5 shadow-lg shadow-emerald-500/10">
                 <div className="absolute bottom-0 left-0 right-0 h-1/3 bg-gradient-to-t from-zinc-800/80 to-transparent z-10"></div>
                 <img
-                  src="/Portfolio_Putri_Zahara/images/putri-zahara-portrait.png"
+                  src="https://putrizahara-pro.github.io/Portfolio_Putri_Zahara/images/putri-zahara-portrait.png"
                   alt="Portrait de Putri Zahara"
                   className="object-cover h-full w-full object-top rounded-2xl"
                 />

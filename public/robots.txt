@@ -1,0 +1,32 @@
+User-agent: *
+Disallow: /config/
+Disallow: /api/
+
+# Protection contre la collecte de données personnelles
+Disallow: /user/
+Disallow: /admin/
+Disallow: /login/
+Disallow: /profile/
+
+# Protection des ressources médias
+Disallow: /images/
+Disallow: /img/
+Disallow: /media/
+Disallow: /assets/
+Disallow: /public/
+
+# Pour éviter l'indexation de certaines ressources
+Disallow: /*.json$
+Disallow: /*.jpg$
+Disallow: /*.jpeg$
+Disallow: /*.png$
+Disallow: /*.gif$
+Disallow: /*.webp$
+Disallow: /*.svg$
+
+# Interdiction d'accès aux répertoires
+Disallow: /*?*
+Disallow: /*/
+
+# Protection complète du site
+Crawl-delay: 10

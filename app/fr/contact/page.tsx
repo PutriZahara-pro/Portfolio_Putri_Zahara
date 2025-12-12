@@ -1,4 +1,4 @@
-import { Phone, MapPin, Linkedin, Palette } from "lucide-react"
+import { MapPin, Linkedin, Palette } from "lucide-react"
 import ContactForm from "@/components/contact-form"
 
 export default function ContactPageFr() {
@@ -41,16 +41,6 @@ export default function ContactPageFr() {
                       <p className="text-zinc-300">Lyon, France</p>
                     </div>
                   </div>
-                  
-                  <div className="flex items-center gap-4">
-                    <div className="bg-emerald-500/10 p-3 rounded-full">
-                      <Phone className="h-6 w-6 text-emerald-400" />
-                    </div>
-                    <div>
-                      <h3 className="font-medium mb-1">Téléphone</h3>
-                      <p className="text-zinc-300">+33 6 XX XX XX XX</p>
-                    </div>
-                  </div>
                 </div>
               </div>
               
@@ -59,7 +49,7 @@ export default function ContactPageFr() {
                 
                 <div className="grid grid-cols-2 gap-4">
                   <a 
-                    href="https://www.linkedin.com/in/putri-zahara" 
+                    href="https://www.linkedin.com/in/putri-zaharapro/" 
                     target="_blank" 
                     rel="noopener noreferrer"
                     className="flex items-center gap-3 bg-zinc-800/50 hover:bg-zinc-700/50 p-4 rounded-2xl transition-all"

@@ -8,7 +8,9 @@ export interface Character {
     attack: number
     defense: number
   }
-  size?: 'small' | 'normal' | 'large'
+  size?: "small" | "normal" | "large"
+  position?: "left" | "center" | "right"
+  animation?: "idle" | "attack" | "hurt" | "victory" | "defeat"
 }
 
 export interface Choice {

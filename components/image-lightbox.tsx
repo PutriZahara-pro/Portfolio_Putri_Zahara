@@ -1,178 +1,123 @@
-"use client";
+"use client"
 
-import React, { useState, useEffect } from "react";
-import { X, ZoomIn, MousePointer } from "lucide-react";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation, Keyboard, Zoom } from "swiper/modules";
+import { useState, useEffect } from "react"
+import { X, ZoomIn } from "lucide-react"
+import { Swiper, SwiperSlide } from "swiper/react"
+import { Navigation, Keyboard, Zoom } from "swiper/modules"
+import { getImagePath } from "../utils/image-path"
 
 // Import Swiper styles
-import "swiper/css";
-import "swiper/css/navigation";
-import "swiper/css/zoom";
-
-// Ajout des styles CSS pour le zoom
-const zoomStyles = `
-.swiper-zoom-container {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  cursor: zoom-in;
-}
-
-.swiper-zoom-container img {
-  transition: transform 0.3s;
-}
-
-.swiper-zoom-container.zoomed {
-  cursor: grab;
-}
-
-.swiper-zoom-container.zoomed:active {
-  cursor: grabbing;
-}
-
-.zoom-instructions {
-  position: absolute;
-  bottom: 20px;
-  left: 50%;
-  transform: translateX(-50%);
-  background-color: rgba(0, 0, 0, 0.7);
-  color: white;
-  padding: 8px 16px;
-  border-radius: 20px;
-  font-size: 14px;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  opacity: 0.8;
-  transition: opacity 0.3s;
-  z-index: 100;
-}
-
-.zoom-instructions:hover {
-  opacity: 1;
-}
-
-.lightbox-nav-button {
-  background-color: rgba(0, 0, 0, 0.5);
-  color: white;
-  border: none;
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  font-size: 24px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  transition: background-color 0.3s;
-}
-
-.lightbox-nav-button:hover {
-  background-color: rgba(0, 0, 0, 0.8);
-}
-`;
+import "swiper/css"
+import "swiper/css/navigation"
+import "swiper/css/zoom"
 
 interface ImageLightboxProps {
-  images: { src: string; alt: string }[];
-  initialSlide?: number;
-  isOpen: boolean;
-  onClose: () => void;
+  images: {
+    src: string
+    alt: string
+  }[]
+  initialSlide?: number
+  isOpen: boolean
+  onClose: () => void
 }
 
-export default function ImageLightbox({
-  images,
-  initialSlide = 0,
-  isOpen,
-  onClose,
-}: ImageLightboxProps) {
-  const [mounted, setMounted] = useState(false);
-  const [showInstructions, setShowInstructions] = useState(true);
+export default function ImageLightbox({ images, initialSlide = 0, isOpen, onClose }: ImageLightboxProps) {
+  const [mounted, setMounted] = useState(false)
 
   useEffect(() => {
-    setMounted(true);
-    if (isOpen) {
-      document.body.style.overflow = "hidden";
-      // Afficher les instructions pendant 5 secondes
-      setShowInstructions(true);
-      const timer = setTimeout(() => {
-        setShowInstructions(false);
-      }, 5000);
-      
-      return () => {
-        clearTimeout(timer);
-        document.body.style.overflow = "";
-      };
-    }
-  }, [isOpen]);
+    setMounted(true)
 
-  if (!mounted || !isOpen) return null;
+    if (isOpen) {
+      document.body.style.overflow = "hidden"
+    }
+
+    return () => {
+      document.body.style.overflow = ""
+    }
+  }, [isOpen])
+
+  if (!mounted || !isOpen) return null
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center">
-      {/* Ajout des styles CSS pour le zoom */}
-      <style>{zoomStyles}</style>
-      
-      <div
-        className="absolute inset-0 bg-black/80 backdrop-blur-md"
-        onClick={onClose}
-      />
-      
+      {/* Backdrop */}
+      <div className="absolute inset-0 bg-black/90 backdrop-blur-md" onClick={onClose} />
+
+      {/* Close button */}
       <button
         onClick={onClose}
+        className="absolute top-16 right-4 sm:top-20 z-50 p-3 sm:p-4 rounded-full bg-zinc-800/90 text-emerald-400 hover:bg-zinc-700/90 transition-colors shadow-lg border-2 border-emerald-500/30 hover:border-emerald-500/70 hover:text-emerald-300 hover:shadow-emerald-500/20 hover:shadow-xl"
         aria-label="Close lightbox"
-        className="absolute top-4 right-4 z-50 p-2 rounded-full bg-zinc-800/80 text-white hover:bg-zinc-700/80 transition-colors"
       >
-        <X size={24} />
+        <X size={28} strokeWidth={2.5} />
       </button>
-      
-      <button 
-        className="lightbox-nav-button lightbox-prev-button absolute left-4 z-50"
+
+      {/* Navigation buttons - positioned outside the swiper */}
+      <button
+        className="lightbox-nav-button lightbox-prev-button absolute left-4 z-50 p-3 rounded-full bg-zinc-800/80 text-emerald-400 hover:bg-zinc-700/80 transition-colors"
         aria-label="Previous image"
       >
-        &lsaquo;
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        >
+          <path d="m15 18-6-6 6-6" />
+        </svg>
       </button>
-      
-      <button 
-        className="lightbox-nav-button lightbox-next-button absolute right-4 z-50"
+
+      <button
+        className="lightbox-nav-button lightbox-next-button absolute right-4 z-50 p-3 rounded-full bg-zinc-800/80 text-emerald-400 hover:bg-zinc-700/80 transition-colors"
         aria-label="Next image"
       >
-        &rsaquo;
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        >
+          <path d="m9 18 6-6-6-6" />
+        </svg>
       </button>
-      
-      {showInstructions && (
-        <div className="zoom-instructions">
-          <ZoomIn size={16} />
-          <span>Cliquez sur l'image pour zoomer, double-cliquez pour réinitialiser</span>
-          <MousePointer size={16} />
-        </div>
-      )}
-      
-      <div className="relative z-10 w-full h-full max-w-5xl max-h-[90vh] px-8">
+
+      {/* Image swiper */}
+      <div className="relative z-10 w-full h-full max-w-[90vw] max-h-[90vh]">
         <Swiper
           modules={[Navigation, Keyboard, Zoom]}
           navigation={{
             prevEl: ".lightbox-prev-button",
             nextEl: ".lightbox-next-button",
           }}
-          keyboard={{ enabled: true }}
+          keyboard={{
+            enabled: true,
+          }}
           zoom={{
             maxRatio: 3,
-            minRatio: 1
+            minRatio: 1,
           }}
           initialSlide={initialSlide}
-          spaceBetween={20}
+          spaceBetween={30}
+          slidesPerView={1}
           className="w-full h-full"
         >
-          {images.map((img, idx) => (
-            <SwiperSlide key={idx} className="flex items-center justify-center">
-              <div className="swiper-zoom-container">
-                <img 
-                  src={img.src || "/placeholder.svg"} 
-                  alt={img.alt} 
-                  className="max-h-[85vh] object-contain" 
+          {images.map((image, index) => (
+            <SwiperSlide key={index} className="flex items-center justify-center">
+              <div className="swiper-zoom-container w-full h-full flex items-center justify-center">
+                <img
+                  src={getImagePath(image.src)}
+                  alt={image.alt}
+                  className="max-w-full max-h-[85vh] object-contain rounded-lg shadow-xl"
                 />
               </div>
             </SwiperSlide>
@@ -180,5 +125,26 @@ export default function ImageLightbox({
         </Swiper>
       </div>
     </div>
-  );
+  )
+}
+
+// Composant pour ajouter l'icône de zoom au survol des images
+export function ZoomableImage({ src, alt, className = "", onClick = () => {} }) {
+  return (
+    <div 
+      className="group relative overflow-hidden rounded-lg cursor-zoom-in"
+      onClick={onClick}
+    >
+      <img 
+        src={getImagePath(src)} 
+        alt={alt} 
+        className={`w-full transition-transform duration-300 group-hover:scale-105 ${className}`}
+      />
+      <div className="absolute inset-0 bg-black/30 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+        <div className="bg-emerald-500/80 p-2 rounded-full">
+          <ZoomIn className="text-white" size={24} />
+        </div>
+      </div>
+    </div>
+  )
 }

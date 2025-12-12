@@ -1,28 +1,65 @@
 "use client";
 
 import InteractiveCard from "@/components/interactive-card"
+import SlidingImageCard from "@/components/sliding-image-card"
 
-const portfolioCategories = [
+// Images pour le défilement de la carte "Other Works"
+const otherWorksImages = [
+  "https://putrizahara-pro.github.io/Portfolio_Putri_Zahara/images/Portfolio/Other_works/Fallout_fanart/Zahara_Putri_AG4_Fallout_environnement.jpg",
+  "https://putrizahara-pro.github.io/Portfolio_Putri_Zahara/images/Portfolio/Other_works/Chaudrons/Chaudron_araignée.jpg",
+  "https://putrizahara-pro.github.io/Portfolio_Putri_Zahara/images/Portfolio/Other_works/Concept_monstes/Ismi.jpg",
+  "https://putrizahara-pro.github.io/Portfolio_Putri_Zahara/images/Portfolio/Other_works/Gnomes/gnome_3_volume.jpg",
+  "https://putrizahara-pro.github.io/Portfolio_Putri_Zahara/images/Portfolio/Other_works/Marchant_ambulant/Recherche_chariot_couleur.jpg",
+  "https://putrizahara-pro.github.io/Portfolio_Putri_Zahara/images/Portfolio/Other_works/Washing_machine/Washing_machine.jpg",
+  "/images/Portfolio/Other_works/building/1E1A1C08-ED86-407D-A752-0091CA984F94.jpg",
+  "/images/Portfolio/Other_works/eletric_field/6FA3148D-3C31-49D4-8000-7EEE421AB5E9.jpg",
+];
+
+// Mise à jour de l'interface pour inclure le champ 'images'
+interface PortfolioCategory {
+  id: string;
+  title: string;
+  description: string;
+  image?: string;
+  images?: string[];
+  count: number;
+}
+
+const portfolioCategories: PortfolioCategory[] = [
+  {
+    id: "The_Ethians_Redeemed",
+    title: "The Ethians Redeemed",
+    description: "Character designs and key art for a dystopian RPG",
+    image: "https://putrizahara-pro.github.io/Portfolio_Putri_Zahara/images/title/titletitre.png",
+    count: 18,
+  },
   {
     id: "ps-apocalypse",
     title: "P.S. Apocalypse",
     description: "Environmental concept art for a post-apocalyptic game world",
-    image: "/Portfolio_Putri_Zahara/images/Portfolio/ps_apocalypse/1.jpg",
+    image: "https://putrizahara-pro.github.io/Portfolio_Putri_Zahara/images/Portfolio/ps_apocalypse/1.jpg",
     count: 4,
   },
   {
-    id: "ethian-redem",
-    title: "The Ethians Redeemed",
-    description: "Character designs and key art for a dystopian RPG",
-    image: "/Portfolio_Putri_Zahara/images/title/titletitre.png",
+    id: "tower-defense-game",
+    title: "Tower Defense Game",
+    description: "Concept art project of tower defense game, creating assets of habitations and environments",
+    image: "https://putrizahara-pro.github.io/Portfolio_Putri_Zahara/images/Portfolio/Tower_defense_game/WORKSHOP_BATTLE_CHESS_1.jpg",
+    count: 5,
+  },
+  {
+    id: "book",
+    title: "Sleeping Honey Beauty",
+    description: "Children's pop-up book with illustrated fairytale story",
+    image: "/images/Book/image pour cart 3D.jpg",
     count: 11,
   },
   {
     id: "other-works",
     title: "Other Works",
     description: "Various concept art projects and personal works",
-    image: "/placeholder.svg?height=600&width=800",
-    count: 15,
+    images: otherWorksImages,
+    count: 8,
   },
 ]
 
@@ -44,17 +81,33 @@ export default function PortfolioPage() {
       <section className="pb-20">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {portfolioCategories.map((category) => (
-              <InteractiveCard
-                key={category.id}
-                id={category.id}
-                title={category.title}
-                description={category.description}
-                image={category.image}
-                href={`/portfolio/${category.id}`}
-                count={category.count}
-              />
-            ))}
+            {portfolioCategories.map((category) => {
+              if (category.id === "other-works" && category.images) {
+                return (
+                  <SlidingImageCard
+                    key={category.id}
+                    id={category.id}
+                    title={category.title}
+                    description={category.description}
+                    images={category.images}
+                    href={`/portfolio/${category.id}`}
+                    count={category.count}
+                  />
+                );
+              }
+              
+              return (
+                <InteractiveCard
+                  key={category.id}
+                  id={category.id}
+                  title={category.title}
+                  description={category.description}
+                  image={category.image || ""}
+                  href={`/portfolio/${category.id}`}
+                  count={category.count}
+                />
+              );
+            })}
           </div>
         </div>
       </section>

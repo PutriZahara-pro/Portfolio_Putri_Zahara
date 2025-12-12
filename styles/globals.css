@@ -92,3 +92,63 @@ body {
     @apply bg-background text-foreground;
   }
 }
+
+/* Animation pour le switch de langue */
+@keyframes flip-out {
+  0% {
+    transform: perspective(400px) rotateX(0);
+    opacity: 1;
+  }
+  100% {
+    transform: perspective(400px) rotateX(-180deg);
+    opacity: 0;
+  }
+}
+
+@keyframes flip-in {
+  0% {
+    transform: perspective(400px) rotateX(180deg);
+    opacity: 0;
+  }
+  100% {
+    transform: perspective(400px) rotateX(0);
+    opacity: 1;
+  }
+}
+
+.animate-flip-out {
+  animation: flip-out 0.5s cubic-bezier(0.455, 0.03, 0.515, 0.955) forwards;
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
+}
+
+.animate-flip-in {
+  animation: flip-in 0.5s cubic-bezier(0.455, 0.03, 0.515, 0.955) forwards;
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
+}
+
+/* Effet néon pour les éléments interactifs */
+.shadow-neon {
+  box-shadow: 0 0 5px #4ade80, 0 0 10px rgba(74, 222, 128, 0.5);
+  text-shadow: 0 0 2px #4ade80;
+  transition: all 0.3s ease-in-out;
+}
+
+/* Animation pour les éléments avec effet néon au survol */
+@keyframes pulse-neon {
+  0% {
+    box-shadow: 0 0 5px #4ade80, 0 0 10px rgba(74, 222, 128, 0.5);
+  }
+  50% {
+    box-shadow: 0 0 8px #4ade80, 0 0 15px rgba(74, 222, 128, 0.7);
+  }
+  100% {
+    box-shadow: 0 0 5px #4ade80, 0 0 10px rgba(74, 222, 128, 0.5);
+  }
+}
+
+/* Appliquer l'animation aux éléments avec la classe .shadow-neon */
+button:hover.shadow-neon, a:hover.shadow-neon, div:hover.shadow-neon {
+  animation: pulse-neon 2s infinite;
+}

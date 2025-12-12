@@ -1,7 +1,8 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   output: 'export',
-  basePath: '/Portfolio_Putri_Zahara',
+  basePath: '',
+  assetPrefix: '',
   images: {
     unoptimized: true,
   },
@@ -9,9 +10,7 @@ const nextConfig = {
   typescript: {
     ignoreBuildErrors: true,
   },
-  // Assurez-vous que tous les fichiers publics sont copiés
   distDir: 'out',
-  assetPrefix: '/Portfolio_Putri_Zahara',
 }
 
 module.exports = nextConfig

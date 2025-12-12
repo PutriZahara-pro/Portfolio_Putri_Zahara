@@ -2,18 +2,32 @@
 import Link from "next/link"
 import { ArrowLeft } from "lucide-react"
 import { useState } from "react"
-import ImageLightbox from "@/components/image-lightbox"
+import ImageLightbox, { ZoomableImage } from "@/components/image-lightbox"
 
 const images = [
-  '/Portfolio_Putri_Zahara/images/Portfolio/ps_apocalypse/1.jpg',
-  '/Portfolio_Putri_Zahara/images/Portfolio/ps_apocalypse/2.jpg',
-  '/Portfolio_Putri_Zahara/images/Portfolio/ps_apocalypse/3.jpg',
-  '/Portfolio_Putri_Zahara/images/Portfolio/ps_apocalypse/4.jpg'
-].map((src, index) => ({
-  src,
-  alt: `Image ${index + 1} du projet P.S. Apocalypse`,
-  description: 'Illustration du projet P.S. Apocalypse'
-}));
+  'https://putrizahara-pro.github.io/Portfolio_Putri_Zahara/images/Portfolio/ps_apocalypse/1.jpg',
+  'https://putrizahara-pro.github.io/Portfolio_Putri_Zahara/images/Portfolio/ps_apocalypse/2.jpg',
+  'https://putrizahara-pro.github.io/Portfolio_Putri_Zahara/images/Portfolio/ps_apocalypse/3.jpg',
+  'https://putrizahara-pro.github.io/Portfolio_Putri_Zahara/images/Portfolio/ps_apocalypse/4.jpg'
+].map((src, index) => {
+  const descriptions = [
+    'Projet P.S. Apocalypse',
+    'Evelyn',
+    'Explorations',
+    'Maison'
+  ];
+  const subDescriptions = [
+    'Concept art pour le projet P.S. Apocalypse',
+    'Design de personnage avec accessoires',
+    'Recherches et croquis',
+    'Concept de bâtiment'
+  ];
+  return {
+    src,
+    alt: descriptions[index],
+    description: subDescriptions[index]
+  };
+});
 
 export default function PsApocalypsePageFr() {
   const [lightboxOpen, setLightboxOpen] = useState(false)
@@ -45,26 +59,34 @@ export default function PsApocalypsePageFr() {
           <div className="max-w-4xl">
             <h1 className="text-4xl md:text-5xl font-bold mb-6">P.S. Apocalypse</h1>
             <p className="text-xl text-zinc-300 mb-8">
-              Art conceptuel environnemental pour un jeu post-apocalyptique où la nature a repris ses droits sur des établissements humains abandonnés.
+              Projet de concept art pour un jeu où Evelyn tente de survivre dans sa ville natale Brooklyn (Park Slope) dans un monde post-apocalyptique.
             </p>
 
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-sm">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-sm mb-6">
               <div>
                 <h3 className="text-zinc-400 mb-1">CLIENT</h3>
                 <p>Projet personnel</p>
               </div>
               <div>
                 <h3 className="text-zinc-400 mb-1">ANNÉE</h3>
-                <p>2024-2025</p>
+                <p>2022-2023</p>
               </div>
               <div>
                 <h3 className="text-zinc-400 mb-1">RÔLE</h3>
-                <p>Artiste conceptuel</p>
+                <p>Concept Artiste</p>
               </div>
               <div>
                 <h3 className="text-zinc-400 mb-1">LIVRABLES</h3>
-                <p>Designs d'environnements</p>
+                <p>Designs d'environnements & personnages</p>
               </div>
+            </div>
+            
+            <div className="mb-6">
+              <h3 className="text-zinc-400 mb-1">OUTILS</h3>
+              <p className="flex items-center gap-3">
+                <span className="bg-zinc-700 px-3 py-1 rounded-full">Photoshop</span>
+                <span className="bg-zinc-700 px-3 py-1 rounded-full">Blender</span>
+              </p>
             </div>
           </div>
         </div>
@@ -75,13 +97,15 @@ export default function PsApocalypsePageFr() {
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
             {images.map((image, index) => (
-              <div key={index} className="bg-zinc-800 rounded-xl overflow-hidden shadow-lg">
-                <div className="overflow-hidden cursor-pointer" onClick={() => openLightbox(index)}>
-                  <img 
+              <div key={index} className="bg-zinc-800 rounded-xl overflow-hidden shadow-lg hover:shadow-emerald-500/20 transition-all duration-300">
+                <div
+                  className="overflow-hidden"
+                >
+                  <ZoomableImage 
                     src={image.src} 
                     alt={image.alt} 
                     className="w-full object-cover" 
-                    loading={index === 0 ? "eager" : "lazy"}
+                    onClick={() => openLightbox(index)}
                   />
                 </div>
                 <div className="p-6">
@@ -94,23 +118,25 @@ export default function PsApocalypsePageFr() {
         </div>
       </section>
 
-      {/* Description détaillée */}
-      <section className="pb-20 bg-zinc-800">
-        <div className="container mx-auto px-4 py-16">
-          <div className="max-w-4xl mx-auto">
-            <h2 className="text-3xl font-bold mb-8">À propos du projet</h2>
-            <p className="text-lg text-zinc-300 mb-6">
-              P.S. Apocalypse explore un monde post-apocalyptique où la nature a lentement repris ses droits sur les vestiges de la civilisation.
-              Ce projet artistique vise à créer des environnements immersifs qui racontent l'histoire de ce qui s'est passé, tout en laissant place à l'imagination du spectateur.
-            </p>
-            <p className="text-lg text-zinc-300 mb-6">
-              Chaque concept art montre un équilibre entre désolation et renouveau, entre les ruines de la civilisation humaine et la résurgence de la vie naturelle.
-              Les couleurs, la composition et l'éclairage ont été soigneusement choisis pour évoquer à la fois mélancolie et espoir.
-            </p>
-            <p className="text-lg text-zinc-300">
-              Mon objectif était de créer des environnements qui pourraient servir de base à un jeu vidéo post-apocalyptique, 
-              tout en ayant une valeur artistique intrinsèque. Chaque image raconte sa propre histoire, tout en faisant partie d'un récit plus vaste.
-            </p>
+      {/* Description du projet */}
+      <section className="py-20 bg-zinc-800">
+        <div className="container mx-auto px-4">
+          <div className="max-w-3xl mx-auto">
+            <h2 className="text-3xl font-bold mb-8">À propos de ce projet</h2>
+            <div className="prose prose-invert max-w-none">
+              <p>
+                P.S. Apocalypse est un jeu post-apocalyptique se déroulant dans un monde où la nature a repris ses droits sur des établissements humains abandonnés. Le jeu explore des thèmes de survie, d'espoir et de reconstruction dans un monde à jamais changé par la catastrophe.
+              </p>
+              <p>
+                L'objectif de ce projet est de créer une représentation visuelle d'un monde apocalyptique du point de vue de la vie d'une adolescente, Evelyn. Plutôt que de présenter une ambiance sombre et déprimante, le projet vise à transmettre une atmosphère littéralement "Génération Z" malgré le contexte apocalyptique.
+              </p>
+              <p>
+                En tant qu'artiste concept, j'étais responsable d'établir le langage visuel du monde du jeu, en me concentrant sur le quartier de Park Slope à Brooklyn comme décor principal. Cela comprenait la création de concepts d'environnements, de designs de personnages et de concepts de bâtiments qui reflètent comment une protagoniste adolescente navigue et interprète ce monde transformé.
+              </p>
+              <p>
+                La direction artistique met l'accent sur un équilibre entre la dureté d'un cadre post-apocalyptique et la perspective vibrante, parfois irrévérencieuse, d'un personnage de la Génération Z. Cela crée une esthétique unique qui raconte une histoire convaincante d'adaptation et de résilience à travers le prisme contemporain d'une adolescente.
+              </p>
+            </div>
           </div>
         </div>
       </section>

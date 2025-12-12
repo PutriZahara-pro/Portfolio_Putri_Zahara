@@ -1,0 +1,19 @@
+@keyframes flash {
+  0%, 100% { opacity: 0; }
+  50% { opacity: 0.3; } /* Flash subtil à 30% d'opacité */
+}
+
+.battle-flash {
+  animation: flash 0.3s ease-out;
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-5px); }
+  50% { transform: translateX(5px); }
+  75% { transform: translateX(-3px); }
+}
+
+.battle-shake {
+  animation: shake 0.3s ease-in-out;
+}
