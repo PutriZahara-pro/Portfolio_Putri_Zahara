@@ -37,7 +37,7 @@ export default function GamePage() {
           <div className="flex justify-between items-center mb-6">
             <h1 className="text-4xl md:text-5xl font-bold text-emerald-400">The Ethians Redeemed</h1>
             <Link 
-              href="/fr/portfolio/ethian-redem/" 
+              href="/fr/portfolio/The_Ethians_Redeemed/" 
               className="bg-zinc-800 hover:bg-zinc-700 rounded-full px-4 py-2 flex items-center space-x-2 text-sm transition-all duration-300 border border-emerald-600/30 hover:border-emerald-500"
             >
               <span className="font-medium text-emerald-400">Concept Art</span>

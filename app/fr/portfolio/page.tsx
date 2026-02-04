@@ -33,9 +33,21 @@ interface PortfolioCategory {
   image?: string;
   images?: string[];
   count: number;
+  logoSrc?: string;
+  logoAlt?: string;
+  imagePosition?: string;
 }
 
 const portfolioCategories: PortfolioCategory[] = [
+  {
+    id: "Aporion",
+    title: "Aporion",
+    description: "Vue alternative de la galerie du projet",
+    image: "/images/Portfolio/Aporion/thumbnail.png",
+    count: 10,
+    logoSrc: "/images/Portfolio/Aporion/45T2jk7r3uq9zPyPdDvbsrkAD4M (1).png",
+    logoAlt: "Aporion logo",
+  },
   {
     id: "The_Ethians_Redeemed",
     title: "The Ethians Redeemed",
@@ -83,7 +95,7 @@ export default function PortfolioPageFr() {
           __html: JSON.stringify({
             "@context": "https://schema.org",
             "@type": "CollectionPage",
-            "name": "Portfolio Concept Art - Putri Zahara",
+            "name": "Portfolio - Putri Zahara",
             "description": pagesSEO.portfolio.description,
             "url": "https://putrizahara.com/fr/portfolio",
             "author": {
@@ -94,7 +106,7 @@ export default function PortfolioPageFr() {
             },
             "mainEntity": {
               "@type": "ImageGallery",
-              "name": "Portfolio Concept Art",
+              "name": "Portfolio",
               "description": "Collection de concept art pour jeux vidéo, environnements et personnages"
             }
           })
@@ -104,7 +116,7 @@ export default function PortfolioPageFr() {
       {/* Section Portfolio */}
       <section className="py-20">
         <div className="container mx-auto px-4">
-          <h1 className="text-4xl md:text-5xl font-bold mb-6">Portfolio Concept Art</h1>
+          <h1 className="text-4xl md:text-5xl font-bold mb-6">Portfolio</h1>
           <p className="text-xl text-zinc-300 max-w-3xl">
             Découvrez mon travail à travers différents projets, de la conception d'environnements dystopiques aux concepts de personnages détaillés et au développement visuel pour jeux vidéo et médias interactifs.
           </p>
@@ -139,6 +151,9 @@ export default function PortfolioPageFr() {
                   image={category.image || ""}
                   href={`/fr/portfolio/${category.id}`}
                   count={category.count}
+                  logoSrc={category.logoSrc}
+                  logoAlt={category.logoAlt}
+                  imagePosition={category.imagePosition}
                 />
               );
             })}

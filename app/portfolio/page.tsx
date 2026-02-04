@@ -23,15 +23,28 @@ interface PortfolioCategory {
   image?: string;
   images?: string[];
   count: number;
+  logoSrc?: string;
+  logoAlt?: string;
+  imagePosition?: string;
 }
 
 const portfolioCategories: PortfolioCategory[] = [
+  {
+    id: "Aporion",
+    title: "Aporion",
+    description: "Alternate gallery view of the project",
+    image: "/images/Portfolio/Aporion/thumbnail.png",
+    count: 10,
+    logoSrc: "/images/Portfolio/Aporion/45T2jk7r3uq9zPyPdDvbsrkAD4M (1).png",
+    logoAlt: "Aporion logo",
+  },
   {
     id: "The_Ethians_Redeemed",
     title: "The Ethians Redeemed",
     description: "Character designs and key art for a dystopian RPG",
     image: "https://putrizahara-pro.github.io/Portfolio_Putri_Zahara/images/title/titletitre.png",
     count: 18,
+    imagePosition: "54% center",
   },
   {
     id: "ps-apocalypse",
@@ -80,7 +93,7 @@ export default function PortfolioPage() {
       {/* Portfolio Categories */}
       <section className="pb-20">
         <div className="container mx-auto px-4">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 justify-items-center">
             {portfolioCategories.map((category) => {
               if (category.id === "other-works" && category.images) {
                 return (
@@ -105,6 +118,9 @@ export default function PortfolioPage() {
                   image={category.image || ""}
                   href={`/portfolio/${category.id}`}
                   count={category.count}
+                  logoSrc={category.logoSrc}
+                  logoAlt={category.logoAlt}
+                  imagePosition={category.imagePosition}
                 />
               );
             })}

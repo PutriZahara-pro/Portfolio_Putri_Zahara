@@ -28,18 +28,24 @@ export default function PageActualites() {
 
   // Naviguer vers l'image suivante pour un article spécifique
   const imageSuivante = (idArticle: string, nombreImages: number) => {
-    setIndicesImagesActives(prev => ({
-      ...prev,
-      [idArticle]: (prev[idArticle] + 1) % nombreImages || 0
-    }));
+    setIndicesImagesActives(prev => {
+      const indiceActuel = prev[idArticle] ?? 0;
+      return {
+        ...prev,
+        [idArticle]: (indiceActuel + 1) % nombreImages
+      };
+    });
   };
 
   // Naviguer vers l'image précédente pour un article spécifique
   const imagePrecedente = (idArticle: string, nombreImages: number) => {
-    setIndicesImagesActives(prev => ({
-      ...prev,
-      [idArticle]: (prev[idArticle] - 1 + nombreImages) % nombreImages || 0
-    }));
+    setIndicesImagesActives(prev => {
+      const indiceActuel = prev[idArticle] ?? 0;
+      return {
+        ...prev,
+        [idArticle]: (indiceActuel - 1 + nombreImages) % nombreImages
+      };
+    });
   };
 
   // Données des actualités - triées de la plus récente à la plus ancienne

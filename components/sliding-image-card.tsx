@@ -92,14 +92,14 @@ export default function SlidingImageCard({ id, title, description, images, href,
   }
 
   return (
-    <Link href={href} className="block w-full">
+    <Link href={href} className="block w-full max-w-md">
       <div
         ref={ref}
         onMouseMove={onMove}
         onMouseEnter={onEnter}
         onMouseLeave={onLeave}
         style={{ perspective: 800 }}
-        className="relative w-full h-[320px] m-2"
+        className="relative w-full h-[320px]"
       >
         <div
           className="w-full h-full bg-zinc-800 rounded-xl overflow-hidden shadow-lg transition-transform duration-200"
@@ -142,7 +142,7 @@ export default function SlidingImageCard({ id, title, description, images, href,
             <div className="space-y-2 transition-opacity duration-300" style={{
               opacity: hover ? 1 : 0.7,
             }}>
-              <p className="text-sm leading-snug">{description}</p>
+              <p className="text-sm leading-snug break-words line-clamp-2">{description}</p>
               
               {count != null && (
                 <div className="flex items-center mt-3">

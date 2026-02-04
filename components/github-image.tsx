@@ -8,6 +8,7 @@ interface GithubImageProps {
   onClick?: () => void;
   priority?: boolean;
   loading?: 'lazy' | 'eager';
+  style?: React.CSSProperties;
 }
 
 /**
@@ -21,7 +22,8 @@ export default function GithubImage({
   className, 
   onClick, 
   priority = false, 
-  loading = 'lazy' 
+  loading = 'lazy',
+  style
 }: GithubImageProps) {
   // Vérifier si l'URL contient déjà le préfixe GitHub Pages pour éviter la duplication
   const githubPrefix = "https://putrizahara-pro.github.io/Portfolio_Putri_Zahara/";
@@ -30,6 +32,9 @@ export default function GithubImage({
   // sinon, construire l'URL complète
   let fullImageUrl;
   if (src.startsWith(githubPrefix)) {
+    fullImageUrl = src;
+  } else if (src.startsWith('/images/') || src.startsWith('/placeholder')) {
+    // Préserver les chemins locaux pour le dev (servis depuis public/)
     fullImageUrl = src;
   } else {
     // Supprimer le préfixe '/' si présent pour éviter les doubles slashes
@@ -50,6 +55,7 @@ export default function GithubImage({
       alt={optimizedAlt}
       title={imageTitle}
       className={className}
+      style={style}
       onClick={onClick}
       loading={priority ? 'eager' : loading}
       decoding="async"

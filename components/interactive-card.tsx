@@ -13,9 +13,12 @@ interface CardProps {
   image: string;
   href: string;
   count?: number;
+  logoSrc?: string;
+  logoAlt?: string;
+  imagePosition?: string;
 }
 
-export default function InteractiveCard({ id, title, description, image, href, count }: CardProps) {
+export default function InteractiveCard({ id, title, description, image, href, count, logoSrc, logoAlt, imagePosition }: CardProps) {
   const [mouseX, setMouseX] = useState(0);
   const [mouseY, setMouseY] = useState(0);
   const [width, setWidth] = useState(0);
@@ -69,14 +72,14 @@ export default function InteractiveCard({ id, title, description, image, href, c
   const rY = px * -20;
 
   return (
-    <Link href={href} className="block w-full">
+    <Link href={href} className="block w-full max-w-md">
       <div
         ref={ref}
         onMouseMove={onMove}
         onMouseEnter={onEnter}
         onMouseLeave={onLeave}
         style={{ perspective: 800 }}
-        className="relative w-full h-[320px] m-2"
+        className="relative w-full h-[320px]"
       >
         <div
           className="w-full h-full bg-zinc-800 rounded-lg overflow-hidden shadow-lg transition-transform duration-200"
@@ -86,6 +89,19 @@ export default function InteractiveCard({ id, title, description, image, href, c
             ...neonGlowStyle,
           }}
         >
+          {logoSrc && (
+            <div
+              className="absolute top-3 left-3 z-10 w-12 h-12 p-1 bg-white/90 dark:bg-zinc-900/90 shadow-md overflow-hidden"
+              style={{ borderRadius: "60%" }}
+            >
+              <GithubImage
+                src={logoSrc}
+                alt={logoAlt || `${title} company logo`}
+                className="w-full h-full object-contain"
+                loading="lazy"
+              />
+            </div>
+          )}
           <div className="absolute inset-0 overflow-hidden">
             <div 
               className="relative w-full h-full transition-transform duration-200"
@@ -99,6 +115,7 @@ export default function InteractiveCard({ id, title, description, image, href, c
                 src={getImagePath(image)} 
                 alt={optimizedAlt}
                 className="w-full h-full object-cover"
+                style={imagePosition ? { objectPosition: imagePosition } : undefined}
                 loading="lazy"
                 priority={false}
               />
@@ -118,7 +135,7 @@ export default function InteractiveCard({ id, title, description, image, href, c
             <div className="space-y-2 transition-opacity duration-300" style={{
               opacity: hover ? 1 : 0.7,
             }}>
-              <p className="text-sm leading-snug">{description}</p>
+              <p className="text-sm leading-snug break-words line-clamp-2">{description}</p>
               
               {count != null && (
                 <div className="flex items-center mt-3">

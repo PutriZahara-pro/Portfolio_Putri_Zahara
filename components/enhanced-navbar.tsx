@@ -40,6 +40,23 @@ export default function EnhancedNavbar() {
     setIsScrolled(latest > 50)
   })
 
+  const getMagneticTarget = (index: number) => {
+    if (!navRef.current) return null
+    const wrapper = navRef.current.querySelectorAll(".menu-item")[index] as HTMLElement | undefined
+    if (!wrapper) return null
+    return (wrapper.firstElementChild as HTMLElement | null) ?? wrapper
+  }
+
+  const resetMagneticTransforms = () => {
+    if (!navRef.current) return
+    const menuEls = navRef.current.querySelectorAll(".menu-item") as NodeListOf<HTMLElement>
+    menuEls.forEach((wrapper) => {
+      const target = (wrapper.firstElementChild as HTMLElement | null) ?? wrapper
+      target.style.transform = "translate(0, 0)"
+    })
+    setHoverIndex(null)
+  }
+
   // Update document height on client-side only
   useEffect(() => {
     const updateDocumentHeight = () => {
@@ -75,6 +92,8 @@ export default function EnhancedNavbar() {
     if (menuItems.includes(formattedPath)) {
       setActiveItem(formattedPath)
     }
+
+    resetMagneticTransforms()
   }, [pathname])
 
   const menuItems = ["Home", "About", "Portfolio", "News", "Game", "Contact"]
@@ -83,7 +102,7 @@ export default function EnhancedNavbar() {
   const handleMouseMove = (e: React.MouseEvent, index: number) => {
     if (!navRef.current) return
 
-    const menuItem = navRef.current.querySelectorAll(".menu-item")[index] as HTMLElement
+    const menuItem = getMagneticTarget(index)
     if (!menuItem) return
 
     const rect = menuItem.getBoundingClientRect()
@@ -94,9 +113,7 @@ export default function EnhancedNavbar() {
   }
 
   const handleMouseLeave = (index: number) => {
-    if (!navRef.current) return
-
-    const menuItem = navRef.current.querySelectorAll(".menu-item")[index] as HTMLElement
+    const menuItem = getMagneticTarget(index)
     if (!menuItem) return
 
     menuItem.style.transform = "translate(0, 0)"
@@ -179,22 +196,23 @@ export default function EnhancedNavbar() {
                     className={`text-sm font-medium relative px-1 py-2 flex items-center ${
                       activeItem === item ? "text-emerald-400" : "text-zinc-300 hover:text-emerald-400"
                     }`}
-                    onClick={() => setActiveItem(item)}
+                    onClick={() => {
+                      resetMagneticTransforms()
+                      setActiveItem(item)
+                    }}
                   >
                     {item}
                     {item === "Game" && <Gamepad2 className="inline-block ml-1 w-4 h-4" />}
                   </Link>
 
                   {/* Active indicator */}
-                  {activeItem === item && (
-                    <motion.div
-                      className="absolute -bottom-1 left-0 right-0 h-0.5 bg-gradient-to-r from-green-400 via-green-500 to-emerald-600"
-                      layoutId="activeIndicator"
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
-                      transition={{ duration: 0.3 }}
-                    />
-                  )}
+                  <motion.div
+                    className="absolute -bottom-1 left-0 right-0 h-0.5 bg-gradient-to-r from-green-400 via-green-500 to-emerald-600"
+                    initial={false}
+                    animate={{ scaleX: activeItem === item ? 1 : 0 }}
+                    transition={{ type: "spring", stiffness: 500, damping: 40 }}
+                    style={{ transformOrigin: "center" }}
+                  />
                 </motion.div>
               ))}
               
@@ -210,6 +228,7 @@ export default function EnhancedNavbar() {
                 <Link
                   href={getLanguageSwitchPath()}
                   className="text-sm font-medium relative px-1 py-2 flex items-center text-zinc-300 hover:text-emerald-400"
+                  onClick={() => resetMagneticTransforms()}
                 >
                   <motion.div
                     className="flex items-center justify-center w-6 h-6 rounded-full overflow-hidden border border-zinc-500 hover:border-emerald-400 transition-colors"
@@ -282,6 +301,7 @@ export default function EnhancedNavbar() {
                         : "text-zinc-300 hover:bg-zinc-800 hover:text-emerald-400"
                     }`}
                     onClick={() => {
+                      resetMagneticTransforms()
                       setActiveItem(item)
                       setIsMobileMenuOpen(false)
                     }}
@@ -302,7 +322,10 @@ export default function EnhancedNavbar() {
                 <Link
                   href={getLanguageSwitchPath()}
                   className="flex items-center px-3 py-2 rounded-md text-base font-medium text-zinc-300 hover:bg-zinc-800 hover:text-emerald-400"
-                  onClick={() => setIsMobileMenuOpen(false)}
+                  onClick={() => {
+                    resetMagneticTransforms()
+                    setIsMobileMenuOpen(false)
+                  }}
                 >
                   <div className="flex items-center justify-center w-6 h-6 rounded-full border border-zinc-500 mr-2">
                     <span className="text-xs font-bold">{isFrenchVersion ? "EN" : "FR"}</span>
