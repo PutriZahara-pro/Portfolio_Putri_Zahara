@@ -1,0 +1,90 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="390" height="844" viewBox="0 0 390 844">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#1a0a2e"/>
+      <stop offset="100%" style="stop-color:#3b0764"/>
+    </linearGradient>
+    <linearGradient id="gold" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#f5d060"/>
+      <stop offset="100%" style="stop-color:#e8a820"/>
+    </linearGradient>
+    <linearGradient id="btn" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#16a34a"/>
+      <stop offset="100%" style="stop-color:#14532d"/>
+    </linearGradient>
+    <linearGradient id="cell" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#4c1d95"/>
+      <stop offset="100%" style="stop-color:#2d1060"/>
+    </linearGradient>
+  </defs>
+  <rect width="390" height="844" fill="url(#bg)"/>
+  <!-- Header -->
+  <rect x="0" y="0" width="390" height="80" fill="#000" opacity="0.4"/>
+  <text x="195" y="30" text-anchor="middle" font-family="Georgia,serif" font-size="14" font-weight="bold" fill="url(#gold)" letter-spacing="2">CUISINE ROYALE</text>
+  <text x="195" y="58" text-anchor="middle" font-family="Arial,sans-serif" font-size="11" fill="#c4b5fd">Choisissez vos plats</text>
+  <!-- Price tabs -->
+  <rect x="30" y="95" width="80" height="32" rx="16" fill="#7c3aed"/>
+  <text x="70" y="115" text-anchor="middle" font-family="Arial,sans-serif" font-size="13" font-weight="bold" fill="white">2€</text>
+  <rect x="155" y="95" width="80" height="32" rx="16" fill="#5b21b6" opacity="0.6"/>
+  <text x="195" y="115" text-anchor="middle" font-family="Arial,sans-serif" font-size="13" fill="#c4b5fd">4€</text>
+  <rect x="280" y="95" width="80" height="32" rx="16" fill="#5b21b6" opacity="0.6"/>
+  <text x="320" y="115" text-anchor="middle" font-family="Arial,sans-serif" font-size="13" fill="#c4b5fd">6€</text>
+  <!-- 3x3 grid of dishes -->
+  <g>
+    <!-- Row 1 -->
+    <rect x="25" y="150" width="100" height="100" rx="12" fill="url(#cell)" stroke="#7c3aed" stroke-width="1.5"/>
+    <ellipse cx="75" cy="210" rx="28" ry="5" fill="#5b21b6"/>
+    <path d="M47,210 Q75,180 103,210" fill="#8b5cf6" opacity="0.8"/>
+    <rect x="70" y="175" width="10" height="8" rx="2" fill="#c4b5fd"/>
+
+    <rect x="145" y="150" width="100" height="100" rx="12" fill="url(#cell)" stroke="#7c3aed" stroke-width="1.5"/>
+    <ellipse cx="195" cy="210" rx="28" ry="5" fill="#5b21b6"/>
+    <path d="M167,210 Q195,180 223,210" fill="#8b5cf6" opacity="0.8"/>
+    <rect x="190" y="175" width="10" height="8" rx="2" fill="#c4b5fd"/>
+
+    <rect x="265" y="150" width="100" height="100" rx="12" fill="url(#cell)" stroke="#7c3aed" stroke-width="1.5"/>
+    <ellipse cx="315" cy="210" rx="28" ry="5" fill="#5b21b6"/>
+    <path d="M287,210 Q315,180 343,210" fill="#8b5cf6" opacity="0.8"/>
+    <rect x="310" y="175" width="10" height="8" rx="2" fill="#c4b5fd"/>
+
+    <!-- Row 2 -->
+    <rect x="25" y="265" width="100" height="100" rx="12" fill="url(#cell)" stroke="#7c3aed" stroke-width="1.5"/>
+    <ellipse cx="75" cy="325" rx="28" ry="5" fill="#5b21b6"/>
+    <path d="M47,325 Q75,295 103,325" fill="#8b5cf6" opacity="0.8"/>
+    <rect x="70" y="290" width="10" height="8" rx="2" fill="#c4b5fd"/>
+
+    <rect x="145" y="265" width="100" height="100" rx="12" fill="#1e3a5f" stroke="#3b82f6" stroke-width="2"/>
+    <!-- Revealed cell -->
+    <text x="195" y="318" text-anchor="middle" font-family="Georgia,serif" font-size="11" fill="#93c5fd">500€</text>
+    <text x="195" y="334" text-anchor="middle" font-family="Arial,sans-serif" font-size="8" fill="#60a5fa">GRILLÉ</text>
+
+    <rect x="265" y="265" width="100" height="100" rx="12" fill="url(#cell)" stroke="#7c3aed" stroke-width="1.5"/>
+    <ellipse cx="315" cy="325" rx="28" ry="5" fill="#5b21b6"/>
+    <path d="M287,325 Q315,295 343,325" fill="#8b5cf6" opacity="0.8"/>
+    <rect x="310" y="290" width="10" height="8" rx="2" fill="#c4b5fd"/>
+
+    <!-- Row 3 -->
+    <rect x="25" y="380" width="100" height="100" rx="12" fill="url(#cell)" stroke="#7c3aed" stroke-width="1.5"/>
+    <ellipse cx="75" cy="440" rx="28" ry="5" fill="#5b21b6"/>
+    <path d="M47,440 Q75,410 103,440" fill="#8b5cf6" opacity="0.8"/>
+    <rect x="70" y="405" width="10" height="8" rx="2" fill="#c4b5fd"/>
+
+    <rect x="145" y="380" width="100" height="100" rx="12" fill="url(#cell)" stroke="#7c3aed" stroke-width="1.5"/>
+    <ellipse cx="195" cy="440" rx="28" ry="5" fill="#5b21b6"/>
+    <path d="M167,440 Q195,410 223,440" fill="#8b5cf6" opacity="0.8"/>
+    <rect x="190" y="405" width="10" height="8" rx="2" fill="#c4b5fd"/>
+
+    <rect x="265" y="380" width="100" height="100" rx="12" fill="url(#cell)" stroke="#7c3aed" stroke-width="1.5"/>
+    <ellipse cx="315" cy="440" rx="28" ry="5" fill="#5b21b6"/>
+    <path d="M287,440 Q315,410 343,440" fill="#8b5cf6" opacity="0.8"/>
+    <rect x="310" y="405" width="10" height="8" rx="2" fill="#c4b5fd"/>
+  </g>
+  <!-- Remaining scratches -->
+  <text x="195" y="510" text-anchor="middle" font-family="Arial,sans-serif" font-size="12" fill="#c4b5fd">Grattages restants : <tspan font-weight="bold" fill="url(#gold)">8</tspan></text>
+  <!-- Reveal button -->
+  <rect x="80" y="530" width="230" height="55" rx="27" fill="url(#btn)"/>
+  <text x="195" y="563" text-anchor="middle" font-family="Arial,sans-serif" font-size="17" font-weight="bold" fill="white" letter-spacing="2">RÉVÉLER</text>
+  <!-- Screen label -->
+  <rect x="0" y="810" width="390" height="34" fill="#000" opacity="0.4"/>
+  <text x="195" y="832" text-anchor="middle" font-family="Arial,sans-serif" font-size="11" fill="#a78bfa" letter-spacing="3">ÉCRAN 3 — GAMEPLAY</text>
+</svg>
