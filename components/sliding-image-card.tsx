@@ -2,7 +2,6 @@
 
 import React, { useState, useRef, useEffect } from "react";
 import Link from "next/link";
-import { getImagePath } from "../utils/image-path";
 import { getImageSEO, generateSEOAlt } from "../data/seo-content";
 import GithubImage from "./github-image";
 
@@ -13,9 +12,10 @@ interface SlidingImageCardProps {
   images: string[];
   href: string;
   count?: number;
+  priority?: boolean;
 }
 
-export default function SlidingImageCard({ id, title, description, images, href, count }: SlidingImageCardProps) {
+export default function SlidingImageCard({ id, title, description, images, href, count, priority = false }: SlidingImageCardProps) {
   const [mouseX, setMouseX] = useState(0);
   const [mouseY, setMouseY] = useState(0);
   const [width, setWidth] = useState(0);
@@ -110,23 +110,14 @@ export default function SlidingImageCard({ id, title, description, images, href,
           }}
         >
           <div className="absolute inset-0 overflow-hidden">
-            {images.map((image, index) => (
-              <div
-                key={`${id}-image-${index}`}
-                className="absolute inset-0 transition-opacity duration-1000"
-                style={{
-                  opacity: index === currentImageIndex ? 1 : 0,
-                }}
-              >
-                <GithubImage 
-                  src={getImagePath(image)} 
-                  alt={getOptimizedAlt(image, index)}
-                  className="w-full h-full object-cover"
-                  loading={index === 0 ? "eager" : "lazy"}
-                  priority={index === 0}
-                />
-              </div>
-            ))}
+            <GithubImage 
+              src={images[currentImageIndex]} 
+              alt={getOptimizedAlt(images[currentImageIndex], currentImageIndex)}
+              className="w-full h-full object-cover"
+              loading={priority ? "eager" : "lazy"}
+              priority={priority}
+              variant="thumb"
+            />
           </div>
           <div
             className="absolute bottom-0 w-full p-4 text-white bg-gradient-to-t from-black/60 to-transparent"

@@ -4,7 +4,7 @@ import { useState, useEffect } from "react"
 import { X, ZoomIn } from "lucide-react"
 import { Swiper, SwiperSlide } from "swiper/react"
 import { Navigation, Keyboard, Zoom } from "swiper/modules"
-import { getImagePath } from "../utils/image-path"
+import GithubImage from "./github-image"
 
 // Import Swiper styles
 import "swiper/css"
@@ -114,10 +114,12 @@ export default function ImageLightbox({ images, initialSlide = 0, isOpen, onClos
           {images.map((image, index) => (
             <SwiperSlide key={index} className="flex items-center justify-center">
               <div className="swiper-zoom-container w-full h-full flex items-center justify-center">
-                <img
-                  src={getImagePath(image.src)}
+                <GithubImage
+                  src={image.src}
                   alt={image.alt}
                   className="max-w-full max-h-[85vh] object-contain rounded-lg shadow-xl"
+                  variant="full"
+                  renderMode="img"
                 />
               </div>
             </SwiperSlide>
@@ -129,16 +131,35 @@ export default function ImageLightbox({ images, initialSlide = 0, isOpen, onClos
 }
 
 // Composant pour ajouter l'icône de zoom au survol des images
-export function ZoomableImage({ src, alt, className = "", onClick = () => {} }) {
+export function ZoomableImage({
+  src,
+  alt,
+  className = "",
+  onClick = () => {},
+  loading = "lazy",
+  priority = false,
+  variant = "thumb",
+}: {
+  src: string
+  alt: string
+  className?: string
+  onClick?: () => void
+  loading?: "lazy" | "eager"
+  priority?: boolean
+  variant?: "thumb" | "full"
+}) {
   return (
     <div 
       className="group relative overflow-hidden rounded-lg cursor-zoom-in"
       onClick={onClick}
     >
-      <img 
-        src={getImagePath(src)} 
-        alt={alt} 
+      <GithubImage
+        src={src}
+        alt={alt}
         className={`w-full transition-transform duration-300 group-hover:scale-105 ${className}`}
+        loading={priority ? "eager" : loading}
+        priority={priority}
+        variant={variant}
       />
       <div className="absolute inset-0 bg-black/30 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
         <div className="bg-emerald-500/80 p-2 rounded-full">

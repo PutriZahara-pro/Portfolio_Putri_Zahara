@@ -61,26 +61,26 @@ export default function TowerDefenseGamePage() {
 
           <div className="max-w-4xl">
             <h1 className="text-4xl md:text-5xl font-bold mb-6">Tower Defense Game</h1>
-            <p className="text-xl text-zinc-300 mb-8">
+            <p className="text-xl font-medium text-zinc-200 mb-8">
               Concept art project for a tower defense game, creating assets of habitations and varied environments
               adapted to different seasons.
             </p>
 
             <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-sm">
               <div>
-                <h3 className="text-zinc-400 mb-1">CLIENT</h3>
+                <h3 className="text-zinc-300 mb-1">CLIENT</h3>
                 <p>Personal Project</p>
               </div>
               <div>
-                <h3 className="text-zinc-400 mb-1">YEAR</h3>
+                <h3 className="text-zinc-300 mb-1">YEAR</h3>
                 <p>2023-2024</p>
               </div>
               <div>
-                <h3 className="text-zinc-400 mb-1">ROLE</h3>
+                <h3 className="text-zinc-300 mb-1">ROLE</h3>
                 <p>Concept Artist</p>
               </div>
               <div>
-                <h3 className="text-zinc-400 mb-1">DELIVERABLES</h3>
+                <h3 className="text-zinc-300 mb-1">DELIVERABLES</h3>
                 <p>Environments & Seasonal Towers</p>
               </div>
             </div>

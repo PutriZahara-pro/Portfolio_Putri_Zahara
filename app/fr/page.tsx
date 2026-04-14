@@ -38,7 +38,7 @@ export default function PageFr() {
       <section className="relative h-screen flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0 z-0">
           <GithubImage
-            src="images/environement/key_frame_base_camp.jpg"
+            src="/images/environement/key_frame_base_camp.jpg"
             alt="Concept art environnement The Ethians Redeemed - Vue panoramique d'un camp de base dystopique avec structures détaillées par Putri Zahara concept artist"
             className="object-cover opacity-40 w-full h-full"
             priority={true}

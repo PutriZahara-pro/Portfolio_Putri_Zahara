@@ -4,11 +4,11 @@ import type React from "react"
 import { useState, useEffect, useRef } from "react"
 import { motion, AnimatePresence, useScroll, useTransform, useMotionValueEvent } from "framer-motion"
 import Link from "next/link"
-import { Gamepad2 } from "lucide-react"
+import { Globe } from "lucide-react"
 import { usePathname } from "next/navigation"
 
 export default function EnhancedNavbar() {
-  const [activeItem, setActiveItem] = useState("Home")
+  const [activeItem, setActiveItem] = useState<string | null>(null)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const [isScrolled, setIsScrolled] = useState(false)
   const [hoverIndex, setHoverIndex] = useState<number | null>(null)
@@ -96,7 +96,7 @@ export default function EnhancedNavbar() {
     resetMagneticTransforms()
   }, [pathname])
 
-  const menuItems = ["Home", "About", "Portfolio", "News", "Game", "Contact"]
+  const menuItems = ["Home", "About", "Portfolio", "News", "Contact"]
 
   // Magnetic effect for menu items
   const handleMouseMove = (e: React.MouseEvent, index: number) => {
@@ -202,7 +202,6 @@ export default function EnhancedNavbar() {
                     }}
                   >
                     {item}
-                    {item === "Game" && <Gamepad2 className="inline-block ml-1 w-4 h-4" />}
                   </Link>
 
                   {/* Active indicator */}
@@ -231,10 +230,11 @@ export default function EnhancedNavbar() {
                   onClick={() => resetMagneticTransforms()}
                 >
                   <motion.div
-                    className="flex items-center justify-center w-6 h-6 rounded-full overflow-hidden border border-zinc-500 hover:border-emerald-400 transition-colors"
-                    whileHover={{ scale: 1.1 }}
+                    className="flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-zinc-600 hover:border-emerald-400 bg-zinc-800/60 hover:bg-zinc-700/60 transition-all"
+                    whileHover={{ scale: 1.05 }}
                     transition={{ type: "spring", stiffness: 400, damping: 10 }}
                   >
+                    <Globe className="w-3.5 h-3.5 text-zinc-400" />
                     <span className="text-xs font-bold">{isFrenchVersion ? "EN" : "FR"}</span>
                   </motion.div>
                 </Link>
@@ -307,11 +307,10 @@ export default function EnhancedNavbar() {
                     }}
                   >
                     {item}
-                    {item === "Game" && <Gamepad2 className="inline-block ml-1 w-4 h-4" />}
                   </Link>
                 </motion.div>
               ))}
-              
+
               {/* Language Switcher Mobile */}
               <motion.div
                 initial={{ x: -20, opacity: 0 }}
@@ -327,7 +326,8 @@ export default function EnhancedNavbar() {
                     setIsMobileMenuOpen(false)
                   }}
                 >
-                  <div className="flex items-center justify-center w-6 h-6 rounded-full border border-zinc-500 mr-2">
+                  <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-zinc-600 bg-zinc-800/60 mr-2">
+                    <Globe className="w-3.5 h-3.5 text-zinc-400" />
                     <span className="text-xs font-bold">{isFrenchVersion ? "EN" : "FR"}</span>
                   </div>
                   <span>{isFrenchVersion ? "Switch to English" : "Changer de langue"}</span>

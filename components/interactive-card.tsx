@@ -2,7 +2,6 @@
 
 import React, { useState, useRef, useEffect } from "react";
 import Link from "next/link";
-import { getImagePath } from "../utils/image-path";
 import { getImageSEO, generateSEOAlt } from "../data/seo-content";
 import GithubImage from "./github-image";
 
@@ -16,9 +15,11 @@ interface CardProps {
   logoSrc?: string;
   logoAlt?: string;
   imagePosition?: string;
+  imageScale?: number;
+  priority?: boolean;
 }
 
-export default function InteractiveCard({ id, title, description, image, href, count, logoSrc, logoAlt, imagePosition }: CardProps) {
+export default function InteractiveCard({ id, title, description, image, href, count, logoSrc, logoAlt, imagePosition, imageScale = 1, priority = false }: CardProps) {
   const [mouseX, setMouseX] = useState(0);
   const [mouseY, setMouseY] = useState(0);
   const [width, setWidth] = useState(0);
@@ -107,17 +108,18 @@ export default function InteractiveCard({ id, title, description, image, href, c
               className="relative w-full h-full transition-transform duration-200"
               style={{
                 transform: hover
-                  ? "scale(1.1) translateZ(30px)"
-                  : "scale(1) translateZ(0)",
+                  ? `scale(${imageScale * 1.1}) translateZ(30px)`
+                  : `scale(${imageScale}) translateZ(0)`,
               }}
             >
               <GithubImage 
-                src={getImagePath(image)} 
+                src={image} 
                 alt={optimizedAlt}
                 className="w-full h-full object-cover"
                 style={imagePosition ? { objectPosition: imagePosition } : undefined}
-                loading="lazy"
-                priority={false}
+                loading={priority ? "eager" : "lazy"}
+                priority={priority}
+                variant="thumb"
               />
             </div>
           </div>

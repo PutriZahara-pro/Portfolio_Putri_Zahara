@@ -91,31 +91,31 @@ export default function AporionPageFr() {
 
           <div className="max-w-4xl">
             <h1 className="text-4xl md:text-5xl font-bold mb-6">Aporion</h1>
-            <p className="text-xl text-zinc-300 mb-8">
+            <p className="text-xl font-medium text-zinc-200 mb-8">
               Aporion VTT est une plateforme de jeu de rôle sur table virtuelle de nouvelle génération, offrant des outils avancés pour permettre aux maîtres de jeu et aux joueurs de créer, personnaliser et explorer des aventures immersives ensemble.
             </p>
 
             <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-sm">
               <div>
-                <h3 className="text-zinc-400 mb-1">CLIENT</h3>
+                <h3 className="text-zinc-300 mb-1">CLIENT</h3>
                 <p>Olive Branch Interactive</p>
               </div>
               <div>
-                <h3 className="text-zinc-400 mb-1">ANNÉE</h3>
+                <h3 className="text-zinc-300 mb-1">ANNÉE</h3>
                 <p>2025 - 2026</p>
               </div>
               <div>
-                <h3 className="text-zinc-400 mb-1">RÔLE</h3>
+                <h3 className="text-zinc-300 mb-1">RÔLE</h3>
                 <p>Concept Artist</p>
               </div>
               <div>
-                <h3 className="text-zinc-400 mb-1">LIVRABLES</h3>
+                <h3 className="text-zinc-300 mb-1">LIVRABLES</h3>
                 <p>Concept art d'environnement</p>
               </div>
             </div>
 
             <div className="mt-6">
-              <h3 className="text-zinc-400 mb-2 text-sm">OUTILS</h3>
+              <h3 className="text-zinc-300 mb-2 text-sm">OUTILS</h3>
               <div className="flex gap-2 flex-wrap">
                 <span className="px-4 py-2 bg-zinc-800 rounded-full text-sm">Photoshop</span>
                 <span className="px-4 py-2 bg-zinc-800 rounded-full text-sm">Blender</span>
@@ -140,6 +140,7 @@ export default function AporionPageFr() {
                     alt={image.alt} 
                     className="w-full object-cover h-[300px]" 
                     onClick={() => openLightbox(index)}
+                    priority={index < 2}
                   />
                 </div>
                 <div className="p-6">

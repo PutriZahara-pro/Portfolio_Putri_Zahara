@@ -1,5 +1,8 @@
-import React from 'react';
+"use client";
+
+import React, { useState, useEffect, useRef } from 'react';
 import { getImageSEO } from '../data/seo-content';
+import { getImagePath } from '../utils/image-path';
 
 interface GithubImageProps {
   src: string;
@@ -9,6 +12,8 @@ interface GithubImageProps {
   priority?: boolean;
   loading?: 'lazy' | 'eager';
   style?: React.CSSProperties;
+  variant?: 'thumb' | 'full';
+  renderMode?: 'picture' | 'img';
 }
 
 /**
@@ -23,48 +28,107 @@ export default function GithubImage({
   onClick, 
   priority = false, 
   loading = 'lazy',
-  style
+  style,
+  variant = 'full',
+  renderMode = 'img'
 }: GithubImageProps) {
-  // Vérifier si l'URL contient déjà le préfixe GitHub Pages pour éviter la duplication
-  const githubPrefix = "https://putrizahara-pro.github.io/Portfolio_Putri_Zahara/";
-  
-  // Utiliser l'URL telle quelle si elle commence déjà par le préfixe
-  // sinon, construire l'URL complète
-  let fullImageUrl;
-  if (src.startsWith(githubPrefix)) {
-    fullImageUrl = src;
-  } else if (src.startsWith('/images/') || src.startsWith('/placeholder')) {
-    // Préserver les chemins locaux pour le dev (servis depuis public/)
-    fullImageUrl = src;
-  } else {
-    // Supprimer le préfixe '/' si présent pour éviter les doubles slashes
-    const cleanSrc = src.startsWith('/') ? src.substring(1) : src;
-    fullImageUrl = `${githubPrefix}${cleanSrc}`;
-  }
-  
+  const resolvedSrc = getImagePath(src);
+
+  const getLocalImagesPathFromAnyUrl = (input: string) => {
+    const githubBase = "https://putrizahara-pro.github.io/Portfolio_Putri_Zahara";
+    const basePathPrefix = "/Portfolio_Putri_Zahara";
+
+    let p = input;
+    if (p.startsWith(githubBase)) {
+      p = p.substring(githubBase.length);
+    }
+    if (p.startsWith(basePathPrefix)) {
+      p = p.substring(basePathPrefix.length);
+    }
+    if (!p.startsWith("/")) p = `/${p}`;
+    return p;
+  };
+
+  const localPath = getLocalImagesPathFromAnyUrl(src);
+  const lowerLocal = localPath.toLowerCase();
+  const isOptimizable =
+    lowerLocal.startsWith("/images/") &&
+    (lowerLocal.endsWith(".jpg") || lowerLocal.endsWith(".jpeg") || lowerLocal.endsWith(".png"));
+
+  const pickWidth = (v: 'thumb' | 'full') => {
+    if (v === 'thumb') return 640;
+    return priority ? 1920 : 1600;
+  };
+
+  const width = pickWidth(variant);
+  const optimizedSrc = isOptimizable
+    ? getImagePath(
+        localPath
+          .replace(/^\/images\//i, `/images/optimized/`)
+          .replace(/\.(png|jpe?g)$/i, `_${width}.webp`)
+      )
+    : undefined;
+
+  const [activeSrc, setActiveSrc] = useState(optimizedSrc || resolvedSrc);
+  const imgRef = useRef<HTMLImageElement>(null);
+
+  const handleImgError = () => {
+    if (activeSrc !== resolvedSrc) setActiveSrc(resolvedSrc);
+  };
+
+  // Fix for hydration race condition: image may 404 before React attaches onError
+  useEffect(() => {
+    const img = imgRef.current;
+    if (img && img.complete && img.naturalWidth === 0 && activeSrc !== resolvedSrc) {
+      setActiveSrc(resolvedSrc);
+    }
+  }, []);
+
   // Récupérer les données SEO pour cette image si disponibles
   const seoData = getImageSEO(src);
-  
+
   // Utiliser l'alt text SEO optimisé si disponible, sinon l'alt fourni
   const optimizedAlt = seoData?.alt || alt;
   const imageTitle = seoData?.title || alt;
-  
+
+  if (renderMode === 'img') {
+    return (
+      <img
+        ref={imgRef}
+        src={activeSrc}
+        onError={handleImgError}
+        alt={optimizedAlt}
+        title={imageTitle}
+        className={className}
+        style={style}
+        onClick={onClick}
+        loading={priority ? 'eager' : loading}
+        decoding="async"
+        fetchPriority={priority ? 'high' : 'auto'}
+        itemProp="image"
+        {...(seoData?.description && { 'data-description': seoData.description })}
+        {...(seoData?.keywords && { 'data-keywords': seoData.keywords.join(', ') })}
+      />
+    );
+  }
+
   return (
-    <img
-      src={fullImageUrl}
-      alt={optimizedAlt}
-      title={imageTitle}
-      className={className}
-      style={style}
-      onClick={onClick}
-      loading={priority ? 'eager' : loading}
-      decoding="async"
-      // Optimisations SEO et performance
-      fetchPriority={priority ? 'high' : 'auto'}
-      // Schema.org structured data attributes
-      itemProp="image"
-      {...(seoData?.description && { 'data-description': seoData.description })}
-      {...(seoData?.keywords && { 'data-keywords': seoData.keywords.join(', ') })}
-    />
+    <picture>
+      {optimizedSrc && <source srcSet={optimizedSrc} type="image/webp" />}
+      <img
+        src={resolvedSrc}
+        alt={optimizedAlt}
+        title={imageTitle}
+        className={className}
+        style={style}
+        onClick={onClick}
+        loading={priority ? 'eager' : loading}
+        decoding="async"
+        fetchPriority={priority ? 'high' : 'auto'}
+        itemProp="image"
+        {...(seoData?.description && { 'data-description': seoData.description })}
+        {...(seoData?.keywords && { 'data-keywords': seoData.keywords.join(', ') })}
+      />
+    </picture>
   );
 }

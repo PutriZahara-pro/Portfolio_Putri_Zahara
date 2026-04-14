@@ -26,9 +26,19 @@ interface PortfolioCategory {
   logoSrc?: string;
   logoAlt?: string;
   imagePosition?: string;
+  imageScale?: number;
 }
 
 const portfolioCategories: PortfolioCategory[] = [
+  {
+    id: "cuisine-royale",
+    title: "Cuisine Royale",
+    description: "UI/UX design for a mobile web game — scratch card format inspired by FDJ Illiko.",
+    image: "/images/Portfolio/cuisine-royale/thumbnail.png",
+    count: 6,
+    imagePosition: "50% 3%",
+    imageScale: 1.15,
+  },
   {
     id: "Aporion",
     title: "Aporion",
@@ -94,7 +104,8 @@ export default function PortfolioPage() {
       <section className="pb-20">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 justify-items-center">
-            {portfolioCategories.map((category) => {
+            {portfolioCategories.map((category, index) => {
+              const priority = index < 3
               if (category.id === "other-works" && category.images) {
                 return (
                   <SlidingImageCard
@@ -105,6 +116,7 @@ export default function PortfolioPage() {
                     images={category.images}
                     href={`/portfolio/${category.id}`}
                     count={category.count}
+                    priority={priority}
                   />
                 );
               }
@@ -121,6 +133,8 @@ export default function PortfolioPage() {
                   logoSrc={category.logoSrc}
                   logoAlt={category.logoAlt}
                   imagePosition={category.imagePosition}
+                  imageScale={category.imageScale}
+                  priority={priority}
                 />
               );
             })}

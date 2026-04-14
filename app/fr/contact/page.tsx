@@ -24,33 +24,30 @@ export default function ContactPageFr() {
             <ContactForm lang="fr" />
 
             {/* Infos de contact */}
-            <div className="space-y-8">
-              <div className="bg-gradient-to-br from-zinc-800/80 to-zinc-900/90 p-8 rounded-3xl border border-zinc-700/50 shadow-lg">
-                <h2 className="text-2xl font-bold mb-6">Informations de contact</h2>
-                <p className="text-zinc-300 mb-8">
-                  N'hésitez pas à me contacter via l'un des moyens suivants. Je suis toujours ouvert à discuter de nouveaux projets, idées créatives ou opportunités.
-                </p>
-              
-                <div className="space-y-6">
-                  <div className="flex items-center gap-4">
-                    <div className="bg-emerald-500/10 p-3 rounded-full">
-                      <MapPin className="h-6 w-6 text-emerald-400" />
-                    </div>
-                    <div>
-                      <h3 className="font-medium mb-1">Localisation</h3>
-                      <p className="text-zinc-300">Lyon, France</p>
-                    </div>
+            <div className="bg-gradient-to-br from-zinc-800/80 to-zinc-900/90 p-8 rounded-3xl border border-zinc-700/50 shadow-lg">
+              <h2 className="text-2xl font-bold mb-6">Informations de contact</h2>
+              <p className="text-zinc-300 mb-8">
+                N'hésitez pas à me contacter via l'un des moyens suivants. Je suis toujours ouvert à discuter de nouveaux projets, idées créatives ou opportunités.
+              </p>
+
+              <div className="space-y-6 mb-8">
+                <div className="flex items-center gap-4">
+                  <div className="bg-emerald-500/10 p-3 rounded-full">
+                    <MapPin className="h-6 w-6 text-emerald-400" />
+                  </div>
+                  <div>
+                    <h3 className="font-medium mb-1">Localisation</h3>
+                    <p className="text-zinc-300">Lyon, France</p>
                   </div>
                 </div>
               </div>
-              
-              <div className="bg-gradient-to-br from-zinc-800/80 to-zinc-900/90 p-8 rounded-3xl border border-zinc-700/50 shadow-lg">
-                <h2 className="text-2xl font-bold mb-6">Retrouvez-moi en ligne</h2>
-                
+
+              <div className="border-t border-zinc-700/50 pt-8">
+                <h2 className="text-xl font-bold mb-4">Retrouvez-moi en ligne</h2>
                 <div className="grid grid-cols-2 gap-4">
-                  <a 
-                    href="https://www.linkedin.com/in/putri-zaharapro/" 
-                    target="_blank" 
+                  <a
+                    href="https://www.linkedin.com/in/putri-zaharapro/"
+                    target="_blank"
                     rel="noopener noreferrer"
                     className="flex items-center gap-3 bg-zinc-800/50 hover:bg-zinc-700/50 p-4 rounded-2xl transition-all"
                   >
@@ -59,10 +56,9 @@ export default function ContactPageFr() {
                     </div>
                     <span>LinkedIn</span>
                   </a>
-                  
-                  <a 
-                    href="https://www.artstation.com/putrizahara972015" 
-                    target="_blank" 
+                  <a
+                    href="https://www.artstation.com/putrizahara972015"
+                    target="_blank"
                     rel="noopener noreferrer"
                     className="flex items-center gap-3 bg-zinc-800/50 hover:bg-zinc-700/50 p-4 rounded-2xl transition-all"
                   >

@@ -12,6 +12,22 @@ export default function AboutPageFr() {
               <p className="text-xl text-zinc-300 mb-8">
                 Salut ! Je m'appelle Putri Zahara. Je suis une étudiante Internationale en Art Graphique - Spé Concept Art à Brassart Lyon.
               </p>
+              <div className="flex items-center gap-8 mb-8 py-5 border-t border-b border-zinc-700/50">
+                <div>
+                  <p className="text-2xl font-bold text-emerald-400">3+</p>
+                  <p className="text-xs text-zinc-400 uppercase tracking-wide mt-1">Années d'études</p>
+                </div>
+                <div className="w-px h-10 bg-zinc-700" />
+                <div>
+                  <p className="text-2xl font-bold text-emerald-400">6</p>
+                  <p className="text-xs text-zinc-400 uppercase tracking-wide mt-1">Projets</p>
+                </div>
+                <div className="w-px h-10 bg-zinc-700" />
+                <div>
+                  <p className="text-2xl font-bold text-emerald-400">3</p>
+                  <p className="text-xs text-zinc-400 uppercase tracking-wide mt-1">Outils principaux</p>
+                </div>
+              </div>
               <div className="space-y-4 text-zinc-300">
                 <p>
                   Depuis toujours, je suis passionnée par la création de mondes et de personnages, surtout pour les jeux vidéo et les films. 
@@ -39,7 +55,7 @@ export default function AboutPageFr() {
                 <div className="absolute bottom-0 left-0 right-0 h-1/3 bg-gradient-to-t from-zinc-800/80 to-transparent z-10"></div>
                 <img
                   src="/images/putri-zahara-profile.jpg"
-                  alt="Portrait de Putri Zahara"
+                  alt="Putri Zahara à sa tablette graphique"
                   className="object-cover h-full w-full object-[70%_45%] rounded-2xl"
                 />
               </div>

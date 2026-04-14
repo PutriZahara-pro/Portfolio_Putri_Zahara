@@ -58,31 +58,31 @@ export default function PsApocalypsePageFr() {
 
           <div className="max-w-4xl">
             <h1 className="text-4xl md:text-5xl font-bold mb-6">P.S. Apocalypse</h1>
-            <p className="text-xl text-zinc-300 mb-8">
+            <p className="text-xl font-medium text-zinc-200 mb-8">
               Projet de concept art pour un jeu où Evelyn tente de survivre dans sa ville natale Brooklyn (Park Slope) dans un monde post-apocalyptique.
             </p>
 
             <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-sm mb-6">
               <div>
-                <h3 className="text-zinc-400 mb-1">CLIENT</h3>
+                <h3 className="text-zinc-300 mb-1">CLIENT</h3>
                 <p>Projet personnel</p>
               </div>
               <div>
-                <h3 className="text-zinc-400 mb-1">ANNÉE</h3>
+                <h3 className="text-zinc-300 mb-1">ANNÉE</h3>
                 <p>2022-2023</p>
               </div>
               <div>
-                <h3 className="text-zinc-400 mb-1">RÔLE</h3>
+                <h3 className="text-zinc-300 mb-1">RÔLE</h3>
                 <p>Concept Artiste</p>
               </div>
               <div>
-                <h3 className="text-zinc-400 mb-1">LIVRABLES</h3>
+                <h3 className="text-zinc-300 mb-1">LIVRABLES</h3>
                 <p>Designs d'environnements & personnages</p>
               </div>
             </div>
             
             <div className="mb-6">
-              <h3 className="text-zinc-400 mb-1">OUTILS</h3>
+              <h3 className="text-zinc-300 mb-1">OUTILS</h3>
               <p className="flex items-center gap-3">
                 <span className="bg-zinc-700 px-3 py-1 rounded-full">Photoshop</span>
                 <span className="bg-zinc-700 px-3 py-1 rounded-full">Blender</span>
@@ -106,6 +106,7 @@ export default function PsApocalypsePageFr() {
                     alt={image.alt} 
                     className="w-full object-cover" 
                     onClick={() => openLightbox(index)}
+                    priority={index === 0}
                   />
                 </div>
                 <div className="p-6">

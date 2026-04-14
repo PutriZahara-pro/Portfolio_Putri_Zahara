@@ -12,6 +12,22 @@ export default function AboutPage() {
               <p className="text-xl text-zinc-300 mb-8">
                 Hello! I'm Putri Zahara, an International student in Graphic Arts - Concept Art at Brassart Lyon.
               </p>
+              <div className="flex items-center gap-8 mb-8 py-5 border-t border-b border-zinc-700/50">
+                <div>
+                  <p className="text-2xl font-bold text-emerald-400">3+</p>
+                  <p className="text-xs text-zinc-400 uppercase tracking-wide mt-1">Years studying</p>
+                </div>
+                <div className="w-px h-10 bg-zinc-700" />
+                <div>
+                  <p className="text-2xl font-bold text-emerald-400">6</p>
+                  <p className="text-xs text-zinc-400 uppercase tracking-wide mt-1">Projects</p>
+                </div>
+                <div className="w-px h-10 bg-zinc-700" />
+                <div>
+                  <p className="text-2xl font-bold text-emerald-400">3</p>
+                  <p className="text-xs text-zinc-400 uppercase tracking-wide mt-1">Core tools</p>
+                </div>
+              </div>
               <div className="space-y-4 text-zinc-300">
                 <p>
                   I've always been passionate about creating worlds and characters, especially for video games and films. 
@@ -37,7 +53,7 @@ export default function AboutPage() {
                 <div className="absolute bottom-0 left-0 right-0 h-1/3 bg-gradient-to-t from-zinc-800/80 to-transparent z-10"></div>
                 <img
                   src="/images/putri-zahara-profile.jpg"
-                  alt="Putri Zahara portrait"
+                  alt="Putri Zahara working at her drawing tablet"
                   className="object-cover h-full w-full object-[70%_45%] rounded-2xl"
                 />
               </div>

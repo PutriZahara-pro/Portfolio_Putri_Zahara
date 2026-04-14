@@ -124,31 +124,31 @@ export default function EthianRedemPageFr() {
 
           <div className="max-w-4xl">
             <h1 className="text-4xl md:text-5xl font-bold mb-6">The Ethians Redeemed</h1>
-            <p className="text-xl text-zinc-300 mb-8">
+            <p className="text-xl font-medium text-zinc-200 mb-8">
               Un projet de concept art pour un RPG néo-médiéval où l'esclave Demetrius se soulève et combat contre un empire cruel.
             </p>
 
             <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-sm mb-6">
               <div>
-                <h3 className="text-zinc-400 mb-1">CLIENT</h3>
+                <h3 className="text-zinc-300 mb-1">CLIENT</h3>
                 <p>Projet de fin d'année</p>
               </div>
               <div>
-                <h3 className="text-zinc-400 mb-1">ANNÉE</h3>
+                <h3 className="text-zinc-300 mb-1">ANNÉE</h3>
                 <p>2024-2025</p>
               </div>
               <div>
-                <h3 className="text-zinc-400 mb-1">RÔLE</h3>
+                <h3 className="text-zinc-300 mb-1">RÔLE</h3>
                 <p>Concept Artist & Game Designer</p>
               </div>
               <div>
-                <h3 className="text-zinc-400 mb-1">LIVRABLES</h3>
+                <h3 className="text-zinc-300 mb-1">LIVRABLES</h3>
                 <p>Designs de personnages, concepts d'environnements, interface utilisateur</p>
               </div>
             </div>
             
             <div className="mb-6">
-              <h3 className="text-zinc-400 mb-1">OUTILS</h3>
+              <h3 className="text-zinc-300 mb-1">OUTILS</h3>
               <p className="flex items-center gap-3">
                 <span className="bg-zinc-700 px-3 py-1 rounded-full">Photoshop</span>
                 <span className="bg-zinc-700 px-3 py-1 rounded-full">Blender</span>

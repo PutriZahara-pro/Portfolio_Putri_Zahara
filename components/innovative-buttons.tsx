@@ -167,14 +167,14 @@ export default function InnovativeButtons({ frenchVersion = false }: InnovativeB
         onHoverEnd={() => setIsHoveringAbout(false)}
         transition={{ type: "spring", stiffness: 200, damping: 20 }}
       >
-        <div className="absolute -inset-1 rounded-xl bg-gradient-to-r from-gray-200 via-white to-gray-300 opacity-75 blur-md transition-all duration-300 group-hover:opacity-100 group-hover:blur-lg"></div>
+        <div className="absolute -inset-1 rounded-xl bg-gradient-to-r from-emerald-700/50 via-emerald-600/50 to-green-700/50 opacity-75 blur-md transition-all duration-300 group-hover:opacity-100 group-hover:blur-lg"></div>
 
         {/* Particles for About Me button */}
         {isHoveringAbout &&
           aboutParticles.map((particle) => (
             <motion.div
               key={particle.id}
-              className="absolute w-1 h-1 rounded-full bg-white"
+              className="absolute w-1 h-1 rounded-full bg-emerald-300"
               initial={{ opacity: 0, scale: 0 }}
               animate={{
                 opacity: [0, 1, 0],
@@ -198,7 +198,7 @@ export default function InnovativeButtons({ frenchVersion = false }: InnovativeB
 
         <Link
           href={frenchVersion ? "/fr/about" : "/about"}
-          className="relative flex items-center justify-center rounded-xl bg-black px-10 py-5 text-xl font-bold text-white transition-all duration-500 hover:shadow-[0_0_25px_rgba(255,255,255,0.6)]"
+          className="relative flex items-center justify-center rounded-xl bg-zinc-900 border border-emerald-700/60 px-10 py-5 text-xl font-bold text-white transition-all duration-500 hover:shadow-[0_0_20px_rgba(52,211,153,0.35)]"
         >
           <motion.span
             className="relative z-10 flex items-center gap-3"
@@ -207,11 +207,11 @@ export default function InnovativeButtons({ frenchVersion = false }: InnovativeB
             }}
             transition={{ type: "spring", stiffness: 300 }}
           >
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-white to-gray-200 font-bold">
+            <span className="text-emerald-300 font-bold">
               {frenchVersion ? "À propos" : "About Me"}
             </span>
             <motion.svg
-              className="h-6 w-6 text-white"
+              className="h-6 w-6 text-emerald-400"
               animate={{
                 rotate: isHoveringAbout ? 180 : 0,
                 scale: isHoveringAbout ? 1.2 : 1,
@@ -232,7 +232,7 @@ export default function InnovativeButtons({ frenchVersion = false }: InnovativeB
           </motion.span>
 
           {/* 3D effect bottom layer */}
-          <div className="absolute inset-0 -bottom-1 -z-10 rounded-xl bg-gray-400 translate-y-1 translate-x-1 transition-transform duration-300 group-hover:translate-y-2 group-hover:translate-x-2"></div>
+          <div className="absolute inset-0 -bottom-1 -z-10 rounded-xl bg-emerald-900 translate-y-1 translate-x-1 transition-transform duration-300 group-hover:translate-y-2 group-hover:translate-x-2"></div>
         </Link>
       </motion.div>
     </div>

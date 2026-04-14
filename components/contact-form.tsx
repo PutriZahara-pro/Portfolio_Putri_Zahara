@@ -41,7 +41,8 @@ export default function ContactForm({ lang = "en" }: ContactFormProps) {
       formSubject: "New message from portfolio",
       success: "Your message has been sent successfully!",
       error: "Failed to send message. Please try again.",
-      captchaRequired: "Please validate the captcha before sending the message."
+      captchaRequired: "Please validate the captcha before sending the message.",
+      requiredNote: "* All fields are required"
     },
     fr: {
       title: "Envoyer un message",
@@ -58,7 +59,8 @@ export default function ContactForm({ lang = "en" }: ContactFormProps) {
       formSubject: "Nouveau message du portfolio",
       success: "Votre message a été envoyé avec succès !",
       error: "Échec de l'envoi du message. Veuillez réessayer.",
-      captchaRequired: "Veuillez valider le captcha avant d'envoyer le message."
+      captchaRequired: "Veuillez valider le captcha avant d'envoyer le message.",
+      requiredNote: "* Tous les champs sont obligatoires"
     },
   };
 
@@ -82,7 +84,8 @@ export default function ContactForm({ lang = "en" }: ContactFormProps) {
           sitekey: "0x4AAAAAABadkJg2mUhPpxoj", // Clé de site Turnstile
           callback: handleTurnstileCallback,
           "refresh-expired": "auto",
-          appearance: "always"
+          appearance: "always",
+          language: lang === "fr" ? "fr" : "en",
         });
       } catch (error) {
         console.error("Erreur lors du chargement de Turnstile:", error);
@@ -165,12 +168,13 @@ export default function ContactForm({ lang = "en" }: ContactFormProps) {
       />
       
       <div className="bg-gradient-to-br from-zinc-800 to-zinc-900/90 p-8 rounded-3xl border border-zinc-700/50 shadow-lg">
-        <div className="flex items-center gap-3 mb-6">
+        <div className="flex items-center gap-3 mb-3">
           <div className="bg-emerald-500/20 p-2 rounded-full">
             <Mail className="h-5 w-5 text-emerald-400" />
           </div>
           <h2 className="text-2xl font-bold">{t.title}</h2>
         </div>
+        <p className="text-xs text-zinc-400 mb-5">{t.requiredNote}</p>
         
         {formStatus && (
           <div className={`p-4 mb-6 rounded-xl ${formStatus.success ? 'bg-emerald-500/20 text-emerald-400' : 'bg-red-500/20 text-red-400'}`}>
@@ -188,7 +192,7 @@ export default function ContactForm({ lang = "en" }: ContactFormProps) {
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div className="space-y-2">
               <label htmlFor="name" className="text-sm font-medium">
-                {t.name}
+                {t.name} <span className="text-emerald-400">*</span>
               </label>
               <Input
                 id="name"
@@ -200,7 +204,7 @@ export default function ContactForm({ lang = "en" }: ContactFormProps) {
             </div>
             <div className="space-y-2">
               <label htmlFor="email" className="text-sm font-medium">
-                {t.email}
+                {t.email} <span className="text-emerald-400">*</span>
               </label>
               <Input
                 id="email"
@@ -214,7 +218,7 @@ export default function ContactForm({ lang = "en" }: ContactFormProps) {
           </div>
           <div className="space-y-2">
             <label htmlFor="subject" className="text-sm font-medium">
-              {t.subject}
+              {t.subject} <span className="text-emerald-400">*</span>
             </label>
             <Input
               id="subject"
@@ -226,7 +230,7 @@ export default function ContactForm({ lang = "en" }: ContactFormProps) {
           </div>
           <div className="space-y-2">
             <label htmlFor="message" className="text-sm font-medium">
-              {t.message}
+              {t.message} <span className="text-emerald-400">*</span>
             </label>
             <Textarea
               id="message"
@@ -244,7 +248,7 @@ export default function ContactForm({ lang = "en" }: ContactFormProps) {
           {/* Honeypot - Champ invisible pour les humains, mais visible pour les bots */}
           <div className="absolute top-0 left-0 h-0 w-0 overflow-hidden" aria-hidden="true">
             <label>
-              Ne pas remplir ce champ si vous êtes humain:
+              Do not fill this field:
               <input type="text" name="website" tabIndex={-1} autoComplete="off" />
             </label>
           </div>

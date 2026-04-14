@@ -1,0 +1,102 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="600" height="400" viewBox="0 0 600 400">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1a0a2e;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#2d1060;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#0f1a1f;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="gold" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#f5d060;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#e8a820;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#c47c10;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="plateGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#f0f0f0;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#c8c8c8;stop-opacity:1" />
+    </linearGradient>
+    <radialGradient id="glow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" style="stop-color:#7c3aed;stop-opacity:0.4" />
+      <stop offset="100%" style="stop-color:#7c3aed;stop-opacity:0" />
+    </radialGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="4" stdDeviation="8" flood-color="#000" flood-opacity="0.5"/>
+    </filter>
+    <filter id="glow-filter">
+      <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+      <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="600" height="400" fill="url(#bg)"/>
+
+  <!-- Glow circle behind plate -->
+  <ellipse cx="300" cy="200" rx="160" ry="160" fill="url(#glow)"/>
+
+  <!-- Decorative corner ornaments -->
+  <g fill="none" stroke="url(#gold)" stroke-width="1.5" opacity="0.6">
+    <!-- Top left -->
+    <path d="M20,20 L60,20 M20,20 L20,60"/>
+    <path d="M25,25 L55,25 M25,25 L25,55"/>
+    <!-- Top right -->
+    <path d="M580,20 L540,20 M580,20 L580,60"/>
+    <path d="M575,25 L545,25 M575,25 L575,55"/>
+    <!-- Bottom left -->
+    <path d="M20,380 L60,380 M20,380 L20,340"/>
+    <path d="M25,375 L55,375 M25,375 L25,345"/>
+    <!-- Bottom right -->
+    <path d="M580,380 L540,380 M580,380 L580,340"/>
+    <path d="M575,375 L545,375 M575,375 L575,345"/>
+  </g>
+
+  <!-- Horizontal decorative lines -->
+  <line x1="40" y1="50" x2="560" y2="50" stroke="url(#gold)" stroke-width="0.8" opacity="0.3"/>
+  <line x1="40" y1="350" x2="560" y2="350" stroke="url(#gold)" stroke-width="0.8" opacity="0.3"/>
+
+  <!-- Crown -->
+  <g filter="url(#shadow)">
+    <!-- Crown base -->
+    <rect x="240" y="98" width="120" height="18" rx="3" fill="url(#gold)"/>
+    <!-- Crown points -->
+    <polygon points="248,98 256,68 264,98" fill="url(#gold)"/>
+    <polygon points="278,98 288,55 298,98" fill="url(#gold)"/>
+    <polygon points="302,98 312,55 322,98" fill="url(#gold)"/>
+    <polygon points="336,98 344,68 352,98" fill="url(#gold)"/>
+    <!-- Crown jewels -->
+    <circle cx="256" cy="78" r="5" fill="#e53e3e" opacity="0.9"/>
+    <circle cx="288" cy="65" r="6" fill="#9f7aea" opacity="0.9"/>
+    <circle cx="312" cy="65" r="6" fill="#ed8936" opacity="0.9"/>
+    <circle cx="344" cy="78" r="5" fill="#48bb78" opacity="0.9"/>
+  </g>
+
+  <!-- Plate -->
+  <ellipse cx="300" cy="235" rx="105" ry="14" fill="#a0a0a0" opacity="0.5"/>
+  <circle cx="300" cy="215" r="100" fill="url(#plateGrad)" filter="url(#shadow)"/>
+  <circle cx="300" cy="215" r="82" fill="none" stroke="#d0d0d0" stroke-width="2"/>
+  <circle cx="300" cy="215" r="75" fill="white"/>
+
+  <!-- Food on plate (stylized cloche/dish) -->
+  <ellipse cx="300" cy="230" rx="58" ry="8" fill="#d4a574"/>
+  <path d="M242,230 Q300,165 358,230" fill="#c8956b"/>
+  <!-- Cloche handle -->
+  <rect x="294" y="162" width="12" height="10" rx="3" fill="#d4a574"/>
+  <ellipse cx="300" cy="162" rx="10" ry="5" fill="#b8835a"/>
+
+  <!-- Stars scattered -->
+  <g fill="url(#gold)" opacity="0.7" filter="url(#glow-filter)">
+    <polygon points="80,120 83,130 93,130 85,136 88,146 80,140 72,146 75,136 67,130 77,130" transform="scale(0.5) translate(100,160)"/>
+    <polygon points="500,80 503,90 513,90 505,96 508,106 500,100 492,106 495,96 487,90 497,90" transform="scale(0.4) translate(700,90)"/>
+    <polygon points="520,280 523,290 533,290 525,296 528,306 520,300 512,306 515,296 507,290 517,290" transform="scale(0.45) translate(650,320)"/>
+    <polygon points="60,260 63,270 73,270 65,276 68,286 60,280 52,286 55,276 47,270 57,270" transform="scale(0.4) translate(90,360)"/>
+  </g>
+
+  <!-- "CUISINE ROYALE" text -->
+  <text x="300" y="310" text-anchor="middle" font-family="Georgia, serif" font-size="30" font-weight="bold" fill="url(#gold)" filter="url(#glow-filter)" letter-spacing="4">CUISINE ROYALE</text>
+
+  <!-- Subtitle -->
+  <text x="300" y="332" text-anchor="middle" font-family="Georgia, serif" font-size="11" fill="#c8a8e8" letter-spacing="6">UI / UX · MOBILE GAME</text>
+
+  <!-- Bottom "FDJ Illiko inspired" tag -->
+  <rect x="205" y="345" width="190" height="20" rx="10" fill="#7c3aed" opacity="0.4"/>
+  <text x="300" y="359" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="#d8b4fe" letter-spacing="2">INSPIRÉ DES JEUX ILLIKO FDJ</text>
+</svg>
