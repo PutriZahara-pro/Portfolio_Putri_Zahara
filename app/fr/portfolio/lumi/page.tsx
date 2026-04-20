@@ -31,7 +31,12 @@ export default function LumiPageFr() {
         .anim-up-3   { animation: fadeUp 0.9s ease both; animation-delay: 0.45s; }
         .anim-up-4   { animation: fadeUp 0.9s ease both; animation-delay: 0.6s; }
         .anim-fade   { animation: fadeIn 1.2s ease both; animation-delay: 0.7s; }
-        .anim-scroll { animation: scrollBounce 2s ease-in-out infinite; animation-delay: 1.4s; }
+        .anim-scroll   { animation: scrollBounce 2s ease-in-out infinite; animation-delay: 1.4s; }
+        @keyframes marqueeRight {
+          from { transform: translateX(-50%); }
+          to   { transform: translateX(0%); }
+        }
+        .anim-marquee  { animation: marqueeRight 15s linear infinite; }
       `}</style>
 
       {/* ── HERO ───────────────────────────────────────────────── */}
@@ -161,27 +166,35 @@ export default function LumiPageFr() {
         </div>
       </section>
 
-      {/* ── VARIATIONS LOGO ───────────────────────────────────── */}
-      <section className="px-6 pb-8">
-        <div className="container mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-3 rounded-2xl overflow-hidden border border-[#C4614A]/15">
-            {[
-              { bg: "/images/Portfolio/lumi/Rectangle 18.png", logo: "/images/Portfolio/lumi/lumi!.png",   alt: "Lumi terracotta" },
-              { bg: "/images/Portfolio/lumi/Rectangle 19.png", logo: "/images/Portfolio/lumi/lumi!-1.png", alt: "Lumi olive"      },
-              { bg: "/images/Portfolio/lumi/Rectangle 20.png", logo: "/images/Portfolio/lumi/lumi!-2.png", alt: "Lumi jaune"      },
-            ].map(({ bg, logo, alt }) => (
-              <div key={alt} className="relative aspect-square flex items-center justify-center p-10">
-                <Image src={bg} fill className="object-cover" alt="" />
-                <div className="relative z-10 w-2/3">
-                  <Image src={logo} width={400} height={200} className="w-full h-auto" alt={alt} />
-                </div>
+      {/* ── VARIATIONS LOGO — bandeau défilant ───────────────── */}
+      <section className="pb-8 overflow-hidden">
+        <div
+          className="anim-marquee flex"
+          style={{ width: '200%' }}
+        >
+          {[
+            { bg: "/images/Portfolio/lumi/Rectangle 18.png", logo: "/images/Portfolio/lumi/lumi!.png",   alt: "Lumi terracotta" },
+            { bg: "/images/Portfolio/lumi/Rectangle 19.png", logo: "/images/Portfolio/lumi/lumi!-1.png", alt: "Lumi olive"      },
+            { bg: "/images/Portfolio/lumi/Rectangle 20.png", logo: "/images/Portfolio/lumi/lumi!-2.png", alt: "Lumi jaune"      },
+            { bg: "/images/Portfolio/lumi/Rectangle 18.png", logo: "/images/Portfolio/lumi/lumi!.png",   alt: "Lumi terracotta dup" },
+            { bg: "/images/Portfolio/lumi/Rectangle 19.png", logo: "/images/Portfolio/lumi/lumi!-1.png", alt: "Lumi olive dup"      },
+            { bg: "/images/Portfolio/lumi/Rectangle 20.png", logo: "/images/Portfolio/lumi/lumi!-2.png", alt: "Lumi jaune dup"       },
+          ].map(({ bg, logo, alt }, i) => (
+            <div
+              key={i}
+              className="relative flex-none aspect-square flex items-center justify-center"
+              style={{ width: '16.6667%', padding: '5%' }}
+            >
+              <Image src={bg} fill className="object-cover" alt="" />
+              <div className="relative z-10 w-2/3">
+                <Image src={logo} width={400} height={200} className="w-full h-auto" alt={alt} />
               </div>
-            ))}
-          </div>
-          <p className="text-center text-[#E8C9A0]/30 text-xs mt-4 tracking-widest uppercase">
-            Variations logo — Système de couleurs
-          </p>
+            </div>
+          ))}
         </div>
+        <p className="text-center text-[#E8C9A0]/30 text-xs mt-4 tracking-widest uppercase px-6">
+          Variations logo — Système de couleurs
+        </p>
       </section>
 
       {/* ── BRAND BOARD ───────────────────────────────────────── */}
