@@ -166,37 +166,6 @@ export default function LumiPageFr() {
         </div>
       </section>
 
-      {/* ── VARIATIONS LOGO — bandeau défilant ───────────────── */}
-      <section className="pb-8 overflow-hidden">
-        <div
-          className="anim-marquee flex"
-          style={{ width: '200%' }}
-        >
-          {[
-            { bg: "/images/Portfolio/lumi/Rectangle 18.png", logo: "/images/Portfolio/lumi/lumi!.png",   alt: "Lumi terracotta" },
-            { bg: "/images/Portfolio/lumi/Rectangle 19.png", logo: "/images/Portfolio/lumi/lumi!-1.png", alt: "Lumi olive"      },
-            { bg: "/images/Portfolio/lumi/Rectangle 20.png", logo: "/images/Portfolio/lumi/lumi!-2.png", alt: "Lumi jaune"      },
-            { bg: "/images/Portfolio/lumi/Rectangle 18.png", logo: "/images/Portfolio/lumi/lumi!.png",   alt: "Lumi terracotta dup" },
-            { bg: "/images/Portfolio/lumi/Rectangle 19.png", logo: "/images/Portfolio/lumi/lumi!-1.png", alt: "Lumi olive dup"      },
-            { bg: "/images/Portfolio/lumi/Rectangle 20.png", logo: "/images/Portfolio/lumi/lumi!-2.png", alt: "Lumi jaune dup"       },
-          ].map(({ bg, logo, alt }, i) => (
-            <div
-              key={i}
-              className="relative flex-none aspect-square flex items-center justify-center"
-              style={{ width: '16.6667%', padding: '5%' }}
-            >
-              <Image src={bg} fill className="object-cover" alt="" />
-              <div className="relative z-10 w-2/3">
-                <Image src={logo} width={400} height={200} className="w-full h-auto" alt={alt} />
-              </div>
-            </div>
-          ))}
-        </div>
-        <p className="text-center text-[#E8C9A0]/30 text-xs mt-4 tracking-widest uppercase px-6">
-          Variations logo — Système de couleurs
-        </p>
-      </section>
-
       {/* ── BRAND BOARD ───────────────────────────────────────── */}
       <section className="px-6 pb-8">
         <div className="container mx-auto">
@@ -208,23 +177,51 @@ export default function LumiPageFr() {
               height={7566}
               className="w-full h-auto"
             />
-            {/* 3 blocs sur la case blanche — 58.2% à 70.4% de la hauteur */}
+            {/* titre.png flottant centré sur la photo taiyaki — 0%→26% */}
             <div
-              className="absolute inset-x-0 grid grid-cols-3"
+              className="absolute inset-x-0 flex items-center justify-center pointer-events-none"
+              style={{ top: '1%', bottom: '74%' }}
+            >
+              <div style={{ width: '48%' }}>
+                <Image
+                  src="/images/Portfolio/lumi/titre.webp"
+                  width={546}
+                  height={435}
+                  className="w-full h-auto"
+                  alt="Lumi — Traditional Japanese fish-shaped cake"
+                />
+              </div>
+            </div>
+
+            {/* Bandeau défilant dans la case blanche — 58.2% à 70.4% */}
+            <div
+              className="absolute inset-x-0 overflow-hidden"
               style={{ top: '58.2%', bottom: '29.6%' }}
             >
-              {[
-                { bg: "/images/Portfolio/lumi/Rectangle 18.png", logo: "/images/Portfolio/lumi/lumi!.png",   alt: "Lumi terracotta" },
-                { bg: "/images/Portfolio/lumi/Rectangle 19.png", logo: "/images/Portfolio/lumi/lumi!-1.png", alt: "Lumi olive"      },
-                { bg: "/images/Portfolio/lumi/Rectangle 20.png", logo: "/images/Portfolio/lumi/lumi!-2.png", alt: "Lumi jaune"      },
-              ].map(({ bg, logo, alt }) => (
-                <div key={alt} className="relative flex items-center justify-center p-[8%]">
-                  <Image src={bg} fill className="object-cover" alt="" />
-                  <div className="relative z-10 w-3/4">
-                    <Image src={logo} width={400} height={200} className="w-full h-auto" alt={alt} />
+              <div
+                className="anim-marquee flex h-full"
+                style={{ width: '200%' }}
+              >
+                {[
+                  { bg: "/images/Portfolio/lumi/Rectangle 18.png", logo: "/images/Portfolio/lumi/lumi!.png",   alt: "Lumi terracotta" },
+                  { bg: "/images/Portfolio/lumi/Rectangle 19.png", logo: "/images/Portfolio/lumi/lumi!-1.png", alt: "Lumi olive"      },
+                  { bg: "/images/Portfolio/lumi/Rectangle 20.png", logo: "/images/Portfolio/lumi/lumi!-2.png", alt: "Lumi jaune"      },
+                  { bg: "/images/Portfolio/lumi/Rectangle 18.png", logo: "/images/Portfolio/lumi/lumi!.png",   alt: "Lumi terracotta dup" },
+                  { bg: "/images/Portfolio/lumi/Rectangle 19.png", logo: "/images/Portfolio/lumi/lumi!-1.png", alt: "Lumi olive dup"      },
+                  { bg: "/images/Portfolio/lumi/Rectangle 20.png", logo: "/images/Portfolio/lumi/lumi!-2.png", alt: "Lumi jaune dup"       },
+                ].map(({ bg, logo, alt }, i) => (
+                  <div
+                    key={i}
+                    className="relative flex-none h-full flex items-center justify-center"
+                    style={{ width: '16.6667%', padding: '3%' }}
+                  >
+                    <Image src={bg} fill className="object-cover" alt="" />
+                    <div className="relative z-10 w-5/6">
+                      <Image src={logo} width={400} height={200} className="w-full h-auto" alt={alt} />
+                    </div>
                   </div>
-                </div>
-              ))}
+                ))}
+              </div>
             </div>
           </div>
           <p className="text-center text-[#E8C9A0]/30 text-xs mt-4 tracking-widest uppercase">
