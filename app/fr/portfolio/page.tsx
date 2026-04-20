@@ -41,6 +41,14 @@ interface PortfolioCategory {
 
 const portfolioCategories: PortfolioCategory[] = [
   {
+    id: "lumi",
+    title: "Lumi",
+    description: "Brand & product design — recherche typographique et maquette produit pour Lumi, une marque de Taiyaki imaginaire. Refonte d'un design de 2023.",
+    image: "/images/Portfolio/lumi/thumbnail.png",
+    count: 0,
+    imagePosition: "50% 50%",
+  },
+  {
     id: "cuisine-royale",
     title: "Cuisine Royale",
     description: "Design UI/UX d'un jeu web mobile — format grattage inspiré des jeux Illiko de la FDJ.",
