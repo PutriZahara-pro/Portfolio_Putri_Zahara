@@ -37,6 +37,11 @@ export default function LumiPageFr() {
           to   { transform: translateX(0%); }
         }
         .anim-marquee  { animation: marqueeRight 15s linear infinite; }
+        @keyframes float {
+          0%, 100% { transform: translateY(0px); }
+          50%       { transform: translateY(-14px); }
+        }
+        .anim-float    { animation: float 5s ease-in-out infinite; }
       `}</style>
 
       {/* ── HERO ───────────────────────────────────────────────── */}
@@ -45,11 +50,11 @@ export default function LumiPageFr() {
         <div className="absolute inset-0 overflow-hidden">
           <div className="anim-ken absolute inset-[-8%] w-[116%] h-[116%]">
             <Image
-              src="/images/Portfolio/lumi/Desktop-2.webp"
+              src="/images/Portfolio/lumi/hero-bg.webp"
               alt="Lumi brand design"
               fill
               className="object-cover"
-              style={{ objectPosition: "center top" }}
+              style={{ objectPosition: "center center" }}
               priority
             />
           </div>
@@ -182,7 +187,7 @@ export default function LumiPageFr() {
               className="absolute inset-x-0 flex items-center justify-center pointer-events-none"
               style={{ top: '1%', bottom: '74%' }}
             >
-              <div style={{ width: '48%' }}>
+              <div className="anim-float" style={{ width: '48%' }}>
                 <Image
                   src="/images/Portfolio/lumi/titre.webp"
                   width={546}
