@@ -2,6 +2,7 @@
 
 import InteractiveCard from "@/components/interactive-card"
 import SlidingImageCard from "@/components/sliding-image-card"
+import VideoPreviewCard from "@/components/video-preview-card"
 
 // Images pour le défilement de la carte "Other Works"
 const otherWorksImages = [
@@ -30,6 +31,14 @@ interface PortfolioCategory {
 }
 
 const portfolioCategories: PortfolioCategory[] = [
+  {
+    id: "animation",
+    title: "Animation",
+    description: "Hand-drawn frame-by-frame animation — illustrated in Procreate and composited in After Effects.",
+    image: "/images/Portfolio/Animation/thumbnail.webp",
+    count: 0,
+    imagePosition: "50% 50%",
+  },
   {
     id: "lumi",
     title: "Lumi",
@@ -114,6 +123,20 @@ export default function PortfolioPage() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 justify-items-center">
             {portfolioCategories.map((category, index) => {
               const priority = index < 3
+              if (category.id === "animation") {
+                return (
+                  <VideoPreviewCard
+                    key={category.id}
+                    id={category.id}
+                    title={category.title}
+                    description={category.description}
+                    videoSrc="/images/Portfolio/Animation/Composition_1.mp4"
+                    poster="/images/Portfolio/Animation/thumbnail.webp"
+                    href={`/portfolio/${category.id}`}
+                    priority={priority}
+                  />
+                );
+              }
               if (category.id === "other-works" && category.images) {
                 return (
                   <SlidingImageCard
